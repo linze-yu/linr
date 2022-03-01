@@ -1,0 +1,14 @@
+Package: YuriR
+Type: Package
+Title: Yuri
+Version: 0.1.0
+Author: Linze Yu
+Maintainer: The package maintainer <842359449@qq.com>
+Description: 主题+一些函数
+License:
+Depends:
+        rio,data.table,tidyverse,jmv,gtsummary,circlize,ComplexHeatmap,ggwordcloud,survival,customLayout,gghalves,survminer,glmnet,shiny,Cairo,patternplot,pacman,ggbreak,scales,tidyfst,ggpmisc,jiebaR,DMwR2,mice,tidytext,hunspell,tokenizers,udpipe,readtext,textreadr,udpipe,hunspell,tokenizers,skimr
+Encoding: UTF-8
+RoxygenNote: 7.1.2.9000
+NeedsCompilation: no
+Packaged: 2022-03-01 14:46:34 UTC; LinzeYu
