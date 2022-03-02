@@ -39,122 +39,143 @@ library("udpipe")#
 
 # 可选安装的包
 ## 基础包
-install.packages("devtools")#从GitHub上下载R包
-devtools::install_github("r-lib/devtools")
-install.packages("remotes")#从GitHub上下载R包
-devtools::install_github("tidyverse/tidyverse")#Tidy-R(1+7)
-devtools::install_github("Yurisuriyel/YuriR")#
-devtools::install_github("tidymodels/tidymodels")#Tidy-R'(1+13)
-remotes::install_github("rstudio/rmarkdown")#写书
-remotes::install_github("rstudio/bookdown")#写书
-devtools::install_github("pzhaonet/bookdownplus")#写书+
-install.packages('knitr')#文档编辑必要
-remotes::install_github('yihui/xaringan')#幻灯片
-remotes::install_github("gadenbuie/xaringanthemer")#幻灯片主题
-install.packages('tinytex')#PDF输出
-tinytex::tlmgr_repo('http://mirrors.tuna.tsinghua.edu.cn/CTAN/')#PDF输出
-tinytex::install_tinytex()#PDF输出
-remotes::install_github("plotly/plotly")#交互网页
-devtools::install_github("r-lib/roxygen2")#R包
-devtools::install_github("joshuaulrich/quantmod")
-devtools::install_github("joshuaulrich/xts")
-devtools::install_github("GuangchuangYu/rvcheck")#更新大部分平台的R包
+install.packages("devtools")#从GitHub上下载R包  
+devtools::install_github("r-lib/devtools")  
+install.packages("remotes")#从GitHub上下载R包  
+devtools::install_github("tidyverse/tidyverse")#Tidy-R(1+7)  
+devtools::install_github("Yurisuriyel/YuriR")#  
+devtools::install_github("tidymodels/tidymodels")#Tidy-R'(1+13)  
+remotes::install_github("rstudio/rmarkdown")#写书  
+remotes::install_github("rstudio/bookdown")#写书  
+devtools::install_github("pzhaonet/bookdownplus")#写书+  
+install.packages('knitr')#文档编辑必要  
+remotes::install_github('yihui/xaringan')#幻灯片  
+remotes::install_github("gadenbuie/xaringanthemer")#幻灯片主题  
+install.packages('tinytex')#PDF输出  
+tinytex::tlmgr_repo('http://mirrors.tuna.tsinghua.edu.cn/CTAN/')#PDF输出  
+tinytex::install_tinytex()#PDF输出  
+remotes::install_github("plotly/plotly")#交互网页  
+devtools::install_github("r-lib/roxygen2")#R包  
+devtools::install_github("joshuaulrich/quantmod")  
+devtools::install_github("joshuaulrich/xts")  
+devtools::install_github("GuangchuangYu/rvcheck")#更新大部分平台的R包  
 
 ## 数据部分
-remotes::install_github("leeper/rio")#导入数据
-install.packages("tidyfst")#dplyr类似,底层使用datatable
-install.packages("data.table")#高性能数据处理
-data.table::update.dev.pkg()#datatable最新版
-install.packages("fBasics")#正态性检验1
-install.packages("timeDate")#正态性检验2
-install.packages("timeSeries")#正态性检验3
-install.packages("car")#方差齐性检验
-install.packages("psych")#相关性检验
-install.packages("jmv")#jamovi
-remotes::install_github("ddsjoberg/gtsummary")#基线资料表
+remotes::install_github("leeper/rio")#导入数据  
+install.packages("tidyfst")#dplyr类似,底层使用datatable  
+install.packages("data.table")#高性能数据处理  
+data.table::update.dev.pkg()#datatable最新版  
+install.packages("fBasics")#正态性检验1  
+install.packages("timeDate")#正态性检验2  
+install.packages("timeSeries")#正态性检验3  
+install.packages("car")#方差齐性检验  
+install.packages("psych")#相关性检验  
+install.packages("jmv")#jamovi  
+remotes::install_github("ddsjoberg/gtsummary")#基线资料表  
 
 ## 主要绘图包
-install.packages("MASS")#曲线拟合
-install.packages("mgcv")#曲线拟合
-install.packages("hexbin")#六边形封箱热图
-devtools::install_github("ChrisLou-bioinfo/gg.gap")#截断坐标轴
-install.packages("survival")#生存曲线
-devtools::install_github("raivokolde/pheatmap")#热图
-devtools::install_github("jokergoo/ComplexHeatmap")#热图*
-devtools::install_github("r-lib/scales")#缩放刻度
-devtools::install_github("zzawadz/customLayout")#图片排版
-devtools::install_github("trinker/pacman")#参考文献
-remotes::install_github("csdaw/ggprism")#用ggplot2输出GraphPad prism的图
-remotes::install_github("r-tmap/tmaptools")#专题地图
-remotes::install_github("r-tmap/tmap")#专题地图
-devtools::install_github('badbye/baidumap')#百度地图
-devtools::install_github("EmilHvitfeldt/paletteer")#配色
-devtools::install_github("calligross/ggthemeassist")#主题调整
+install.packages("MASS")#曲线拟合  
+install.packages("mgcv")#曲线拟合  
+install.packages("hexbin")#六边形封箱热图  
+devtools::install_github("ChrisLou-bioinfo/gg.gap")#截断坐标轴  
+install.packages("survival")#生存曲线  
+devtools::install_github("raivokolde/pheatmap")#热图  
+devtools::install_github("jokergoo/ComplexHeatmap")#热图*  
+devtools::install_github("r-lib/scales")#缩放刻度  
+devtools::install_github("zzawadz/customLayout")#图片排版  
+devtools::install_github("trinker/pacman")#参考文献  
+remotes::install_github("csdaw/ggprism")#用ggplot2输出GraphPad prism的图  
+remotes::install_github("r-tmap/tmaptools")#专题地图  
+remotes::install_github("r-tmap/tmap")#专题地图  
+devtools::install_github('badbye/baidumap')#百度地图  
+devtools::install_github("EmilHvitfeldt/paletteer")#配色  
+devtools::install_github("calligross/ggthemeassist")#主题调整  
 
 ## 文本挖掘
-devtools::install_github("quanteda/readtext")#读取文本pdf、docx、xml、json
-install.packages("textreadr")#rtf、html、docx
-install.packages("magick")#高级图像处理
-install.packages("imager")#基于CImg的R图像处理库,可以快速处理多达4个维度的图像信息（两个空间维度、一个时间或深度维度,一个颜色维度）
+devtools::install_github("quanteda/readtext")#读取文本pdf、docx、xml、json  
+install.packages("textreadr")#rtf、html、docx  
+install.packages("magick")#高级图像处理  
+install.packages("imager")#基于CImg的R图像处理库,可以快速处理多达4个维度的图像信息(两个空间维度、一个时间或深度维度,一个颜色维度)  
 install.packages("av")#对音频和视频进行分析的工具
-install.packages("seewave")#分析、操作、显示、编辑和合成时间波的功能（特别是音频文件）
-remotes::install_github("HenrikBengtsson/future.apply", ref="develop")#多个文件的并行读取
-install.packages("skimr")#用最少的代码来获知数据框的方方面面
-devtools::install_github("quanteda/quanteda")
-install.packages("hunspell")#拼写检查
-devtools::install_github("ropensci/tokenizers")#文本切分
-devtools::install_github("mkearney/textfeatures")
-install.packages("udpipe")
-install.packages("stringdist")#距离计算
-install.packages("RSentiment")
-install.packages("sentimentr")
-install.packages("SentimentAnalysis")
-remotes::install_github("wrathematics/meanr")
-devtools::install_github("SentometricsResearch/sentometrics")
+install.packages("seewave")#分析、操作、显示、编辑和合成时间波的功能（特别是音频文件）  
+remotes::install_github("HenrikBengtsson/future.apply", ref="develop")#多个文件的并行读取  
+install.packages("skimr")#用最少的代码来获知数据框的方方面面  
+devtools::install_github("quanteda/quanteda")  
+install.packages("hunspell")#拼写检查  
+devtools::install_github("ropensci/tokenizers")#文本切分  
+devtools::install_github("mkearney/textfeatures")  
+install.packages("udpipe")  
+install.packages("stringdist")#距离计算  
+install.packages("RSentiment")  
+install.packages("sentimentr")  
+install.packages("SentimentAnalysis")  
+remotes::install_github("wrathematics/meanr")  
+devtools::install_github("SentometricsResearch/sentometrics")  
 
 ## 其他
-remotes::install_github("asteves/tayloRswift")#泰勒专辑配色
-devtools::install_github("sjmgarnier/viridis")#配色
-install.packages("patternplot")#黑白填充
-install.packages("Cairo")#PDF字体
-install.packages("shiny")#不用网页开发也可以写自己的网站
-install.packages("sudoku")#可以设计数独,解数独
-devtools::install_github("tidyverse/magrittr")#管道符号
-install.packages("tm")#文本挖掘包
-devtools::install_github("mjockers/syuzhet")#文本中提取情绪和基于情绪的情节弧线
-remotes::install_github("juliasilge/tidytext")#文本挖掘
-remotes::install_github("igraph/rigraph@master")# igraph 网络分析库
-devtools::install_github('thomasp85/ggraph')#网络、图形和树
-devtools::install_github("mjockers/syuzhet")#文本挖掘
-remotes::install_github("juliasilge/tidytext")#文本挖掘
-remotes::install_github("EmilHvitfeldt/textdata")#文本挖掘
-install.packages("reshape2")#文本挖掘
-pacman::p_load_gh("trinker/qdapDictionaries","trinker/qdapRegex","trinker/qdapTools","trinker/qdap")#6800个带标签的单词,经过严格审查的学术研究
-install.packages("glmnet")#LASSO回归
-devtools::install_github("ltorgo/DMwR2",ref="develop")#使用局部异常因子法(LOF法)检测异常值,LOF算法只对数值型数据有效。
-devtools::install_github(repo = "amices/mice")#多重插补法
+remotes::install_github("asteves/tayloRswift")#泰勒专辑配色  
+devtools::install_github("sjmgarnier/viridis")#配色  
+install.packages("patternplot")#黑白填充  
+install.packages("Cairo")#PDF字体  
+install.packages("shiny")#不用网页开发也可以写自己的网站  
+install.packages("sudoku")#可以设计数独,解数独  
+devtools::install_github("tidyverse/magrittr")#管道符号  
+install.packages("tm")#文本挖掘包  
+devtools::install_github("mjockers/syuzhet")#文本中提取情绪和基于情绪的情节弧线  
+remotes::install_github("juliasilge/tidytext")#文本挖掘  
+remotes::install_github("igraph/rigraph@master")# igraph 网络分析库  
+devtools::install_github('thomasp85/ggraph')#网络、图形和树  
+devtools::install_github("mjockers/syuzhet")#文本挖掘  
+remotes::install_github("juliasilge/tidytext")#文本挖掘  
+remotes::install_github("EmilHvitfeldt/textdata")#文本挖掘  
+install.packages("reshape2")#文本挖掘  
+pacman::p_load_gh("trinker/qdapDictionaries","trinker/qdapRegex","trinker/qdapTools","trinker/qdap")#6800个带标签的单词,经过严格审查的学术研究  
+install.packages("glmnet")#LASSO回归  
+devtools::install_github("ltorgo/DMwR2",ref="develop")#使用局部异常因子法(LOF法)检测异常值,LOF算法只对数值型数据有效。  
+devtools::install_github(repo = "amices/mice")#多重插补法  
 
 ## 机器学习
-install.packages("h2o")#
-remotes::install_github("mlr-org/mlr3verse")#
+install.packages("h2o")#  
+remotes::install_github("mlr-org/mlr3verse")#  
+install.packages("caret")#类似于python的sciki-learn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大  
+install.packages("randomForest")#最忠实于原文献的随机森林算法包  
+install.packages("xgboost")#大名鼎鼎的xgboost,kaggle高位利器  
+install.packages("arules")#关联算法  
+install.packages("C50")#C50决策树算法包  
+install.packages("rpart")#CART决策树算法  
+install.packages("e1071")#SVM和Naive Bayes  
+install.packages("nnet")#神经网络算法  
+install.packages("neuralnet")#神经网络算法  
+install.packages("mxnet")#深度学习框架  
+install.packages("tensorflow")#深度学习框架  
+install.packages("lubridate")#时间处理最好的包,没有之一  
+install.packages("broom")#将各种统计学模型结果数据框化  
+install.packages("magrittr")#管道符  
+install.packages("zoo")#时间序列  
+install.packages("forcats")#时间序列  
+install.packages("pROC")#绘制ROC曲线  
+install.packages("ROCR")#绘制ROC曲线  
+install.packages("igraph")#网络图以及pagerank算法  
+install.packages("network3D")#结合D3.js  
+install.packages("DBI")#和SQL的交互  
 
 ## 深度学习
-remotes::install_github("mlr-org/mlr3keras")#
-remotes::install_github("mlverse/torch")#
-install.packages("keras")#
+remotes::install_github("mlr-org/mlr3keras")#  
+remotes::install_github("mlverse/torch")#  
+install.packages("keras")#  
 
 ## ggplot2包扩展
-devtools::install_github("jokergoo/circlize")#弦图
-remotes::install_github("IndrajeetPatil/ggstatsplot")#GitHub
-devtools::install_github("terrytangyuan/autoplotly")#为热门统计结果自动生成交互式可视化CRAN
-devtools::install_github("R-CoderDotCom/calendR")#准备打印月度和年历CRAN
-devtools::install_github("krassowski/complex-upset")#可视化设置的交叉点并添加注释ggplot2CRAN
-remotes::install_github("wilkelab/cowplot")#"ggplot2" 的流线型绘图主题和情节注释CRAN
-devtools::install_github("tdhock/directlabels")#在格子或 ggplot2 绘图中添加直接标签的框架。CRAN
-devtools::install_github("R-CoderDotCom/econocharts")#微观经济学与宏观经济学图表GitHub
-remotes::install_github("dreamRs/esquisse")#与您的数据互动探索和可视化ggplot2CRAN
-devtools::install_github("sctyner/geomnet")#地理网通过geom_net在 ggplot2 中实现网络可视化。CRAN
-devtools::install_github("AckerDWM/gg3D")#ggplot2 的 3D 透视图图GitHub
+devtools::install_github("jokergoo/circlize")#弦图  
+remotes::install_github("IndrajeetPatil/ggstatsplot")#GitHub  
+devtools::install_github("terrytangyuan/autoplotly")#为热门统计结果自动生成交互式可视化CRAN  
+devtools::install_github("R-CoderDotCom/calendR")#准备打印月度和年历CRAN  
+devtools::install_github("krassowski/complex-upset")#可视化设置的交叉点并添加注释ggplot2CRAN  
+remotes::install_github("wilkelab/cowplot")#"ggplot2" 的流线型绘图主题和情节注释CRAN  
+devtools::install_github("tdhock/directlabels")#在格子或 ggplot2 绘图中添加直接标签的框架。CRAN  
+devtools::install_github("R-CoderDotCom/econocharts")#微观经济学与宏观经济学图表GitHub  
+remotes::install_github("dreamRs/esquisse")#与您的数据互动探索和可视化ggplot2CRAN  
+devtools::install_github("sctyner/geomnet")#地理网通过geom_net在 ggplot2 中实现网络可视化。CRAN  
+devtools::install_github("AckerDWM/gg3D")#ggplot2 的 3D 透视图图GitHub  
 remotes::install_github("corybrunson/ggalluvial@main", build_vignettes = TRUE)
 remotes::install_github("corybrunson/ggalluvial", ref = "optimization")#冲积图的"ggplot2"扩展CRAN
 devtools::install_github("ggobi/ggally")#通过添加多个功能来扩展"ggplot2",以降低将几何对象与转换数据相结合的复杂性。CRAN
@@ -347,36 +368,16 @@ install.packages("readODS")#
 install.packages("rmatio")#
 remotes::install_github("ddsjoberg/gtsummary")#
 devtools::install_github("GuangchuangYu/rvcheck")#
-remotes::install_git("appliedepi/epirhandbook")#该包集合了流行病学中诸多描述性分析的函数。其中epi.tests函数专门用于计算诊断试验的灵敏度、特异度及预测值等指标。详细介绍可以看链接 https://rpubs.com/maomaoworm/690424
-devtools::install_github("DillonHammill/DataEditR")
-devtools::install_github("DillonHammill/rhandsontable")#类似于excel的功能,对R语言已经读入的数据进行修改
-install.packages("job")#如果命令运行时间过长,是不能运行下一步命令的,这个包里可以将时间比较长的命令放到后台
-remotes::install_github("igraph/rigraph@master")
-install.packages("fBasics")#正态检验
-devtools::install_github("kassambara/ggpubr")#直接帮你画出箱线图、密度分布图、直方图、点图、偏差图的同时标上significance levels
-install.package('tinytex')
-tinytex::install_tinytex()
-install.package('rticles')
-devtools::install_github("joshkatz/needs", ref = "development")
+remotes::install_git("appliedepi/epirhandbook")#该包集合了流行病学中诸多描述性分析的函数。其中epi.tests函数专门用于计算诊断试验的灵敏度、特异度及预测值等指标。详细介绍可以看链接 https://rpubs.com/maomaoworm/690424  
+devtools::install_github("DillonHammill/DataEditR")  
+devtools::install_github("DillonHammill/rhandsontable")#类似于excel的功能,对R语言已经读入的数据进行修改  
+install.packages("job")#如果命令运行时间过长,是不能运行下一步命令的,这个包里可以将时间比较长的命令放到后台  
+remotes::install_github("igraph/rigraph@master")  
+install.packages("fBasics")#正态检验  
+devtools::install_github("kassambara/ggpubr")#直接帮你画出箱线图、密度分布图、直方图、点图、偏差图的同时标上significance levels  
+install.package('tinytex')  
+tinytex::install_tinytex()  
+install.package('rticles')  
+devtools::install_github("joshkatz/needs", ref = "development")  
 ## 机器学习包
-install.packages("caret")#类似于python的sciki-learn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大
-install.packages("randomForest")#最忠实于原文献的随机森林算法包
-install.packages("xgboost")#大名鼎鼎的xgboost,kaggle高位利器
-install.packages("arules")#关联算法
-install.packages("C50")#C50决策树算法包
-install.packages("rpart")#CART决策树算法
-install.packages("e1071")#SVM和Naive Bayes
-install.packages("nnet")#神经网络算法
-install.packages("neuralnet")#神经网络算法
-install.packages("mxnet")#深度学习框架
-install.packages("tensorflow")#深度学习框架
-install.packages("lubridate")#时间处理最好的包,没有之一
-install.packages("broom")#将各种统计学模型结果数据框化
-install.packages("magrittr")#管道符
-install.packages("zoo")#时间序列
-install.packages("forcats")#时间序列
-install.packages("pROC")#绘制ROC曲线
-install.packages("ROCR")#绘制ROC曲线
-install.packages("igraph")#网络图以及pagerank算法
-install.packages("network3D")#结合D3.js
-install.packages("DBI")#和SQL的交互
+
