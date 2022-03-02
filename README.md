@@ -379,5 +379,3 @@ install.package('tinytex')
 tinytex::install_tinytex()  
 install.package('rticles')  
 devtools::install_github("joshkatz/needs", ref = "development")  
-## 机器学习包
-
