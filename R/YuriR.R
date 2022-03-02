@@ -83,9 +83,9 @@ outer.IQR <- function(x, multiple = 1.5, replace = FALSE, revalue = NA) {
   else outlier <- data.frame(location = 0, value = 0)
   if (replace == TRUE) {
     x[x1] <- revalue
-  }
+    }
   return(list(new.value = x, outlier = outlier))
-}
+  }
 
 #' @export Yuri_theme
 Yuri_theme <- theme(text = element_text(color = 1),#全字体
@@ -134,39 +134,7 @@ Yuri_theme <- theme(text = element_text(color = 1),#全字体
 )
 
 #' @export Up
-print("rvcheck::update_all()")
+Up <- print("rvcheck::update_all()")
 
 #' @export Yuri_library
-library("rio")#导入数据
-library("tidyfst")#dplyr类似,底层使用datatable
-library("data.table")#处理大数据
-library("tidyverse")#tidy-R
-library("jmv")#jamovi
-library("survminer")#生存曲线
-library("survival")#生存曲线
-library("ggpmisc")#拟合模型相关的注释和绘图
-library("gghalves")#裁剪图形
-library("customLayout")#图片排版
-library("glmnet")#LASSO回归
-library("circlize")#圈图
-library("ComplexHeatmap")#热图*
-library("ggwordcloud")#词云
-library("gtsummary")#基线资料表
-library("shiny")#交互网页
-library("scales")#缩放刻度
-library("pacman")#参考文献
-library("Cairo")#渲染
-library("patternplot")#黑白填充
-library("ggbreak")#坐标轴截断
-library("jiebaR")#分词
-library("readtext")#读取文本pdf、docx、xml、json
-library("skimr")#用最少的代码来获知数据框的方方面面
-library("tokenizers")#文本切分
-library("hunspell")#拼写检查
-library("udpipe")#词形还原
-library("textreadr")#rtf、html、docx
-library("tidytext")#
-library("mice")#多重插补
-library("DMwR2")#使用局部异常因子法(LOF法)检测异常值
-library("tidyfst")#
-library("udpipe")#
+Yuri_library <- p_load(rio,tidyfst,data.table,tidyverse,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,tidyfst,udpipe)
