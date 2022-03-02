@@ -59,6 +59,7 @@ devtools::install_github("r-lib/roxygen2")#R包
 devtools::install_github("joshuaulrich/quantmod")  
 devtools::install_github("joshuaulrich/xts")  
 devtools::install_github("GuangchuangYu/rvcheck")#更新大部分平台的R包  
+devtools::install_github("trinker/pacman")#参考文献  
 
 ## 数据部分
 remotes::install_github("leeper/rio")#导入数据  
@@ -83,7 +84,6 @@ devtools::install_github("raivokolde/pheatmap")#热图
 devtools::install_github("jokergoo/ComplexHeatmap")#热图*  
 devtools::install_github("r-lib/scales")#缩放刻度  
 devtools::install_github("zzawadz/customLayout")#图片排版  
-devtools::install_github("trinker/pacman")#参考文献  
 remotes::install_github("csdaw/ggprism")#用ggplot2输出GraphPad prism的图  
 remotes::install_github("r-tmap/tmaptools")#专题地图  
 remotes::install_github("r-tmap/tmap")#专题地图  
