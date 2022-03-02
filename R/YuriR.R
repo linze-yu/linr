@@ -137,4 +137,4 @@ Yuri_theme <- theme(text = element_text(color = 1),#全字体
 Up <- print("rvcheck::update_all()")
 
 #' @export Yuri_library
-Yuri_library <- p_load(rio,tidyfst,data.table,tidyverse,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,tidyfst,udpipe)
+Yuri_library <- pacman::p_load(rio,tidyfst,data.table,tidyverse,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,tidyfst,udpipe)
