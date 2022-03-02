@@ -4,11 +4,12 @@ Title: Yuri
 Version: 0.1.0
 Author: Linze Yu
 Maintainer: Linze Yu <842359449@qq.com>
-Depends: tidyverse,rvcheck,pacman
-Description: cols,fills,t_theme,Yuri_theme,outer.IQR,Up,Yuri_library
+Depends:
+        rvcheck,rio,tidyfst,data.table,tidyverse,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,tidyfst,udpipe
+Description: cols,fills,t_theme,Yuri_theme,outer.IQR,Up
 License:
 Encoding: UTF-8
 Date: `r Sys.Date()`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-03-02 13:40:24 UTC; LinzeYu
+Packaged: 2022-03-02 13:47:11 UTC; LinzeYu

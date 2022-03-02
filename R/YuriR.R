@@ -1,6 +1,6 @@
 #' @title Yuri
 #'
-#' @description cols,fills,t_theme,Yuri_theme,outer.IQR,Up,Yuri_library
+#' @description cols,fills,t_theme,Yuri_theme,outer.IQR,Up
 #'
 #' @param cols
 #'
@@ -13,8 +13,6 @@
 #' @param outer.IQR
 #'
 #' @param Up
-#'
-#' @param Yuri_library
 #'
 #' @return NULL
 #'
@@ -135,6 +133,3 @@ Yuri_theme <- theme(text = element_text(color = 1),#全字体
 
 #' @export Up
 Up <- print("rvcheck::update_all()")
-
-#' @export Yuri_library
-Yuri_library <- pacman::p_load(rio,tidyfst,data.table,tidyverse,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,tidyfst,udpipe)

@@ -22,11 +22,9 @@ cols
 \item{outer.IQR}{}
 
 \item{Up}{}
-
-\item{Yuri_library}{}
 }
 \description{
-cols,fills,t_theme,Yuri_theme,outer.IQR,Up,Yuri_library
+cols,fills,t_theme,Yuri_theme,outer.IQR,Up
 }
 \examples{
 
