@@ -1,6 +1,6 @@
 #' @title Yuri
 #'
-#' @description 主题+一些函数
+#' @description cols,fills,t_theme,Yuri_theme,outer.IQR,Up,Yuri_library
 #'
 #' @param cols
 #'
@@ -8,17 +8,23 @@
 #'
 #' @param t_theme
 #'
+#' @param Yuri_theme
+#'
 #' @param outer.IQR
+#'
+#' @param Up
+#'
+#' @param Yuri_library
 #'
 #' @return NULL
 #'
 #' @examples
 #'
 #' @export cols
-cols <- c("#95AAD3", "#FC766A", "#00997B", "#696AAD", "#EBBF57", "#92B558", "#34558B","#E34F33","#E2654D","#6364A5")
+cols <- c("#95AAD3", "#FC766A", "#00997B", "#696AAD", "#EBBF57", "#92B558", "#34558B", "#E34F33", "#E2654D", "#6364A5")
 
 #' @export fills
-fills <- c("#95AAD3", "#FC766A", "#00997B", "#696AAD", "#EBBF57", "#92B558", "#34558B","#E34F33","#E2654D","#6364A5")
+fills <- c("#95AAD3", "#FC766A", "#00997B", "#696AAD", "#EBBF57", "#92B558", "#34558B", "#E34F33", "#E2654D", "#6364A5")
 
 #' @export t_theme
 windowsFonts(A = windowsFont("Source Han Sans CN"))#字体设置
@@ -82,7 +88,7 @@ outer.IQR <- function(x, multiple = 1.5, replace = FALSE, revalue = NA) {
 }
 
 #' @export Yuri_theme
-t_theme <- theme(text = element_text(color = 1),#全字体
+Yuri_theme <- theme(text = element_text(color = 1),#全字体
                  plot.title = element_text(size = 23, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)),#标题
                  plot.subtitle = element_text(size = 17, angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)),#副标题
                  plot.caption = element_text(size = 14, angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#说明文字
@@ -126,3 +132,41 @@ t_theme <- theme(text = element_text(color = 1),#全字体
                  plot.title.position = "plot",
                  #legend.key = element_rect(fill = "group", color = "group"),#图例符号
 )
+
+#' @export Up
+print("rvcheck::update_all()")
+
+#' @export Yuri_library
+library("rio")#导入数据
+library("tidyfst")#dplyr类似,底层使用datatable
+library("data.table")#处理大数据
+library("tidyverse")#tidy-R
+library("jmv")#jamovi
+library("survminer")#生存曲线
+library("survival")#生存曲线
+library("ggpmisc")#拟合模型相关的注释和绘图
+library("gghalves")#裁剪图形
+library("customLayout")#图片排版
+library("glmnet")#LASSO回归
+library("circlize")#圈图
+library("ComplexHeatmap")#热图*
+library("ggwordcloud")#词云
+library("gtsummary")#基线资料表
+library("shiny")#交互网页
+library("scales")#缩放刻度
+library("pacman")#参考文献
+library("Cairo")#渲染
+library("patternplot")#黑白填充
+library("ggbreak")#坐标轴截断
+library("jiebaR")#分词
+library("readtext")#读取文本pdf、docx、xml、json
+library("skimr")#用最少的代码来获知数据框的方方面面
+library("tokenizers")#文本切分
+library("hunspell")#拼写检查
+library("udpipe")#词形还原
+library("textreadr")#rtf、html、docx
+library("tidytext")#
+library("mice")#多重插补
+library("DMwR2")#使用局部异常因子法(LOF法)检测异常值
+library("tidyfst")#
+library("udpipe")#

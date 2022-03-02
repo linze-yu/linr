@@ -3,12 +3,12 @@ Type: Package
 Title: Yuri
 Version: 0.1.0
 Author: Linze Yu
-Maintainer: The package maintainer <842359449@qq.com>
-Description: 主题+一些函数
+Maintainer: Linze Yu <842359449@qq.com>
+Depends: tidyverse,rvcheck
+Description: cols,fills,t_theme,Yuri_theme,outer.IQR,Up,Yuri_library
 License:
-Depends:
-        rio,data.table,tidyverse,jmv,gtsummary,circlize,ComplexHeatmap,ggwordcloud,survival,customLayout,gghalves,survminer,glmnet,shiny,Cairo,patternplot,pacman,ggbreak,scales,tidyfst,ggpmisc,jiebaR,DMwR2,mice,tidytext,hunspell,tokenizers,udpipe,readtext,textreadr,udpipe,hunspell,tokenizers,skimr
 Encoding: UTF-8
+Date: `r Sys.Date()`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-03-01 14:46:34 UTC; LinzeYu
+Packaged: 2022-03-02 05:37:23 UTC; LinzeYu

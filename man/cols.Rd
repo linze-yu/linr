@@ -17,10 +17,16 @@ cols
 
 \item{t_theme}{}
 
+\item{Yuri_theme}{}
+
 \item{outer.IQR}{}
+
+\item{Up}{}
+
+\item{Yuri_library}{}
 }
 \description{
-主题+一些函数
+cols,fills,t_theme,Yuri_theme,outer.IQR,Up,Yuri_library
 }
 \examples{
 
