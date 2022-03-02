@@ -79,8 +79,8 @@ outer.IQR <- function(x, multiple = 1.5, replace = FALSE, revalue = NA) {
   IQR <- q[4]-q[2]
   x1 <- which(x<q[2]-multiple*IQR|x>q[4]+multiple*IQR)
   x2 <- x[x1]
-  if(length(x2)>0)outlier <- data.frame(location = x1, value = x2)
-  else outlier <- data.frame(location = 0, value = 0)
+  if(length(x2)>0)outlier <- data.table(location = x1, value = x2)
+  else outlier <- data.table(location = 0, value = 0)
   if (replace == TRUE) {
     x[x1] <- revalue
     }
