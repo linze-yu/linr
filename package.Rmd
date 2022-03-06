@@ -39,6 +39,7 @@ library("rio")#导入数据
 library("tidyfst")#dplyr类似,底层使用datatable
 library("data.table")#处理大数据
 library("tidyverse")#tidy-R
+library("echarts4r")#
 library("jmv")#jamovi
 library("survminer")#生存曲线
 library("survival")#生存曲线
@@ -253,6 +254,7 @@ remotes::install_github("r-tmap/tmap")#专题地图
 devtools::install_github('badbye/baidumap')#百度地图  
 devtools::install_github("EmilHvitfeldt/paletteer")#配色  
 devtools::install_github("calligross/ggthemeassist")#主题调整  
+remotes::install_github("JohnCoene/echarts4r")#绘图系统  
 ```
 
 ## 文本挖掘

@@ -5,11 +5,11 @@ Version: 0.2.0
 Author: Linze Yu
 Maintainer: Linze Yu <842359449@qq.com>
 Depends:
-        rvcheck,rio,data.table,tidyfst,tidyverse,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,udpipe
+        rvcheck,rio,data.table,tidyfst,tidyverse,echarts4r,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,udpipe
 Description: cols,fills,t_theme,Yuri_theme,outer.IQR,Up
 License:
 Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-03-06 12:23:54 UTC; LinzeYu
+Packaged: 2022-03-06 13:48:32 UTC; LinzeYu
