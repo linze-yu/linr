@@ -1,15 +1,15 @@
 Package: YuriR
 Type: Package
 Title: Yuri
-Version: 0.1.0
+Version: 0.2.0
 Author: Linze Yu
 Maintainer: Linze Yu <842359449@qq.com>
 Depends:
-        rvcheck,rio,tidyfst,data.table,tidyverse,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,tidyfst,udpipe
+        rvcheck,rio,data.table,tidyfst,tidyverse,jmv,survminer,survival,ggpmisc,gghalves,customLayout,glmnet,circlize,ComplexHeatmap,ggwordcloud,gtsummary,shiny,scales,pacman,Cairo,patternplot,ggbreak,jiebaR,readtext,skimr,tokenizers,hunspell,udpipe,textreadr,tidytext,mice,DMwR2,udpipe
 Description: cols,fills,t_theme,Yuri_theme,outer.IQR,Up
 License:
 Encoding: UTF-8
-Date: `r Sys.Date()`
+Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-03-02 13:47:11 UTC; LinzeYu
+Packaged: 2022-03-06 02:07:28 UTC; LinzeYu

@@ -87,17 +87,17 @@ outer.IQR <- function(x, multiple = 1.5, replace = FALSE, revalue = NA) {
 
 #' @export Yuri_theme
 Yuri_theme <- theme(text = element_text(color = 1),#全字体
-                 plot.title = element_text(size = 23, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)),#标题
-                 plot.subtitle = element_text(size = 17, angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)),#副标题
-                 plot.caption = element_text(size = 14, angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#说明文字
-                 plot.tag = element_text(size = 15, angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#标签
-                 legend.title = element_text(size = 12, margin = margin(0, 0, 0, 0)),#图例标题
-                 legend.text = element_text(size = 12, margin = margin(0, 0, 0, 0)),#图例文字
-                 strip.text = element_text(size = 15, hjust = 0, margin = margin(0, 0, 0, 0)),#分面标签文本
-                 axis.text.y = element_text(size = 14, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(0, 1, 0, 0)),#Y轴数字标
-                 axis.title.y = element_text(size = 16, vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)),#Y轴标题
-                 axis.text.x = element_text(size = 14, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)),#X轴数字标
-                 axis.title.x = element_text(size = 15, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)),#X轴标题
+                 plot.title = element_text(hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)),#标题
+                 plot.subtitle = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)),#副标题
+                 plot.caption = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#说明文字
+                 plot.tag = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#标签
+                 legend.title = element_text(margin = margin(0, 0, 0, 0)),#图例标题
+                 legend.text = element_text(margin = margin(0, 0, 0, 0)),#图例文字
+                 strip.text = element_text(hjust = 0, margin = margin(0, 0, 0, 0)),#分面标签文本
+                 axis.text.y = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(0, 1, 0, 0)),#Y轴数字标
+                 axis.title.y = element_text(vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)),#Y轴标题
+                 axis.text.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)),#X轴数字标
+                 axis.title.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)),#X轴标题
                  panel.background = element_rect(fill = NA),#绘图区域背景
                  panel.border = element_rect(color = 1, fill = NA, size = 1),#绘图区边框
                  plot.background = element_rect(fill = NA, color = NA),#文字区域背景
@@ -107,18 +107,18 @@ Yuri_theme <- theme(text = element_text(color = 1),#全字体
                  axis.line = element_line(color = 1, size = 1, lineend = "square"),#坐标轴
                  axis.ticks.x = element_line(color = 1, size = 1),#X轴刻度线
                  axis.ticks.y = element_line(color = 1, size = 1),#Y轴刻度线
-                 axis.ticks.length = unit(.15, "cm"),#刻度线长度
+                 #axis.ticks.length = unit(.15, "cm"),#刻度线长度
                  panel.grid.major.x = element_line(color = "#96999C", size = 0.5, linetype = 3),#主竖线
                  panel.grid.major.y = element_line(color = "#96999C", size = 0.5, linetype = 3),#主横线
                  panel.grid.minor.x = element_line(color = "#96999C", size = 0.25, linetype = 3),#次竖线
                  panel.grid.minor.y = element_line(color = "#96999C", size = 0.25, linetype = 3),#次横线
                  plot.margin = margin(t = 0.5, r = 0.5, b = 0.1, l = 0.5, unit = "cm"),#图边界(距离可以为0或者为负值)
-                 panel.spacing = unit(.25, "cm"),#分面绘图区之间的间距
+                 #panel.spacing = unit(.25, "cm"),#分面绘图区之间的间距
                  legend.margin = margin(t = 0, r = 0, b = 0, l = -9),#图例边界, unit = "cm"
                  legend.position = ("right"),#图例位置left, right, bottom, top, c(0.9, 0.9)
-                 legend.key.height = unit(0.5, "cm"),#图例符号高度
-                 legend.key.width = unit(0.5, "cm"),#图例符号宽度
-                 legend.key.size = unit(0.5, "cm"),#图例符号大小
+                 #legend.key.height = unit(0.5, "cm"),#图例符号高度
+                 #legend.key.width = unit(0.5, "cm"),#图例符号宽度
+                 #legend.key.size = unit(0.5, "cm"),#图例符号大小
                  legend.title.align = (0),#图例标题对齐方式(0为左齐, 1为右齐, 0.5居中)
                  legend.text.align = (0),#图例文字标签对齐方式(0为左齐, 1为右齐, 0.5居中)
                  legend.direction = "vertical",#图例排列方向"horizontal"(水平一行)
