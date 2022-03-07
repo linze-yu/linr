@@ -5,7 +5,7 @@
 \alias{cols}
 \title{Yuri}
 \format{
-An object of class \code{character} of length 10.
+An object of class \code{character} of length 12.
 }
 \usage{
 cols
@@ -24,7 +24,7 @@ cols
 \item{Up}{}
 }
 \description{
-cols,fills,t_theme,Yuri_theme,outer.IQR,Up
+cols, fills, t_theme, Yuri_theme, outer.IQR, Up
 }
 \examples{
 
