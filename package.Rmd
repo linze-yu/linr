@@ -45,6 +45,7 @@ library("survminer")#生存曲线
 library("survival")#生存曲线
 library("ggpmisc")#拟合模型相关的注释和绘图
 library("gghalves")#裁剪图形
+library("ggforce")#形状曲线
 library("customLayout")#图片排版
 library("glmnet")#LASSO回归
 library("circlize")#圈图
@@ -373,7 +374,7 @@ remotes::install_github("jonocarroll/ggeasy")#轻松访问"ggplot2"命令CRAN
 remotes::install_github("yonicd/ggedit")#ggedit 旨在以交互方式编辑 ggplot 层,刻度和主题美学CRAN  
 devtools::install_github("daattali/ggExtra")#ggExtra 允许您将边际密度图或直方图添加到 ggplot2 散射图中。CRAN  
 devtools::install_github("wilkox/ggfittext")#ggplot2地理位置, 以适应文本在一个盒子里CRAN  
-devtools::install_github("thomasp85/ggforce")#ggforce 旨在通过 ggplot2 v2.0.0 引入的扩展系统为 ggplot2 提供缺失的功能CRAN  
+devtools::install_github("thomasp85/ggforce")#旨在通过 ggplot2 v2.0.0 引入的扩展系统为 ggplot2 提供缺失的功能CRAN  
 devtools::install_github("ProjectMOSAIC/ggformulaExtra")#ggplot2通过配方和管道CRAN  
 remotes::install_github('sinhrks/ggfortify')#统一界面到 ggplot2 许多流行的统计帕克奇结果。CRAN  
 devtools::install_github('thomasp85/ggfx')#用于"ggplot2"和"网格"的像素过滤器CRAN  
@@ -466,7 +467,6 @@ install.packages("timetk")#
 install.packages("modeltime")#  
 install.packages("plotly")#  
 install.packages("leaflet")#  
-install.packages("ggforce")#  
 install.packages("treemapify")#  
 install.packages("ggridges")#  
 install.packages("ggalluvial")#  
