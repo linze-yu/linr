@@ -24,11 +24,11 @@ editor_options:
 ---
 
 ```{r,代码全局设置,echo=F}
-knitr::opts_chunk$set(warning=F,error=F,message=F,prompt=T,comment='',echo=T,dpi=600,eval=F)
-#eval=FALSE代码显示不运行
-#include=FALSE代码运行,不显示代码和结果
-#echo=TRUE markdown显示代码块
-#prompt=TRUE使用>开始代码
+knitr::opts_chunk$set(warning=F,error=F,message=F,prompt=T,comment='',echo=T,dpi=100,eval=F)
+#eval=F代码显示不运行
+#include=F代码运行,不显示代码和结果
+#echo=T markdown显示代码块
+#prompt=T使用>开始代码
 #comment=""结果不使用#
 #,cache=T
 ```
@@ -91,7 +91,7 @@ t_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1),#
                  legend.title = element_text(size = 12, margin = margin(0, 0, 0, 0)),#图例标题
                  legend.text = element_text(size = 12, margin = margin(0, 0, 0, 0)),#图例文字
                  strip.text = element_text(size = 15, hjust = 0, margin = margin(0, 0, 0, 0)),#分面标签文本
-                 axis.text.y = element_text(size = 14, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(0, 1, 0, 0)),#Y轴数字标
+                 axis.text.y = element_text(size = 14, vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 1, 0, 0)),#Y轴数字标
                  axis.title.y = element_text(size = 16, vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)),#Y轴标题
                  axis.text.x = element_text(size = 14, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)),#X轴数字标
                  axis.title.x = element_text(size = 15, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)),#X轴标题
@@ -204,6 +204,14 @@ install.packages("devtools")#从GitHub上下载R包
 devtools::install_github("r-lib/devtools")  
 install.packages("remotes")#从GitHub上下载R包  
 devtools::install_github("tidyverse/tidyverse")#Tidy-R(1+7)  
+devtools::install_github("tidyverse/ggplot2")#1  
+devtools::install_github("tidyverse/dplyr")#2  
+devtools::install_github("tidyverse/tidyr")#3  
+devtools::install_github("tidyverse/readr")#4  
+devtools::install_github("tidyverse/purrr")#5  
+devtools::install_github("tidyverse/tibble")#6  
+devtools::install_github("tidyverse/stringr")#7  
+devtools::install_github("tidyverse/forcats")#8  
 devtools::install_github("Yurisuriyel/YuriR")#  
 remotes::install_github("rstudio/rmarkdown")#写书  
 remotes::install_github("rstudio/bookdown")#写书  
@@ -309,6 +317,23 @@ devtools::install_github(repo = "amices/mice")#多重插补法
 ```{r}
 install.packages("h2o")#  
 remotes::install_github("mlr-org/mlr3verse")#  
+devtools::install_github("mlr-org/mlr3cluster")#mlr3的聚类分析  
+remotes::install_github("mlr-org/mlr3filters")#mlr3的变量选择过滤器
+remotes::install_github("mlr-org/mlr3fselect")#mlr3的包装器功能选择  
+remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE)#推荐的学习器mlr3
+remotes::install_github("mlr-org/mlr3proba")#监督概率学习的扩展（包括生存分析）  
+remotes::install_github("mlr-org/mlr3tuning")#通过随机搜索、网格搜索等进行超参数调优  
+remotes::install_github("mlr-org/mlr3viz")#mlr3 的可视化效果
+remotes::install_github("mlr-org/paradox")#
+remotes::install_github("mlr-org/mlr3extralearners")#
+remotes::install_github("mlr-org/bbotk")#黑盒优化工具包  
+remotes::install_github("mlr-org/mlr3benchmark")#mlr3中用于基准测试的分析和工具
+devtools::install_github("mlr-org/mlr3db")#使用数据后端扩展mlr3包  
+remotes::install_github("mlr-org/mlr3hyperband")#mlr3的超频调谐  
+#mlr3measures#连接器到OpenML  
+#mlr3oml#用于预处理和构建复杂工作流的管道和 DAG  
+remotes::install_github("mlr-org/mlr3spatiotempcv")#用于对时空任务进行重新采样的扩展  
+remotes::install_github("mlr-org/mlr3keras")
 devtools::install_github("tidymodels/tidymodels")#Tidy-R'(1+13)  
 install.packages("caret")#类似于python的sciki-learn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大  
 install.packages("randomForest")#最忠实于原文献的随机森林算法包  
@@ -530,10 +555,12 @@ install.packages("igraph")#
 install.packages("nloptr")#  
 install.packages("sp")#  
 install.packages("rgeos")#  
+devtools::install_github("zoometh/iconr")#研究史前图像学的形式化方法
 ```
 
 ## 画图包
 ```{r}
+devtools::install_github("jrodu/qqboxplot")#q-qboxplots作为ggplot2的扩展
 install.packages("pez")#系统全面的系统发育R包  
 install.packages("r3dmol")#在R中对分子结构进行3D可视化  
 install.packages("ggeconodist")#可以画另类的箱线图  
@@ -547,7 +574,6 @@ install.packages("hexView")#
 install.packages("pzfx")#  
 install.packages("readODS")#  
 install.packages("rmatio")#  
-remotes::install_github("ddsjoberg/gtsummary")#  
 devtools::install_github("GuangchuangYu/rvcheck")#  
 remotes::install_git("appliedepi/epirhandbook")#该包集合了流行病学中诸多描述性分析的函数。其中epi.tests函数专门用于计算诊断试验的灵敏度,特异度及预测值等指标。详细介绍可以看链接 https://rpubs.com/maomaoworm/690424  
 devtools::install_github("DillonHammill/DataEditR")  
@@ -556,8 +582,6 @@ install.packages("job")#如果命令运行时间过长,是不能运行下一步�
 remotes::install_github("igraph/rigraph@master")  
 install.packages("fBasics")#正态检验  
 devtools::install_github("kassambara/ggpubr")#直接帮你画出箱线图,密度分布图,直方图,点图,偏差图的同时标上significance levels  
-install.package('tinytex')  
-tinytex::install_tinytex()  
 install.package('rticles')  
 devtools::install_github("joshkatz/needs", ref = "development")  
 ```

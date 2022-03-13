@@ -34,7 +34,7 @@ t_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1), 
                  legend.title = element_text(size = 12, margin = margin(0, 0, 0, 0)), #
                  legend.text = element_text(size = 12, margin = margin(0, 0, 0, 0)), #
                  strip.text = element_text(size = 15, hjust = 0, margin = margin(0, 0, 0, 0)), #
-                 axis.text.y = element_text(size = 14, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(0, 1, 0, 0)), #
+                 axis.text.y = element_text(size = 14, vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 1, 0, 0)), #
                  axis.title.y = element_text(size = 16, vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)), #
                  axis.text.x = element_text(size = 14, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)), #
                  axis.title.x = element_text(size = 15, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)), #
