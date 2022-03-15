@@ -45,6 +45,7 @@ library("survminer")#生存曲线
 library("survival")#生存曲线
 library("ggpmisc")#拟合模型相关的注释和绘图
 library("gghalves")#裁剪图形
+library("ggsignif")#添加P值
 library("ggforce")#形状曲线
 library("customLayout")#图片排版
 library("glmnet")#LASSO回归
@@ -453,7 +454,7 @@ remotes::install_github("ggseg/ggseg")#绘制大脑地图集分割的多边形Gi
 devtools::install_github("omarwagih/ggseqlogo")#使用 ggplot2 的出版物就绪序列徽标。GitHub  
 devtools::install_github("marcmenem/ggshadow")#在线条下画一个阴影,使繁忙的情节更美观GitHub  
 devtools::install_github("jtlandis/ggside")#侧语法图形CRAN  
-remotes::install_github("const-ae/ggsignif")#"ggplot2"的"意义支架"。CRAN  
+remotes::install_github("const-ae/ggsignif")#添加P值。CRAN  
 devtools::install_github("oldlipe/ggsom")#此包的目的是提供基于自组织地图的图形的更多变异性。CRAN  
 install.packages("ggspectra")#"ggspectra"扩展了"ggplot2",并带有用于绘制光谱的统计数据,地理位置和注释。CRAN  
 devtools::install_github("lionel-/ggstance")#ggstance 实现普通 ggplot2 地理群系的水平版本。CRAN  
