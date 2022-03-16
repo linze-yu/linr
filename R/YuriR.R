@@ -33,8 +33,8 @@ t_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1),#
                  plot.tag = element_text(size = 15, angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#标签
                  legend.title = element_text(size = 12, margin = margin(0, 0, 0, 0)),#图例标题
                  legend.text = element_text(size = 12, margin = margin(0, 0, 0, 0)),#图例文字
-                 strip.text.x = element_text(size = 15, hjust = 0, margin = margin(0, 0, 0, 0)),#水平分面标签文本
-                 strip.text.y = element_text(size = 15, hjust = 0, margin = margin(0, 0, 0, 0)),#竖直分面标签文本
+                 strip.text.x = element_text(size = 15, hjust = 0.5, margin = margin(0, 0, 0, 0)),#水平分面标签文本
+                 strip.text.y = element_text(size = 15, vjust = 0.5, margin = margin(0, 0, 0, 0)),#竖直分面标签文本
                  axis.text.y = element_text(size = 14, vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 1, 0, 0)),#Y轴数字标
                  axis.title.y = element_text(size = 16, vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)),#Y轴标题
                  axis.text.x = element_text(size = 14, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)),#X轴数字标
@@ -96,29 +96,29 @@ Yuri_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1
                     plot.tag = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#标签
                     legend.title = element_text(margin = margin(0, 0, 0, 0)),#图例标题
                     legend.text = element_text(margin = margin(0, 0, 0, 0)),#图例文字
-                    strip.text.x = element_text(hjust = 0, margin = margin(0, 0, 0, 0)),#水平分面标签文本
-                    strip.text.y = element_text(hjust = 0, margin = margin(0, 0, 0, 0)),#竖直分面标签文本
+                    strip.text.x = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0)),#水平分面标签文本
+                    strip.text.y = element_text(vjust = 0.5, margin = margin(0, 0, 0, 1)),#竖直分面标签文本
                     axis.text.y = element_text(vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 1, 0, 0)),#Y轴数字标
                     axis.title.y = element_text(vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)),#Y轴标题
                     axis.text.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)),#X轴数字标
                     axis.title.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)),#X轴标题
                     panel.background = element_rect(fill = NA),#绘图区域背景
-                    panel.border = element_rect(color = 1, fill = NA, size = 1),#绘图区边框
+                    panel.border = element_rect(color = NA, fill = NA, size = 1),#绘图区边框
                     plot.background = element_rect(fill = NA, color = NA),#文字区域+图像背景
                     legend.background = element_rect(fill = NA, color = NA),#图例背景
                     legend.key = element_rect(fill = NA, color = NA),#图例符号背景
                     strip.background = element_rect(fill = NA),#分面标签背景
-                    axis.line = element_line(color = 1, size = 1, lineend = "square"),#坐标轴
-                    axis.ticks.x = element_line(color = 1, size = 0.5),#X轴刻度线
-                    axis.ticks.y = element_line(color = 1, size = 0.5),#Y轴刻度线
+                    axis.line = element_line(color = "#96999C", size = 1, lineend = "square"),#坐标轴
+                    axis.ticks.x = element_line(color = "#96999C", size = 0.5),#X轴刻度线
+                    axis.ticks.y = element_line(color = "#96999C", size = 0.5),#Y轴刻度线
                     axis.ticks.length = unit(.15, "cm"),#刻度线长度
                     panel.grid.major.x = element_line(color = "#96999C", size = 0.5, linetype = 3),#主竖线
                     panel.grid.major.y = element_line(color = "#96999C", size = 0.5, linetype = 3),#主横线
                     panel.grid.minor.x = element_line(color = "#96999C", size = 0.25, linetype = 3),#次竖线
                     panel.grid.minor.y = element_line(color = "#96999C", size = 0.25, linetype = 3),#次横线
                     plot.margin = margin(t = 0.5, r = 0.5, b = 0.1, l = 0.5, unit = "cm"),#图边界(距离可以为0或者为负值)
-                    panel.spacing.x = unit(.25, "cm"),#竖直分面绘图区之间的间距
-                    panel.spacing.y = unit(.25, "cm"),#水平分面绘图区之间的间距
+                    panel.spacing.x = unit(.15, "cm"),#竖直分面绘图区之间的间距
+                    panel.spacing.y = unit(.15, "cm"),#水平分面绘图区之间的间距
                     legend.margin = margin(t = 0, r = 0, b = 0, l = -9),#图例边界, unit = "cm"
                     legend.position = ("right"),#图例位置left, right, bottom, top, c(0.9, 0.9)
                     legend.key.height = unit(0.5, "cm"),#图例符号高度

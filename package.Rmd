@@ -91,8 +91,8 @@ t_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1),#
                  plot.tag = element_text(size = 15, angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#标签
                  legend.title = element_text(size = 12, margin = margin(0, 0, 0, 0)),#图例标题
                  legend.text = element_text(size = 12, margin = margin(0, 0, 0, 0)),#图例文字
-                 strip.text.x = element_text(size = 15, hjust = 0, margin = margin(0, 0, 0, 0)),#水平分面标签文本
-                 strip.text.y = element_text(size = 15, hjust = 0, margin = margin(0, 0, 0, 0)),#竖直分面标签文本
+                 strip.text.x = element_text(size = 15, hjust = 0.5, margin = margin(0, 0, 0, 0)),#水平分面标签文本
+                 strip.text.y = element_text(size = 15, vjust = 0.5, margin = margin(0, 0, 0, 0)),#竖直分面标签文本
                  axis.text.y = element_text(size = 14, vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 1, 0, 0)),#Y轴数字标
                  axis.title.y = element_text(size = 16, vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)),#Y轴标题
                  axis.text.x = element_text(size = 14, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)),#X轴数字标
@@ -156,8 +156,8 @@ Yuri_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1
                  plot.tag = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),#标签
                  legend.title = element_text(margin = margin(0, 0, 0, 0)),#图例标题
                  legend.text = element_text(margin = margin(0, 0, 0, 0)),#图例文字
-                 strip.text.x = element_text(hjust = 0, margin = margin(0, 0, 0, 0)),#水平分面标签文本
-                 strip.text.y = element_text(hjust = 0, margin = margin(0, 0, 0, 0)),#竖直分面标签文本
+                 strip.text.x = element_text(hjust = 0.5, margin = margin(0, 0, 0, 0)),#水平分面标签文本
+                 strip.text.y = element_text(vjust = 0.5, margin = margin(0, 0, 0, 0)),#竖直分面标签文本
                  axis.text.y = element_text(vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 1, 0, 0)),#Y轴数字标
                  axis.title.y = element_text(vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)),#Y轴标题
                  axis.text.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)),#X轴数字标
