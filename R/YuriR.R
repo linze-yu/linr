@@ -133,7 +133,7 @@ Yuri_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1
                     plot.caption.position = "panel",
                     plot.tag.position = "topleft",
                     plot.title.position = "plot",
-                    aspect.ratio = 7/5,
+                    #aspect.ratio = 7/5,
                     #legend.key = element_rect(fill = "group", color = "group"),#图例符号
 )
 
