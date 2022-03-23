@@ -65,7 +65,7 @@ t_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1),#
                  legend.text.align = (0),#图例文字标签对齐方式(0为左齐, 1为右齐, 0.5居中)
                  legend.direction = "vertical",#图例排列方向"horizontal"(水平一行)
                  legend.justification = c(1, 1),#图例位置	center或两数字向量
-                 legend.box = "horizontal",#多图例的排列方式	"horizontal" vertical
+                 legend.box = "vertical",#多图例的排列方式"horizontal"
                  legend.box.just = (0.5),#多图例居中方式
                  plot.caption.position = "panel",
                  plot.tag.position = "topleft",
@@ -128,7 +128,7 @@ Yuri_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1
                     legend.text.align = (0),#图例文字标签对齐方式(0为左齐, 1为右齐, 0.5居中)
                     legend.direction = "vertical",#图例排列方向"horizontal"(水平一行)
                     legend.justification = c(1, 1),#图例位置	center或两数字向量
-                    legend.box = "horizontal",#多图例的排列方式	"horizontal" vertical
+                    legend.box = "vertical",#多图例的排列方式	"horizontal"
                     legend.box.just = (0.5),#多图例居中方式
                     plot.caption.position = "panel",
                     plot.tag.position = "topleft",

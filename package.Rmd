@@ -3,28 +3,17 @@ title: “YuriR相关”
 author: "Linze Yu"
 date: "`r Sys.Date()`"
 output:
-  html_document:
-    toc: yes
-    toc_depth: 3
-    toc_float: yes
-    collapsed: T
-    smooth_scroll: T
-    number_sections: T
-    theme: lumen
-    highlight: pygments
-    fig_width: 7
-    fig_height: 5
-    code_folding: hide
-  word_document:
-    toc: yes
-    toc_depth: "3"
+  rmdformats::downcute:
+    self_contained: true
+    default_style: "light"
+    downcute_theme: "default"
 editor_options: 
   markdown: 
     wrap: 72
 ---
 
 ```{r,代码全局设置,echo=F}
-knitr::opts_chunk$set(warning=F,error=F,message=F,prompt=T,comment='',echo=T,dpi=100,eval=F)
+knitr::opts_chunk$set(warning=F,error=F,message=F,prompt=T,comment="",echo=T,dpi=100,eval=F)
 #eval=F代码显示不运行
 #include=F代码运行,不显示代码和结果
 #echo=T markdown显示代码块
@@ -52,6 +41,8 @@ library("glmnet")#LASSO回归
 library("circlize")#圈图
 library("ComplexHeatmap")#热图*
 library("ggwordcloud")#词云
+library("knitr")#表格+渲染
+library("kableExtra")#表格+
 library("gtsummary")#基线资料表
 library("shiny")#交互网页
 library("scales")#缩放刻度
@@ -123,7 +114,7 @@ t_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1),#
                  legend.text.align = (0),#图例文字标签对齐方式(0为左齐, 1为右齐, 0.5居中)
                  legend.direction = "vertical",#图例排列方向"horizontal"(水平一行)
                  legend.justification = c(1, 1),#图例位置	center或两数字向量
-                 legend.box = "horizontal",#多图例的排列方式	"horizontal" vertical
+                 legend.box = "vertical",#多图例的排列方式	"horizontal"
                  legend.box.just = (0.5),#多图例居中方式
                  plot.caption.position = "panel",
                  plot.tag.position = "topleft",
@@ -188,7 +179,7 @@ Yuri_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1
                  legend.text.align = (0),#图例文字标签对齐方式(0为左齐, 1为右齐, 0.5居中)
                  legend.direction = "vertical",#图例排列方向"horizontal"(水平一行)
                  legend.justification = c(1, 1),#图例位置	center或两数字向量
-                 legend.box = "horizontal",#多图例的排列方式	"horizontal" vertical
+                 legend.box = "vertical",#多图例的排列方式	"horizontal"
                  legend.box.just = (0.5),#多图例居中方式
                  plot.caption.position = "panel",
                  plot.tag.position = "topleft",
@@ -223,12 +214,13 @@ devtools::install_github("Yurisuriyel/YuriR")#
 remotes::install_github("rstudio/rmarkdown")#写书  
 remotes::install_github("rstudio/bookdown")#写书  
 devtools::install_github("pzhaonet/bookdownplus")#写书+  
-remotes::install_github('rstudio/blogdown')#写网站  
-install.packages('knitr')#文档编辑必要  
-remotes::install_github('yihui/xaringan')#幻灯片  
+remotes::install_github("rstudio/blogdown")#写网站  
+install.packages("knitr")#文档编辑必要 
+devtools::install_github("haozhu233/kableExtra")#knitr
+remotes::install_github("yihui/xaringan")#幻灯片  
 remotes::install_github("gadenbuie/xaringanthemer")#幻灯片主题  
-install.packages('tinytex')#PDF输出  
-tinytex::tlmgr_repo('http://mirrors.tuna.tsinghua.edu.cn/CTAN/')#PDF输出  
+install.packages("tinytex")#PDF输出  
+tinytex::tlmgr_repo("http://mirrors.tuna.tsinghua.edu.cn/CTAN/")#PDF输出  
 tinytex::install_tinytex()#PDF输出  
 remotes::install_github("plotly/plotly")#交互网页  
 devtools::install_github("r-lib/roxygen2")#R包  
@@ -267,7 +259,7 @@ devtools::install_github("zzawadz/customLayout")#图片排版
 remotes::install_github("csdaw/ggprism")#用ggplot2输出GraphPad prism的图  
 remotes::install_github("r-tmap/tmaptools")#专题地图  
 remotes::install_github("r-tmap/tmap")#专题地图  
-devtools::install_github('badbye/baidumap')#百度地图  
+devtools::install_github("badbye/baidumap")#百度地图  
 devtools::install_github("EmilHvitfeldt/paletteer")#配色  
 devtools::install_github("calligross/ggthemeassist")#主题调整  
 remotes::install_github("JohnCoene/echarts4r")#绘图系统  
@@ -309,7 +301,7 @@ install.packages("tm")#文本挖掘包
 devtools::install_github("mjockers/syuzhet")#文本中提取情绪和基于情绪的情节弧线  
 remotes::install_github("juliasilge/tidytext")#文本挖掘  
 remotes::install_github("igraph/rigraph@master")# igraph 网络分析库  
-devtools::install_github('thomasp85/ggraph')#网络,图形和树  
+devtools::install_github("thomasp85/ggraph")#网络,图形和树  
 devtools::install_github("mjockers/syuzhet")#文本挖掘  
 remotes::install_github("juliasilge/tidytext")#文本挖掘  
 remotes::install_github("EmilHvitfeldt/textdata")#文本挖掘  
@@ -341,7 +333,7 @@ remotes::install_github("mlr-org/mlr3hyperband")#mlr3的超频调谐
 #mlr3oml#用于预处理和构建复杂工作流的管道和 DAG  
 remotes::install_github("mlr-org/mlr3spatiotempcv")#用于对时空任务进行重新采样的扩展  
 remotes::install_github("mlr-org/mlr3keras")
-devtools::install_github("tidymodels/tidymodels")#Tidy-R'(1+13)  
+devtools::install_github("tidymodels/tidymodels")#Tidy-R"(1+13)  
 install.packages("caret")#类似于python的sciki-learn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大  
 install.packages("randomForest")#最忠实于原文献的随机森林算法包  
 install.packages("xgboost")#大名鼎鼎的xgboost,kaggle高位利器  
@@ -390,13 +382,13 @@ remotes::install_github("corybrunson/ggalluvial", ref = "optimization")#冲积�
 devtools::install_github("ggobi/ggally")#通过添加多个功能来扩展"ggplot2",以降低将几何对象与转换数据相结合的复杂性。CRAN  
 devtools::install_github("hrbrmstr/ggalt")#"ggplot2" 的 "地理" , "coords" 和 "统计数据" 的简编。CRAN  
 devtools::install_github("jespermaag/gganatogram")#gganatogram 使不同生物体或细胞室的组织可视化成为可能。GitHub  
-devtools::install_github('thomasp85/gganimate')#动画图形的语法。CRAN  
+devtools::install_github("thomasp85/gganimate")#动画图形的语法。CRAN  
 devtools::install_github("jhrcook/ggasym")#具有多个刻度图的不对称矩阵绘图。CRAN  
 devtools::install_github("eclarke/ggbeeswarm")#创建蜜蜂温暖图,从而避免数据点重叠。CRAN  
 remotes::install_github("GuangchuangYu/ggbreak")#为"ggplot2"设置轴断裂CRAN  
 devtools::install_github("davidsjoberg/ggbump")#凹凸图和西格诺曲线。CRAN  
 remotes::install_github("thomas-neitmann/ggcharts")#缩短从数据可视化构想到实际绘图的距离CRAN  
-devtools::install_github('Selbosh/ggChernoff')#使用人脸可视化多变种数据GitHub  
+devtools::install_github("Selbosh/ggChernoff")#使用人脸可视化多变种数据GitHub  
 devtools::install_github("teunbrand/ggchromatic")#"ggplot2"的色空间刻度GitHub  
 devtools::install_github("kassambara/ggcorrplot")#使用"ggplot2"可视化相关矩阵CRAN  
 devtools::install_github("malcolmbarrett/ggdag")#因果指示环形图(DAG)在ggplot2CRAN  
@@ -408,8 +400,8 @@ devtools::install_github("daattali/ggExtra")#ggExtra 允许您将边际密度图
 devtools::install_github("wilkox/ggfittext")#ggplot2地理位置, 以适应文本在一个盒子里CRAN  
 devtools::install_github("thomasp85/ggforce")#旨在通过 ggplot2 v2.0.0 引入的扩展系统为 ggplot2 提供缺失的功能CRAN  
 devtools::install_github("ProjectMOSAIC/ggformulaExtra")#ggplot2通过配方和管道CRAN  
-remotes::install_github('sinhrks/ggfortify')#统一界面到 ggplot2 许多流行的统计帕克奇结果。CRAN  
-devtools::install_github('thomasp85/ggfx')#用于"ggplot2"和"网格"的像素过滤器CRAN  
+remotes::install_github("sinhrks/ggfortify")#统一界面到 ggplot2 许多流行的统计帕克奇结果。CRAN  
+devtools::install_github("thomasp85/ggfx")#用于"ggplot2"和"网格"的像素过滤器CRAN  
 devtools::install_github("wilkox/gggenes")#ggplot2绘制基因箭头图的地理图CRAN  
 if (!requireNamespace("BiocManager", quietly = TRUE))  
   install.packages("BiocManager")  
@@ -417,13 +409,13 @@ BiocManager::install("ggtree")
 devtools::install_github("thackl/thacklr")  
 devtools::install_github("thackl/gggenomes")#比较基因组学图形语法GitHub  
 devtools::install_github("teunbrand/ggh4x")#定制面,多个色度和杂项选项CRAN  
-devtools::install_github('erocoar/gghalves')#格哈夫斯增加了半地球仪。ggplot2 CRAN  
+devtools::install_github("erocoar/gghalves")#格哈夫斯增加了半地球仪。ggplot2 CRAN  
 devtools::install_github("XiaoLuo-boy/ggheatmap")#ggplot2 版本的热图CRAN  
 devtools::install_github("rivasiker/ggHoriPlot")#地平线图ggplot2CRAN  
 remotes::install_github("statsmaths/ggimg")#图形层,用于绘制带有 ggplot2 的图像数据。CRAN  
 devtools::install_github("aphalo/gginnards")#查找,删除,插入和移动绘图层。从存储在 ggplot 对象中的数据对象中删除未使用的数据。将数据转储到 R 控制台。GitHub  
 remotes::install_github("davidchall/ggip")#IP 地址和网络的数据可视化CRAN  
-devtools::install_github('davidgohel/ggiraph')#htmlwidget 使 "ggplot" 图形交互。CRAN  
+devtools::install_github("davidgohel/ggiraph")#htmlwidget 使 "ggplot" 图形交互。CRAN  
 devtools::install_github("graysonwhite/gglm")#线性模型诊断图的图形语法。CRAN  
 remotes::install_github("jjchern/gglorenz")#在 ggplot2 的祝福下绘制洛伦茨曲线。CRAN  
 devtools::install_github("haleyjeppson/ggmosaic")#格格马赛克通过geom_mosaic在 "ggplot2" 中实现马赛克地块。CRAN  
@@ -437,15 +429,15 @@ devtools::install_github("eliocamp/ggperiodic")#自动增强周期性数据ggplo
 devtools::install_github("mikabr/ggpirate")#海盗阴谋ggplot2GitHub  
 devtools::install_github("aphalo/ggpmisc")#带标模型方程,ANOVA 表,摘要表的注释图;发现和标记山峰和山谷;注释支持分组和方面。CRAN  
 devtools::install_github("LKremer/ggpointdensity")#介绍 ： 散射图和二元密度图之间的交叉。geom_pointdensity()CRAN  
-devtools::install_github('erocoar/ggpol')#ggpol 将议会图表和其他几个地理图添加到 ggplot2 中。CRAN  
+devtools::install_github("erocoar/ggpol")#ggpol 将议会图表和其他几个地理图添加到 ggplot2 中。CRAN  
 devtools::install_github("aphalo/ggpp")#将绘图,表格和凹槽添加为绘图插图集;将标签从焦点或线路上移开;按局部密度过滤观测结果。CRAN  
 devtools::install_github("kassambara/ggpubr")#基于"ggplot2"的出版物准备绘图CRAN  
 devtools::install_github("kenithgrey/ggQC")#使用 ggQC 绘制单层,分面和多层质量控制图表。CRAN  
 #install.packages("ggQQunif")#制作大数据的QQ图,期望统一分布,例如p值  
 remotes::install_github("mitchelloharawild/ggquiver")#"ggplot2"的奎弗/速度图。CRAN  
 devtools::install_github("ricardo-bion/ggradar",dependencies=TRUE)#ggplot2构建雷达图表。CRAN  
-devtools::install_github('thomasp85/ggraph')#ggraph 是针对绘图般的数据结构(图形,网络,树木,层次结构...)量身定做的。CRAN  
-devtools::install_github('VPetukhov/ggrastr',build_vignettes = TRUE)#只对情节的特定层进行光击CRAN  
+devtools::install_github("thomasp85/ggraph")#ggraph 是针对绘图般的数据结构(图形,网络,树木,层次结构...)量身定做的。CRAN  
+devtools::install_github("VPetukhov/ggrastr",build_vignettes = TRUE)#只对情节的特定层进行光击CRAN  
 devtools::install_github("slowkow/ggrepel")#将重叠的文本标签相互排斥。CRAN  
 remotes::install_github("wilkelab/ggridges")#里奇林情节地理为 "ggplot2"CRAN  
 remotes::install_github("nanxstats/ggsci")#受科学期刊和科幻电视节目启发的"ggplot2"调色板系列。CRAN  
@@ -462,8 +454,8 @@ remotes::install_github("IndrajeetPatil/ggstatsplot")#"ggstatslot"提供了一�
 devtools::install_github("ricardo-bion/ggtech",dependencies=TRUE)#ggplot2 技术主题,比例和地理位置。CRAN  
 remotes::install_github("wilkelab/ggtext")#改进的文本渲染支持ggplot2CRAN  
 devtools::install_github(c("hadley/ggplot2", "jrnold/ggthemes"))#一些额外的地理,尺度和主题为 ggplot。CRAN  
-devtools::install_github('Mikata-Project/ggthemr')#格格洛特的主题GitHub  
-devtools::install_github('Ather-Energy/ggTimeSeries')#此 R 包提供新颖的时间系列可视化。CRAN  
+devtools::install_github("Mikata-Project/ggthemr")#格格洛特的主题GitHub  
+devtools::install_github("Ather-Energy/ggTimeSeries")#此 R 包提供新颖的时间系列可视化。CRAN  
 devtools::install_github("rnabioco/ggtrace")#Outline groups of data points using ggplot2  
 install.packages("ggtree")#gtree 专为可视化噬菌体树和不同类型的相关注释数据而设计。GitHub  
 devtools::install_github("const-ae/ggupset")#组合矩阵轴,用于"ggplot2"创建"上置"图CRAN  
@@ -589,6 +581,6 @@ install.packages("job")#如果命令运行时间过长,是不能运行下一步�
 remotes::install_github("igraph/rigraph@master")  
 install.packages("fBasics")#正态检验  
 devtools::install_github("kassambara/ggpubr")#直接帮你画出箱线图,密度分布图,直方图,点图,偏差图的同时标上significance levels  
-install.package('rticles')  
+install.package("rticles")  
 devtools::install_github("joshkatz/needs", ref = "development")  
 ```
