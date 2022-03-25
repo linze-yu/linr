@@ -18,6 +18,9 @@
 #'
 #' @examples
 #'
+#' @export col1
+col1 <- c("#440154", "#470E61", "#481B6D", "#482576", "#46307E", "#443B84", "#404688", "#3C508B", "#38598C", "#33628D", "#2F6B8E", "#2C738E", "#287C8E", "#25838E", "#228C8D", "#1F948C", "#1E9D89", "#20A486", "#26AD81", "#31B57B", "#3FBC73", "#4FC46A", "#61CB5F", "#75D054", "#8BD646", "#A2DA37", "#B9DE28", "#D1E11C", "#E8E419", "#FDE725")
+
 #' @export cols
 cols <- c("#696AAD", "#FC766A", "#5BB3B0", "#95AAD3", "#EBBF57", "#E2654D", "#00997B", "#F8CDCD", "#34558B", "#B067A1", "#D85A7B", "#C34E7C")
 
@@ -109,13 +112,13 @@ Yuri_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1
                     legend.key = element_rect(fill = NA, color = NA),#图例符号背景
                     strip.background = element_rect(fill = NA),#分面标签背景
                     axis.line = element_line(color = "#96999C", size = 1, lineend = "square"),#坐标轴
-                    axis.ticks.x = element_line(color = "#96999C", size = 0.5),#X轴刻度线
-                    axis.ticks.y = element_line(color = "#96999C", size = 0.5),#Y轴刻度线
+                    axis.ticks.x = element_line(color = "#96999C", size = 0.5, lineend = "square"),#X轴刻度线
+                    axis.ticks.y = element_line(color = "#96999C", size = 0.5, lineend = "square"),#Y轴刻度线
                     axis.ticks.length = unit(.15, "cm"),#刻度线长度
-                    panel.grid.major.x = element_line(color = "#96999C", size = 0.5, linetype = 3),#主竖线
-                    panel.grid.major.y = element_line(color = "#96999C", size = 0.5, linetype = 3),#主横线
-                    panel.grid.minor.x = element_line(color = "#96999C", size = 0.25, linetype = 3),#次竖线
-                    panel.grid.minor.y = element_line(color = "#96999C", size = 0.25, linetype = 3),#次横线
+                    panel.grid.major.x = element_line(color = "#96999C", size = 0.5, linetype = 3, lineend = "square"),#主竖线
+                    panel.grid.major.y = element_line(color = "#96999C", size = 0.5, linetype = 3, lineend = "square"),#主横线
+                    panel.grid.minor.x = element_line(color = "#96999C", size = 0.25, linetype = 3, lineend = "square"),#次竖线
+                    panel.grid.minor.y = element_line(color = "#96999C", size = 0.25, linetype = 3, lineend = "square"),#次横线
                     plot.margin = margin(t = 0.5, r = 0.5, b = 0.1, l = 0.5, unit = "cm"),#图边界(距离可以为0或者为负值)
                     panel.spacing.x = unit(.15, "cm"),#竖直分面绘图区之间的间距
                     panel.spacing.y = unit(.15, "cm"),#水平分面绘图区之间的间距
