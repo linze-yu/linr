@@ -212,6 +212,9 @@ Yuri_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1
 Up <- print("rvcheck::update_all()")
 ```
 
+```{r}
+cclean <- print("styler:::style_active_file()")
+```
 
 # 可选安装的包
 
@@ -248,6 +251,7 @@ devtools::install_github("joshuaulrich/quantmod")
 devtools::install_github("joshuaulrich/xts")  
 devtools::install_github("GuangchuangYu/rvcheck")#更新大部分平台的R包  
 devtools::install_github("trinker/pacman")#参考文献  
+remotes::install_github("r-lib/styler")#整理代码  
 ```
 
 ## 数据部分

@@ -14,6 +14,8 @@
 #'
 #' @param Up
 #'
+#' @param cclean
+#'
 #' @return NULL
 #'
 #' @examples
@@ -142,4 +144,11 @@ Yuri_theme <- theme(text = element_text(family = "Source Han Sans CN", color = 1
 
 #' @export Up
 Up <- print("rvcheck::update_all()")
+
+#' @export cclean
+clean <- print("styler:::style_active_file()")
+
+
+
+
 
