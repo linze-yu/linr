@@ -4,9 +4,9 @@ Title: Yuri
 Version: 0.4.0
 Author: Linze Yu
 Maintainer: Linze Yu <842359449@qq.com>
-Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, mlr3verse,
-        echarts4r, survminer, survival, ggpmisc, gghalves, ggsignif,
-        ggforce, customLayout, glmnet, circlize, ComplexHeatmap, knitr,
+Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, echarts4r,
+        survminer, survival, ggpmisc, gghalves, ggsignif, ggforce,
+        customLayout, glmnet, circlize, ComplexHeatmap, knitr,
         kableExtra, gtsummary, shiny, scales, pacman, Cairo, ggbreak,
         jiebaR, readtext, skimr, tokenizers, hunspell, udpipe,
         textreadr, tidytext, mice, DMwR2, styler, rvcheck, ggwordcloud
@@ -16,4 +16,4 @@ Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-04-03 12:19:13 UTC; LinzeYu
+Packaged: 2022-04-07 07:43:05 UTC; LinzeYu

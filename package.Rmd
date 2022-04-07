@@ -43,7 +43,6 @@ library("rio") # 导入数据
 library("tidyfst") # dplyr类似,底层使用datatable
 library("data.table") # 处理大数据
 library("tidyverse") # tidy-R
-library("mlr3verse") # 机器学习
 library("echarts4r") #
 library("survminer") # 生存曲线
 library("survival") # 生存曲线
@@ -391,7 +390,7 @@ install.packages("DBI") # 和SQL的交互
 ```{r}
 remotes::install_github("mlr-org/mlr3keras") #
 remotes::install_github("mlverse/torch") #
-install.packages("keras") #
+devtools::install_github("rstudio/keras") #
 ```
 
 ## ggplot2包扩展
