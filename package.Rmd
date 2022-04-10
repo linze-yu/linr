@@ -43,7 +43,6 @@ library("rio") # 导入数据
 library("tidyfst") # dplyr类似,底层使用datatable
 library("data.table") # 处理大数据
 library("tidyverse") # tidy-R
-library("echarts4r") #
 library("survminer") # 生存曲线
 library("survival") # 生存曲线
 library("ggpmisc") # 拟合模型相关的注释和绘图
@@ -282,6 +281,7 @@ devtools::install_github("ChrisLou-bioinfo/gg.gap") # 截断坐标轴
 install.packages("survival") # 生存曲线
 devtools::install_github("raivokolde/pheatmap") # 热图
 devtools::install_github("jokergoo/ComplexHeatmap") # 热图*
+install.packages("magick") # 热图栅格化
 devtools::install_github("r-lib/scales") # 缩放刻度
 devtools::install_github("zzawadz/customLayout") # 图片排版
 remotes::install_github("csdaw/ggprism") # 用ggplot2输出GraphPad prism的图
