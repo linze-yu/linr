@@ -47,7 +47,7 @@ library("survminer") # 生存曲线
 library("survival") # 生存曲线
 library("ggpmisc") # 拟合模型相关的注释和绘图
 library("gghalves") # 裁剪图形
-library("ggsignif") # 添加P值
+library("rstatix") # 添加P值
 library("ggforce") # 形状曲线
 library("customLayout") # 图片排版
 library("glmnet") # LASSO回归
@@ -278,6 +278,7 @@ install.packages("MASS") # 曲线拟合
 install.packages("mgcv") # 曲线拟合
 install.packages("hexbin") # 六边形封箱热图
 devtools::install_github("ChrisLou-bioinfo/gg.gap") # 截断坐标轴
+devtools::install_github("kassambara/rstatix") # 增加P值
 install.packages("survival") # 生存曲线
 devtools::install_github("raivokolde/pheatmap") # 热图
 devtools::install_github("jokergoo/ComplexHeatmap") # 热图*
