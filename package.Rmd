@@ -28,7 +28,7 @@ editor_options:
 ---
 
 ```{r, 代码全局设置, echo = F}
-knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = T, comment = "", eval = F, echo = T, dpi = 200, cache = T)
+knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = F, comment = "", eval = F, echo = T, dpi = 200, cache = T)
 # eval = F代码显示不运行
 # include = F代码运行, 不显示代码和结果
 # echo = T markdown显示代码块
@@ -38,7 +38,7 @@ knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = T, comment =
 ```
 
 # YuriR加载的相关包
-```{r}
+```{r,YuriR加载的相关包}
 library("rio") # 导入数据
 library("tidyfst") # dplyr类似,底层使用datatable
 library("data.table") # 处理大数据
@@ -77,20 +77,25 @@ library("rvcheck") # 更新包
 library("ggwordcloud") # 词云
 ```
 
-# 相关函数
-```{r}
+# 内容
+## 颜色
+### 连续颜色
+```{r,col1}
 col1 <- c("#440154", "#470E61", "#481B6D", "#482576", "#46307E", "#443B84", "#404688", "#3C508B", "#38598C", "#33628D", "#2F6B8E", "#2C738E", "#287C8E", "#25838E", "#228C8D", "#1F948C", "#1E9D89", "#20A486", "#26AD81", "#31B57B", "#3FBC73", "#4FC46A", "#61CB5F", "#75D054", "#8BD646", "#A2DA37", "#B9DE28", "#D1E11C", "#E8E419", "#FDE725")
 ```
 
-```{r}
+### 离散颜色
+```{r,12cols}
 cols <- c("#696AAD", "#FC766A", "#5BB3B0", "#95AAD3", "#EBBF57", "#E2654D", "#00997B", "#F8CDCD", "#34558B", "#B067A1", "#D85A7B", "#C34E7C")
 ```
 
-```{r}
+```{r,12fills}
 fills <- c("#696AAD", "#FC766A", "#5BB3B0", "#95AAD3", "#EBBF57", "#E2654D", "#00997B", "#F8CDCD", "#34558B", "#B067A1", "#D85A7B", "#C34E7C")
 ```
 
-```{r}
+## 主题
+### t_theme
+```{r,t_theme}
 windowsFonts(A = windowsFont("Source Han Sans CN")) # 字体设置
 t_theme <- theme(
   text = element_text(family = "Source Han Sans CN", color = 1), # 全字体
@@ -142,25 +147,8 @@ t_theme <- theme(
 )
 ```
 
-```{r}
-outer.IQR <- function(x, multiple = 1.5, replace = FALSE, revalue = NA) {
-  q <- quantile(x, na.rm = T) # 四分位间距3倍间距以外的认为是离群值
-  IQR <- q[4] - q[2]
-  x1 <- which(x < q[2] - multiple * IQR | x > q[4] + multiple * IQR)
-  x2 <- x[x1]
-  if (length(x2) > 0) {
-    outlier <- data.table(location = x1, value = x2)
-  } else {
-    outlier <- data.table(location = 0, value = 0)
-  }
-  if (replace == TRUE) {
-    x[x1] <- revalue
-  }
-  return(list(new.value = x, outlier = outlier))
-}
-```
-
-```{r}
+### Yuri_theme
+```{r,Yuri_theme}
 Yuri_theme <- theme(
   text = element_text(family = "Source Han Sans CN", color = 1), # 全字体
   plot.title = element_text(size = 12, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
@@ -211,11 +199,490 @@ Yuri_theme <- theme(
 )
 ```
 
-```{r}
+## 计算
+### 计算离群值
+```{r,计算离群值}
+outer.IQR <- function(x, multiple = 1.5, replace = FALSE, revalue = NA) {
+  q <- quantile(x, na.rm = T) # 四分位间距3倍间距以外的认为是离群值
+  IQR <- q[4] - q[2]
+  x1 <- which(x < q[2] - multiple * IQR | x > q[4] + multiple * IQR)
+  x2 <- x[x1]
+  if (length(x2) > 0) {
+    outlier <- data.table(location = x1, value = x2)
+  } else {
+    outlier <- data.table(location = 0, value = 0)
+  }
+  if (replace == TRUE) {
+    x[x1] <- revalue
+  }
+  return(list(new.value = x, outlier = outlier))
+}
+```
+
+### 决策曲线
+#### stdca
+```{r,stdca}
+stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
+                  ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
+                  interventionper = 100, smooth = FALSE, loess.span = 0.10, cmprsk = FALSE) {
+
+  # LOADING REQUIRED LIBRARIES
+  require(survival)
+  require(stats)
+
+  # ONLY KEEPING COMPLETE CASES
+  data <- data[complete.cases(data[c(outcome, ttoutcome, predictors)]), c(outcome, ttoutcome, predictors)]
+
+  # outcome MUST BE CODED AS 0 AND 1
+  if ((length(data[!(data[outcome] == 0 | data[outcome] == 1), outcome]) > 0) & cmprsk == FALSE) {
+    stop("outcome must be coded as 0 and 1")
+  }
+
+  # data MUST BE A DATA FRAME
+  if (class(data) != "data.frame") {
+    stop("Input data must be class data.frame")
+  }
+
+  # xstart IS BETWEEN 0 AND 1
+  if (xstart < 0 | xstart > 1) {
+    stop("xstart must lie between 0 and 1")
+  }
+
+  # xstop IS BETWEEN 0 AND 1
+  if (xstop < 0 | xstop > 1) {
+    stop("xstop must lie between 0 and 1")
+  }
+
+  # xby IS BETWEEN 0 AND 1
+  if (xby <= 0 | xby >= 1) {
+    stop("xby must lie between 0 and 1")
+  }
+
+  # xstart IS BEFORE xstop
+  if (xstart >= xstop) {
+    stop("xstop must be larger than xstart")
+  }
+
+  # STORING THE NUMBER OF PREDICTORS SPECIFIED
+  pred.n <- length(predictors)
+
+  # IF probability SPECIFIED ENSURING THAT EACH PREDICTOR IS INDICATED AS A T OR F
+  if (length(probability) > 0 & pred.n != length(probability)) {
+    stop("Number of probabilities specified must be the same as the number of predictors being checked.")
+  }
+
+
+  # IF harm SPECIFIED ENSURING THAT EACH PREDICTOR HAS A SPECIFIED HARM
+  if (length(harm) > 0 & pred.n != length(harm)) {
+    stop("Number of harms specified must be the same as the number of predictors being checked.")
+  }
+
+  # INITIALIZING DEFAULT VALUES FOR PROBABILITES AND HARMS IF NOT SPECIFIED
+  if (length(harm) == 0) {
+    harm <- rep(0, pred.n)
+  }
+  if (length(probability) == 0) {
+    probability <- rep(TRUE, pred.n)
+  }
+
+  # THE PREDICTOR NAMES CANNOT BE EQUAL TO all OR none.
+  if (length(predictors[predictors == "all" | predictors == "none"])) {
+    stop("Prediction names cannot be equal to all or none.")
+  }
+
+  # CHECKING THAT EACH probability ELEMENT IS EQUAL TO T OR F,
+  # AND CHECKING THAT PROBABILITIES ARE BETWEEN 0 and 1
+  # IF NOT A PROB THEN CONVERTING WITH A COX REGRESSION
+  for (m in 1:pred.n) {
+    if (probability[m] != TRUE & probability[m] != FALSE) {
+      stop("Each element of probability vector must be TRUE or FALSE")
+    }
+    if (probability[m] == TRUE & (max(data[predictors[m]]) > 1 | min(data[predictors[m]]) < 0)) {
+      stop(paste(predictors[m], "must be between 0 and 1 OR sepcified as a non-probability in the probability option", sep = " "))
+    }
+    if (probability[m] == FALSE) {
+      model <- NULL
+      pred <- NULL
+      model <- coxph(Surv(data.matrix(data[ttoutcome]), data.matrix(data[outcome])) ~ data.matrix(data[predictors[m]]))
+      surv.data <- data.frame(0)
+      pred <- data.frame(1 - c(summary(survfit(model, newdata = surv.data), time = timepoint)$surv))
+      names(pred) <- predictors[m]
+      data <- cbind(data[names(data) != predictors[m]], pred)
+      print(paste(predictors[m], "converted to a probability with Cox regression. Due to linearity and proportional hazards assumption, miscalibration may occur.", sep = " "))
+    }
+  }
+
+  #########  CALCULATING NET BENEFIT   #########
+  N <- dim(data)[1]
+
+  # getting the probability of the event for all subjects
+  # this is used for the net benefit associated with treating all patients
+  if (cmprsk == FALSE) {
+    km.cuminc <- survfit(Surv(data.matrix(data[ttoutcome]), data.matrix(data[outcome])) ~ 1)
+    pd <- 1 - summary(km.cuminc, times = timepoint)$surv
+  } else {
+    require(cmprsk)
+    cr.cuminc <- cuminc(data[[ttoutcome]], data[[outcome]])
+    pd <- timepoints(cr.cuminc, times = timepoint)$est[1]
+  }
+
+  # creating dataset that is one line per threshold for the treat all and treat none strategies;
+  # CREATING DATAFRAME THAT IS ONE LINE PER THRESHOLD PER all AND none STRATEGY
+  nb <- data.frame(seq(from = xstart, to = xstop, by = xby))
+  names(nb) <- "threshold"
+  interv <- nb
+  error <- NULL
+
+  nb["all"] <- pd - (1 - pd) * nb$threshold / (1 - nb$threshold)
+  nb["none"] <- 0
+
+  # CYCLING THROUGH EACH PREDICTOR AND CALCULATING NET BENEFIT
+  for (m in 1:pred.n) {
+    nb[predictors[m]] <- NA
+
+    for (t in 1:length(nb$threshold)) {
+      # calculating number of true and false postives;
+      px <- sum(data[predictors[m]] > nb$threshold[t]) / N
+
+      if (px == 0) {
+        error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "%", sep = ""))
+        break
+      } else {
+        # calculate risk using Kaplan Meier
+        if (cmprsk == FALSE) {
+          km.cuminc <- survfit(Surv(data.matrix(data[data[predictors[m]] > nb$threshold[t], ttoutcome]), data.matrix(data[data[predictors[m]] > nb$threshold[t], outcome])) ~ 1)
+          pdgivenx <- (1 - summary(km.cuminc, times = timepoint)$surv)
+          if (length(pdgivenx) == 0) {
+            error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "% that have followup through the timepoint selected", sep = ""))
+            break
+          }
+          # calculate risk using competing risk
+        } else {
+          cr.cuminc <- cuminc(data[[ttoutcome]][data[[predictors[m]]] > nb$threshold[t]], data[[outcome]][data[[predictors[m]]] > nb$threshold[t]])
+          pdgivenx <- timepoints(cr.cuminc, times = timepoint)$est[1]
+          if (is.na(pdgivenx)) {
+            error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "% that have followup through the timepoint selected", sep = ""))
+            break
+          }
+        }
+        # calculating NB based on calculated risk
+        nb[t, predictors[m]] <- pdgivenx * px - (1 - pdgivenx) * px * nb$threshold[t] / (1 - nb$threshold[t]) - harm[m]
+      }
+    }
+    interv[predictors[m]] <- (nb[predictors[m]] - nb["all"]) * interventionper / (interv$threshold / (1 - interv$threshold))
+  }
+  if (length(error) > 0) {
+    print(paste(error, ", and therefore net benefit not calculable in this range.", sep = ""))
+  }
+
+  # CYCLING THROUGH EACH PREDICTOR AND SMOOTH NET BENEFIT AND INTERVENTIONS AVOIDED
+  for (m in 1:pred.n) {
+    if (smooth == TRUE) {
+      lws <- loess(data.matrix(nb[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(nb[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
+      nb[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
+
+      lws <- loess(data.matrix(interv[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(interv[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
+      interv[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
+    }
+  }
+
+
+  # PLOTTING GRAPH IF REQUESTED
+  if (graph == TRUE) {
+    require(graphics)
+
+    # PLOTTING INTERVENTIONS AVOIDED IF REQUESTED
+    if (intervention == TRUE) {
+      # initialize the legend label, color, and width using the standard specs of the none and all lines
+      legendlabel <- NULL
+      legendcolor <- NULL
+      legendwidth <- NULL
+      legendpattern <- NULL
+
+      # getting maximum number of avoided interventions
+      ymax <- max(interv[predictors], na.rm = TRUE)
+
+      # INITIALIZING EMPTY PLOT WITH LABELS
+      plot(x = nb$threshold, y = nb$all, type = "n", xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = paste("Net reduction in interventions per", interventionper, "patients"))
+
+      # PLOTTING INTERVENTIONS AVOIDED FOR EACH PREDICTOR
+      for (m in 1:pred.n) {
+        if (smooth == TRUE) {
+          lines(interv$threshold, data.matrix(interv[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
+        } else {
+          lines(interv$threshold, data.matrix(interv[predictors[m]]), col = m, lty = 2)
+        }
+
+        # adding each model to the legend
+        legendlabel <- c(legendlabel, predictors[m])
+        legendcolor <- c(legendcolor, m)
+        legendwidth <- c(legendwidth, 1)
+        legendpattern <- c(legendpattern, 2)
+      }
+    } else {
+      # PLOTTING NET BENEFIT IF REQUESTED
+      # initialize the legend label, color, and width using the standard specs of the none and all lines
+      legendlabel <- c("None", "All")
+      legendcolor <- c(17, 8)
+      legendwidth <- c(2, 2)
+      legendpattern <- c(1, 1)
+
+      # getting maximum net benefit
+      ymax <- max(nb[names(nb) != "threshold"], na.rm = TRUE)
+
+      # inializing new benfit plot with treat all option
+      plot(x = nb$threshold, y = nb$all, type = "l", col = 8, lwd = 2, xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = "Net benefit")
+      # adding treat none option
+      lines(x = nb$threshold, y = nb$none, lwd = 2)
+      # PLOTTING net benefit FOR EACH PREDICTOR
+      for (m in 1:pred.n) {
+        if (smooth == TRUE) {
+          lines(nb$threshold, data.matrix(nb[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
+        } else {
+          lines(nb$threshold, data.matrix(nb[predictors[m]]), col = m, lty = 2)
+        }
+        # adding each model to the legend
+        legendlabel <- c(legendlabel, predictors[m])
+        legendcolor <- c(legendcolor, m)
+        legendwidth <- c(legendwidth, 1)
+        legendpattern <- c(legendpattern, 2)
+      }
+    }
+    # then add the legend
+    legend("topright", legendlabel, cex = 0.8, col = legendcolor, lwd = legendwidth, lty = legendpattern)
+  }
+
+  # RETURNING RESULTS
+  results <- list()
+  results$N <- N
+  results$predictors <- data.frame(cbind(predictors, harm, probability))
+  names(results$predictors) <- c("predictor", "harm.applied", "probability")
+  results$interventions.avoided.per <- interventionper
+  results$net.benefit <- nb
+  results$interventions.avoided <- interv
+  return(results)
+}
+```
+
+#### dca
+```{r,dca}
+dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
+                ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
+                interventionper = 100, smooth = FALSE, loess.span = 0.10) {
+
+  # LOADING REQUIRED LIBRARIES
+  require(stats)
+
+  # data MUST BE A DATA FRAME
+  if (class(data) != "data.frame") {
+    stop("Input data must be class data.frame")
+  }
+
+  # ONLY KEEPING COMPLETE CASES
+  data <- data[complete.cases(data[append(outcome, predictors)]), append(outcome, predictors)]
+
+  # outcome MUST BE CODED AS 0 AND 1
+  if (max(data[[outcome]]) > 1 | min(data[[outcome]]) < 0) {
+    stop("outcome cannot be less than 0 or greater than 1")
+  }
+  # xstart IS BETWEEN 0 AND 1
+  if (xstart < 0 | xstart > 1) {
+    stop("xstart must lie between 0 and 1")
+  }
+
+  # xstop IS BETWEEN 0 AND 1
+  if (xstop < 0 | xstop > 1) {
+    stop("xstop must lie between 0 and 1")
+  }
+
+  # xby IS BETWEEN 0 AND 1
+  if (xby <= 0 | xby >= 1) {
+    stop("xby must lie between 0 and 1")
+  }
+
+  # xstart IS BEFORE xstop
+  if (xstart >= xstop) {
+    stop("xstop must be larger than xstart")
+  }
+
+  # STORING THE NUMBER OF PREDICTORS SPECIFIED
+  pred.n <- length(predictors)
+
+  # IF probability SPECIFIED ENSURING THAT EACH PREDICTOR IS INDICATED AS A YES OR NO
+  if (length(probability) > 0 & pred.n != length(probability)) {
+    stop("Number of probabilities specified must be the same as the number of predictors being checked.")
+  }
+
+  # IF harm SPECIFIED ENSURING THAT EACH PREDICTOR HAS A SPECIFIED HARM
+  if (length(harm) > 0 & pred.n != length(harm)) {
+    stop("Number of harms specified must be the same as the number of predictors being checked.")
+  }
+
+  # INITIALIZING DEFAULT VALUES FOR PROBABILITES AND HARMS IF NOT SPECIFIED
+  if (length(harm) == 0) {
+    harm <- rep(0, pred.n)
+  }
+  if (length(probability) == 0) {
+    probability <- rep(TRUE, pred.n)
+  }
+
+
+  # CHECKING THAT EACH probability ELEMENT IS EQUAL TO YES OR NO,
+  # AND CHECKING THAT PROBABILITIES ARE BETWEEN 0 and 1
+  # IF NOT A PROB THEN CONVERTING WITH A LOGISTIC REGRESSION
+  for (m in 1:pred.n) {
+    if (probability[m] != TRUE & probability[m] != FALSE) {
+      stop("Each element of probability vector must be TRUE or FALSE")
+    }
+    if (probability[m] == TRUE & (max(data[predictors[m]]) > 1 | min(data[predictors[m]]) < 0)) {
+      stop(paste(predictors[m], "must be between 0 and 1 OR sepcified as a non-probability in the probability option", sep = " "))
+    }
+    if (probability[m] == FALSE) {
+      model <- NULL
+      pred <- NULL
+      model <- glm(data.matrix(data[outcome]) ~ data.matrix(data[predictors[m]]), family = binomial("logit"))
+      pred <- data.frame(model$fitted.values)
+      pred <- data.frame(pred)
+      names(pred) <- predictors[m]
+      data <- cbind(data[names(data) != predictors[m]], pred)
+      print(paste(predictors[m], "converted to a probability with logistic regression. Due to linearity assumption, miscalibration may occur.", sep = " "))
+    }
+  }
+
+  # THE PREDICTOR NAMES CANNOT BE EQUAL TO all OR none.
+  if (length(predictors[predictors == "all" | predictors == "none"])) {
+    stop("Prediction names cannot be equal to all or none.")
+  }
+
+  #########  CALCULATING NET BENEFIT   #########
+  N <- dim(data)[1]
+  event.rate <- colMeans(data[outcome])
+
+  # CREATING DATAFRAME THAT IS ONE LINE PER THRESHOLD PER all AND none STRATEGY
+  nb <- data.frame(seq(from = xstart, to = xstop, by = xby))
+  names(nb) <- "threshold"
+  interv <- nb
+
+  nb["all"] <- event.rate - (1 - event.rate) * nb$threshold / (1 - nb$threshold)
+  nb["none"] <- 0
+
+  # CYCLING THROUGH EACH PREDICTOR AND CALCULATING NET BENEFIT
+  for (m in 1:pred.n) {
+    for (t in 1:length(nb$threshold)) {
+      # COUNTING TRUE POSITIVES AT EACH THRESHOLD
+      tp <- mean(data[data[[predictors[m]]] >= nb$threshold[t], outcome]) * sum(data[[predictors[m]]] >= nb$threshold[t])
+      # COUNTING FALSE POSITIVES AT EACH THRESHOLD
+      fp <- (1 - mean(data[data[[predictors[m]]] >= nb$threshold[t], outcome])) * sum(data[[predictors[m]]] >= nb$threshold[t])
+      # setting TP and FP to 0 if no observations meet threshold prob.
+      if (sum(data[[predictors[m]]] >= nb$threshold[t]) == 0) {
+        tp <- 0
+        fp <- 0
+      }
+
+      # CALCULATING NET BENEFIT
+      nb[t, predictors[m]] <- tp / N - fp / N * (nb$threshold[t] / (1 - nb$threshold[t])) - harm[m]
+    }
+    interv[predictors[m]] <- (nb[predictors[m]] - nb["all"]) * interventionper / (interv$threshold / (1 - interv$threshold))
+  }
+
+  # CYCLING THROUGH EACH PREDICTOR AND SMOOTH NET BENEFIT AND INTERVENTIONS AVOIDED
+  for (m in 1:pred.n) {
+    if (smooth == TRUE) {
+      lws <- loess(data.matrix(nb[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(nb[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
+      nb[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
+
+      lws <- loess(data.matrix(interv[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(interv[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
+      interv[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
+    }
+  }
+
+  # PLOTTING GRAPH IF REQUESTED
+  if (graph == TRUE) {
+    require(graphics)
+
+    # PLOTTING INTERVENTIONS AVOIDED IF REQUESTED
+    if (intervention == TRUE) {
+      # initialize the legend label, color, and width using the standard specs of the none and all lines
+      legendlabel <- NULL
+      legendcolor <- NULL
+      legendwidth <- NULL
+      legendpattern <- NULL
+
+      # getting maximum number of avoided interventions
+      ymax <- max(interv[predictors], na.rm = TRUE)
+
+      # INITIALIZING EMPTY PLOT WITH LABELS
+      plot(x = nb$threshold, y = nb$all, type = "n", xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = paste("Net reduction in interventions per", interventionper, "patients"))
+
+      # PLOTTING INTERVENTIONS AVOIDED FOR EACH PREDICTOR
+      for (m in 1:pred.n) {
+        if (smooth == TRUE) {
+          lines(interv$threshold, data.matrix(interv[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
+        } else {
+          lines(interv$threshold, data.matrix(interv[predictors[m]]), col = m, lty = 2)
+        }
+
+        # adding each model to the legend
+        legendlabel <- c(legendlabel, predictors[m])
+        legendcolor <- c(legendcolor, m)
+        legendwidth <- c(legendwidth, 1)
+        legendpattern <- c(legendpattern, 2)
+      }
+    } else {
+      # PLOTTING NET BENEFIT IF REQUESTED
+
+      # initialize the legend label, color, and width using the standard specs of the none and all lines
+      legendlabel <- c("None", "All")
+      legendcolor <- c(17, 8)
+      legendwidth <- c(2, 2)
+      legendpattern <- c(1, 1)
+
+      # getting maximum net benefit
+      ymax <- max(nb[names(nb) != "threshold"], na.rm = TRUE)
+
+      # inializing new benfit plot with treat all option
+      plot(x = nb$threshold, y = nb$all, type = "l", col = 8, lwd = 2, xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = "Net benefit")
+      # adding treat none option
+      lines(x = nb$threshold, y = nb$none, lwd = 2)
+      # PLOTTING net benefit FOR EACH PREDICTOR
+      for (m in 1:pred.n) {
+        if (smooth == TRUE) {
+          lines(nb$threshold, data.matrix(nb[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
+        } else {
+          lines(nb$threshold, data.matrix(nb[predictors[m]]), col = m, lty = 2)
+        }
+        # adding each model to the legend
+        legendlabel <- c(legendlabel, predictors[m])
+        legendcolor <- c(legendcolor, m)
+        legendwidth <- c(legendwidth, 1)
+        legendpattern <- c(legendpattern, 2)
+      }
+    }
+    # then add the legend
+    legend("topright", legendlabel, cex = 0.8, col = legendcolor, lwd = legendwidth, lty = legendpattern)
+  }
+
+  # RETURNING RESULTS
+  results <- list()
+  results$N <- N
+  results$predictors <- data.frame(cbind(predictors, harm, probability))
+  names(results$predictors) <- c("predictor", "harm.applied", "probability")
+  results$interventions.avoided.per <- interventionper
+  results$net.benefit <- nb
+  results$interventions.avoided <- interv
+
+  return(results)
+}
+```
+
+## 其他
+### 升级R包
+```{r,升级R包}
 Up <- print("rvcheck::update_all()")
 ```
 
-```{r}
+### 整理代码
+```{r,整理代码}
 cclean <- print("styler:::style_active_file()")
 ```
 
@@ -260,6 +727,12 @@ remotes::install_github("r-lib/styler") # 整理代码
 ## 数据部分
 ```{r}
 remotes::install_github("leeper/rio") # 导入数据
+install.packages("haven")
+remotes::install_github("ycphs/openxlsx")
+install.packages("feather")
+devtools::install_github("fstpackage/fst", ref = "develop")
+devtools::install_github("r-lib/xml2")
+devtools::install_github("Yue-Jiang/pzfx")
 install.packages("tidyfst") # dplyr类似,底层使用datatable
 install.packages("data.table") # 高性能数据处理
 data.table::update.dev.pkg() # datatable最新版
@@ -320,6 +793,7 @@ devtools::install_github("SentometricsResearch/sentometrics")
 
 ## 其他
 ```{r}
+devtools::install_github("tidyverse/glue")
 remotes::install_github("asteves/tayloRswift") # 泰勒专辑配色
 devtools::install_github("sjmgarnier/viridis") # 配色
 install.packages("patternplot") # 黑白填充
@@ -364,6 +838,7 @@ remotes::install_github("mlr-org/mlr3hyperband") # mlr3的超频调谐
 remotes::install_github("mlr-org/mlr3spatiotempcv") # 用于对时空任务进行重新采样的扩展
 remotes::install_github("mlr-org/mlr3keras")
 devtools::install_github("tidymodels/tidymodels") # Tidy-R"(1+13)
+devtools::install_github("r-lib/R6", build_vignettes = FALSE) # R6
 install.packages("caret") # 类似于python的sciki-learn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大
 install.packages("randomForest") # 最忠实于原文献的随机森林算法包
 install.packages("xgboost") # 大名鼎鼎的xgboost,kaggle高位利器
@@ -382,6 +857,8 @@ install.packages("zoo") # 时间序列
 install.packages("forcats") # 时间序列
 install.packages("pROC") # 绘制ROC曲线
 install.packages("ROCR") # 绘制ROC曲线
+devtools::install_github("mdbrown/rmda") # 决策曲线
+devtools::install_github("yikeshu0611/ggDCA") # 决策曲线
 install.packages("igraph") # 网络图以及pagerank算法
 install.packages("network3D") # 结合D3.js
 install.packages("DBI") # 和SQL的交互
@@ -493,7 +970,7 @@ devtools::install_github("const-ae/ggupset") # 组合矩阵轴,用于"ggplot2"�
 devtools::install_github("lepennec/ggwordcloud") # 云文本地理图为"ggplot2"的单词。CRAN
 devtools::install_github("brandmaier/ggx") # "ggplot2"的自然语言界面。CRAN
 remotes::install_github("hrbrmstr/hrbrthemes") # 额外的 [ggplot2] 主题,刻度和实用程序的汇编,包括绘图标签字段的拼写检查功能和对排版的整体强调。CRAN
-devtools::install_github("benskov/humapr") # 用胆汁可视化地形人类数据GitHub
+devtools::install_github("benskov/humapr") # 可视化地形人类数据GitHub
 devtools::install_github("stefanedwards/lemon") # 重新定位图例并将括号添加到轴中以"ggplot2"。CRAN
 devtools::install_github("yeukyul/lindia") # 创建线性回归的诊断图CRAN
 remotes::install_github("thomas-neitmann/mdthemes", upgrade = "never") # 将文本渲染为标记/HTML 的"ggplot2"主题GitHub
@@ -597,21 +1074,18 @@ install.packages("ggeconodist") # 可以画另类的箱线图
 install.packages("lemon") # 可以很方便的操作ggplot2的图例和坐标轴参考https://cran.r-project.org/web/packages/lemon/vignettes/legends.htmlcomplex-layout-with-grid_arrange_shared_legend
 install.packages("ezcox") # 很方便的做Cox回归分析模型和森林图
 install.packages("ggstream") # 河流图绘制
-install.packages("arrow") #
-install.packages("feather") #
-install.packages("fst") #
-install.packages("hexView") #
-install.packages("pzfx") #
-install.packages("readODS") #
-install.packages("rmatio") #
 devtools::install_github("GuangchuangYu/rvcheck") #
 remotes::install_git("appliedepi/epirhandbook") # 该包集合了流行病学中诸多描述性分析的函数。其中epi.tests函数专门用于计算诊断试验的灵敏度,特异度及预测值等指标。详细介绍可以看链接 https://rpubs.com/maomaoworm/690424
 devtools::install_github("DillonHammill/DataEditR")
 devtools::install_github("DillonHammill/rhandsontable") # 类似于excel的功能,对R语言已经读入的数据进行修改
 install.packages("job") # 如果命令运行时间过长,是不能运行下一步命令的,这个包里可以将时间比较长的命令放到后台
+install.packages("arrow") #
+install.packages("hexView") #
+install.packages("readODS") #
+install.packages("rmatio") #
 remotes::install_github("igraph/rigraph@master")
 install.packages("fBasics") # 正态检验
-devtools::install_github("kassambara/ggpubr") # 直接帮你画出箱线图,密度分布图,直方图,点图,偏差图的同时标上significance levels
+devtools::install_github("kassambara/ggpubr") #
 install.package("rticles")
 devtools::install_github("joshkatz/needs", ref = "development")
 ```
