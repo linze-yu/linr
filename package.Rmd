@@ -4,9 +4,15 @@ author: "Linze Yu"
 date: "`r Sys.Date()`"
 output:
   rmdformats::downcute:
-    self_contained: true
+    self_contained: TRUE
     default_style: "light"
     downcute_theme: "default"
+    fig_width: 7
+    fig_height: 5
+    use_bookdown: TRUE
+    gallery: TRUE
+    lightbox: TRUE
+    highlight: tango
   html_document:
     toc: yes
     toc_depth: 3
@@ -28,12 +34,16 @@ editor_options:
 ---
 
 ```{r, 代码全局设置, echo = F}
-knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = F, comment = "", eval = F, echo = T, dpi = 200, cache = T)
-# eval = F代码显示不运行
-# include = F代码运行, 不显示代码和结果
-# echo = T markdown显示代码块
-# prompt = T使用>开始代码
-# comment = ""结果不使用##
+knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = F, comment = "", echo = T, eval = F, dpi = 200, collapse = F, fig.align = "left", dev = "png", prompt = F, cache = T)
+# , eval = F 代码显示不运行
+# , include = F 代码运行, 不显示代码和结果
+# , echo = T 显示代码块
+# , prompt = T 使用>开始代码
+# , comment = "" 结果不使用##
+# , collapse = T 代码合并结果
+# , out.width/out.height = 0.8 缩放
+# , fig.align = "left","center","right" 对齐方式
+# , dev = "pdf","png","svg","jpeg" 记录设备
 # , cache = T
 ```
 
@@ -47,7 +57,7 @@ library("survminer") # 生存曲线
 library("survival") # 生存曲线
 library("ggpmisc") # 拟合模型相关的注释和绘图
 library("gghalves") # 裁剪图形
-library("rstatix") # 添加P值
+library("ggsignif") # 添加P值
 library("ggforce") # 形状曲线
 library("customLayout") # 图片排版
 library("glmnet") # LASSO回归
@@ -732,7 +742,7 @@ install.packages("MASS") # 曲线拟合
 install.packages("mgcv") # 曲线拟合
 install.packages("hexbin") # 六边形封箱热图
 devtools::install_github("ChrisLou-bioinfo/gg.gap") # 截断坐标轴
-devtools::install_github("kassambara/rstatix") # 增加P值
+devtools::install_github("kassambara/rstatix") # 计算+统计
 install.packages("survival") # 生存曲线
 devtools::install_github("raivokolde/pheatmap") # 热图
 devtools::install_github("jokergoo/ComplexHeatmap") # 热图*
