@@ -107,8 +107,8 @@ Yuri_theme <- theme(
   legend.key = element_rect(fill = NA, color = NA), # 图例符号背景
   strip.background = element_rect(fill = NA), # 分面标签背景
   axis.line = element_line(color = "#96999C", size = 1, lineend = "square"), # 坐标轴
-  axis.ticks.x = element_line(color = "#96999C", size = 0.5, lineend = "square"), # X轴刻度线
-  axis.ticks.y = element_line(color = "#96999C", size = 0.5, lineend = "square"), # Y轴刻度线
+  axis.ticks.x = element_line(color = "#96999C", size = 1, lineend = "square"), # X轴刻度线
+  axis.ticks.y = element_line(color = "#96999C", size = 1, lineend = "square"), # Y轴刻度线
   axis.ticks.length = unit(.15, "cm"), # 刻度线长度
   panel.grid.major.x = element_line(color = NA, size = 0.5, linetype = 3, lineend = "square"), # 主竖线"#96999C"
   panel.grid.major.y = element_line(color = NA, size = 0.5, linetype = 3, lineend = "square"), # 主横线"#96999C"
