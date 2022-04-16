@@ -1,6 +1,6 @@
 #' @title Yuri
 #'
-#' @description col1, cols, fills, t_theme, Yuri_theme, outer.IQR, stdca, dca, Up, cclean
+#' @description col1, cols, fills, t_theme, Yuri_theme, stdca, dca, Up, cclean
 #'
 #' @param col1
 #'
@@ -11,8 +11,6 @@
 #' @param t_theme
 #'
 #' @param Yuri_theme
-#'
-#' @param outer.IQR
 #'
 #' @param stdca
 #'
@@ -134,23 +132,6 @@ Yuri_theme <- theme(
   # aspect.ratio = 7/5,
   # legend.key = element_rect(fill = "group", color = "group"),#图例符号
 )
-
-#' @export outer.IQR
-outer.IQR <- function(x, multiple = 1.5, replace = FALSE, revalue = NA) {
-  q <- quantile(x, na.rm = T) #
-  IQR <- q[4] - q[2]
-  x1 <- which(x < q[2] - multiple * IQR | x > q[4] + multiple * IQR)
-  x2 <- x[x1]
-  if (length(x2) > 0) {
-    outlier <- data.table(location = x1, value = x2)
-  } else {
-    outlier <- data.table(location = 0, value = 0)
-  }
-  if (replace == TRUE) {
-    x[x1] <- revalue
-  }
-  return(list(new.value = x, outlier = outlier))
-}
 
 #' @export stdca
 stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,

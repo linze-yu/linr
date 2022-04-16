@@ -200,25 +200,6 @@ Yuri_theme <- theme(
 ```
 
 ## 计算
-### 计算离群值
-```{r,计算离群值}
-outer.IQR <- function(x, multiple = 1.5, replace = FALSE, revalue = NA) {
-  q <- quantile(x, na.rm = T) # 四分位间距3倍间距以外的认为是离群值
-  IQR <- q[4] - q[2]
-  x1 <- which(x < q[2] - multiple * IQR | x > q[4] + multiple * IQR)
-  x2 <- x[x1]
-  if (length(x2) > 0) {
-    outlier <- data.table(location = x1, value = x2)
-  } else {
-    outlier <- data.table(location = 0, value = 0)
-  }
-  if (replace == TRUE) {
-    x[x1] <- revalue
-  }
-  return(list(new.value = x, outlier = outlier))
-}
-```
-
 ### 决策曲线
 #### stdca
 ```{r,stdca}
@@ -701,7 +682,7 @@ devtools::install_github("tidyverse/readr") # 4
 devtools::install_github("tidyverse/purrr") # 5
 devtools::install_github("tidyverse/tibble") # 6
 devtools::install_github("tidyverse/stringr") # 7
-devtools::install_github("tidyverse/forcats") # 8
+devtools::install_github("tidyverse/forcats") # 8时间序列
 devtools::install_github("Yurisuriyel/YuriR") #
 remotes::install_github("rstudio/rmarkdown") # 写书
 remotes::install_github("juba/rmdformats") # Rmarkdown主题
@@ -852,10 +833,8 @@ install.packages("mxnet") # 深度学习框架
 install.packages("tensorflow") # 深度学习框架
 install.packages("lubridate") # 时间处理最好的包,没有之一
 install.packages("broom") # 将各种统计学模型结果数据框化
-install.packages("magrittr") # 管道符
 install.packages("zoo") # 时间序列
-install.packages("forcats") # 时间序列
-install.packages("pROC") # 绘制ROC曲线
+devtools::install_github("xrobin/pROC") # 绘制ROC曲线
 install.packages("ROCR") # 绘制ROC曲线
 devtools::install_github("mdbrown/rmda") # 决策曲线
 devtools::install_github("yikeshu0611/ggDCA") # 决策曲线
@@ -993,7 +972,6 @@ install.packages("showtextdb") #
 remotes::install_github("igraph/rigraph@master") #
 install.packages("extrafont") #
 install.packages("caTools")
-install.packages("purrr") #
 install.packages("fpp3") #
 install.packages("timetk") #
 install.packages("modeltime") #
@@ -1006,18 +984,11 @@ install.packages("alluvial") #
 install.packages("randomForest") #
 install.packages("lubridate") #
 install.packages("broom") #
-install.packages("pROC") #
-install.packages("ROCR") #
-install.packages("survival") #
 install.packages("statnet") #
 install.packages("cartogram") #
 install.packages("fmsb") #
-install.packages("ggridges") #
-install.packages("leaflet") #
-install.packages("plotly") #
 install.packages("treemap") #
 install.packages("vioplot") #
-install.packages("broom") #
 install.packages("%>%") #
 install.packages("ggmap") #
 install.packages("linear models") #
