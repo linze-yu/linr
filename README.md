@@ -1,7 +1,7 @@
 # YuriR
 col1, cols, fills, t_theme, Yuri_theme, stdca, dca, Up, cclean
 # 安装YuriR包
-devtools::install_github("Yurisuriyel/YuriR")  
+`devtools::install_github("Yurisuriyel/YuriR")  `
 # 加载的相关包
 library("rio") # 导入数据  
 library("tidyfst") # dplyr类似,底层使用datatable  
