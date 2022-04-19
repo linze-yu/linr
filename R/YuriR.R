@@ -34,7 +34,7 @@ fills <- c("#696AAD", "#FC766A", "#5BB3B0", "#95AAD3", "#EBBF57", "#E2654D", "#0
 
 #' @export t_theme
 t_theme <- theme(
-  text = element_text(family = "sans", color = 1), # 全字体
+  text = element_text(family = "Source Han Sans CN-Regular", color = 1), # 全字体
   plot.title = element_text(size = 23, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
   plot.subtitle = element_text(size = 17, angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)), # 副标题
   plot.caption = element_text(size = 14, angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)), # 说明文字
@@ -84,7 +84,7 @@ t_theme <- theme(
 
 #' @export Yuri_theme
 Yuri_theme <- theme(
-  text = element_text(family = "sans", color = 1), # 全字体
+  text = element_text(family = "Source Han Sans CN-Regular", color = 1), # 全字体
   plot.title = element_text(size = 12, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
   plot.subtitle = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)), # 副标题
   plot.caption = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)), # 说明文字
