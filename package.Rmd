@@ -48,7 +48,6 @@ knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = F, comment =
 ```
 
 # YuriR加载的相关包
-
 ```{r,YuriR加载的相关包}
 library("rio") # 导入数据
 library("tidyfst") # dplyr类似,底层使用datatable
@@ -87,20 +86,17 @@ library("styler") # 整理代码
 library("rvcheck") # 更新包
 library("ggwordcloud") # 词云
 library("showtext") # 中文PDF
+library("reticulate") # Python
 ```
 
 # 内容
-
 ## 颜色
-
 ### 连续颜色
-
 ```{r,col1}
 col1 <- c("#440154", "#470E61", "#481B6D", "#482576", "#46307E", "#443B84", "#404688", "#3C508B", "#38598C", "#33628D", "#2F6B8E", "#2C738E", "#287C8E", "#25838E", "#228C8D", "#1F948C", "#1E9D89", "#20A486", "#26AD81", "#31B57B", "#3FBC73", "#4FC46A", "#61CB5F", "#75D054", "#8BD646", "#A2DA37", "#B9DE28", "#D1E11C", "#E8E419", "#FDE725")
 ```
 
 ### 离散颜色
-
 ```{r,12cols}
 cols <- c("#696AAD", "#FC766A", "#5BB3B0", "#95AAD3", "#EBBF57", "#E2654D", "#00997B", "#F8CDCD", "#34558B", "#B067A1", "#D85A7B", "#C34E7C")
 ```
@@ -110,9 +106,7 @@ fills <- c("#696AAD", "#FC766A", "#5BB3B0", "#95AAD3", "#EBBF57", "#E2654D", "#0
 ```
 
 ## 主题
-
 ### t_theme
-
 ```{r,t_theme}
 # windowsFonts(A = windowsFont("Source Han Sans CN")) # 字体设置
 t_theme <- theme(
@@ -166,7 +160,6 @@ t_theme <- theme(
 ```
 
 ### Yuri_theme
-
 ```{r,Yuri_theme}
 Yuri_theme <- theme(
   text = element_text(family = "sans", color = 1), # 全字体
@@ -219,11 +212,8 @@ Yuri_theme <- theme(
 ```
 
 ## 计算
-
 ### 决策曲线
-
 #### stdca
-
 ```{r,stdca}
 stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
                   ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
@@ -468,7 +458,6 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
 ```
 
 #### dca
-
 ```{r,dca}
 dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
                 ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
@@ -680,23 +669,18 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
 ```
 
 ## 其他
-
 ### 升级R包
-
 ```{r,升级R包}
 Up <- print("rvcheck::update_all()")
 ```
 
 ### 整理代码
-
 ```{r,整理代码}
 cclean <- print("styler:::style_active_file()")
 ```
 
 # 可选安装的包
-
 ## 基础包
-
 ```{r}
 install.packages("devtools") # 从GitHub上下载R包
 devtools::install_github("r-lib/devtools")
@@ -734,7 +718,6 @@ devtools::install_github("gadenbuie/rsthemes") # Rstudio主题
 ```
 
 ## 数据部分
-
 ```{r}
 remotes::install_github("leeper/rio") # 导入数据
 install.packages("haven")
@@ -756,7 +739,6 @@ remotes::install_github("ddsjoberg/gtsummary") # 基线资料表
 ```
 
 ## 主要绘图包
-
 ```{r}
 install.packages("MASS") # 曲线拟合
 install.packages("mgcv") # 曲线拟合
@@ -780,7 +762,6 @@ remotes::install_github("JohnCoene/echarts4r") # 绘图系统
 ```
 
 ## 文本挖掘
-
 ```{r}
 devtools::install_github("quanteda/readtext") # 读取文本pdf,docx,xml,json
 install.packages("textreadr") # rtf,html,docx
@@ -804,7 +785,6 @@ devtools::install_github("SentometricsResearch/sentometrics")
 ```
 
 ## 其他
-
 ```{r}
 devtools::install_github("tidyverse/glue")
 remotes::install_github("asteves/tayloRswift") # 泰勒专辑配色
@@ -830,7 +810,6 @@ devtools::install_github(repo = "amices/mice") # 多重插补法
 ```
 
 ## 机器学习
-
 ```{r}
 install.packages("h2o") #
 remotes::install_github("mlr-org/mlr3verse") #
@@ -874,15 +853,18 @@ install.packages("DBI") # 和SQL的交互
 ```
 
 ## 深度学习
-
 ```{r}
 remotes::install_github("mlr-org/mlr3keras") #
 remotes::install_github("mlverse/torch") #
 devtools::install_github("rstudio/keras") #
 ```
 
-## ggplot2包扩展
+## Python
+```{r}
+install.packages("reticulate")
+```
 
+## ggplot2包扩展
 ```{r}
 devtools::install_github("jokergoo/circlize") # 弦图
 remotes::install_github("IndrajeetPatil/ggstatsplot") # GitHub
@@ -997,7 +979,6 @@ devtools::install_github("zanidean/xmrr") # 从时间系列数据生成 XMR 控�
 ```
 
 ## 其他类型R包
-
 ```{r}
 install.packages("showtext") # pdf中文
 install.packages("Sysfonts") #
@@ -1067,7 +1048,6 @@ devtools::install_github("zoometh/iconr") # 研究史前图像学的形式化方
 ```
 
 ## 画图包
-
 ```{r}
 devtools::install_github("jrodu/qqboxplot") # q-qboxplots作为ggplot2的扩展
 install.packages("pez") # 系统全面的系统发育R包
