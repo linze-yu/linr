@@ -40,7 +40,7 @@ col1, cols, fills, t_theme, Yuri_theme, stdca, dca, Up, cclean
 `library("rvcheck")` # 更新包  
 `library("ggwordcloud")` # 词云  
 `library("showtext")` # 中文PDF  
-`library("reticulate")` # Python  
+
 
 
 
