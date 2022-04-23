@@ -53,6 +53,7 @@ library("rio") # 导入数据
 library("tidyfst") # dplyr类似,底层使用datatable
 library("data.table") # 处理大数据
 library("tidyverse") # tidy-R
+library("furrr") # purrr
 library("survminer") # 生存曲线
 library("survival") # 生存曲线
 library("ggpmisc") # 拟合模型相关的注释和绘图
@@ -714,6 +715,7 @@ devtools::install_github("GuangchuangYu/rvcheck") # 更新大部分平台的R包
 devtools::install_github("trinker/pacman") # 参考文献
 remotes::install_github("r-lib/styler") # 整理代码
 devtools::install_github("gadenbuie/rsthemes") # Rstudio主题
+remotes::install_github("DavisVaughan/furrr") # 并行purrr
 ```
 
 ## 数据部分
@@ -721,7 +723,7 @@ devtools::install_github("gadenbuie/rsthemes") # Rstudio主题
 remotes::install_github("leeper/rio") # 导入数据
 install.packages("haven")
 remotes::install_github("ycphs/openxlsx")
-install.packages("feather")
+install.packages("feather") # R&Python高效数据
 devtools::install_github("fstpackage/fst", ref = "develop")
 devtools::install_github("r-lib/xml2")
 devtools::install_github("Yue-Jiang/pzfx")
@@ -786,6 +788,11 @@ devtools::install_github("SentometricsResearch/sentometrics")
 
 ## 其他
 ```{r}
+remotes::install_github("xoopR/param6") # 快速轻便的 R6 参数接口
+devtools::install_github("hadley/strict") # 严格代码
+devtools::install_github("hadley/emo") # 添加表情
+devtools::install_github("s-u/PKI") # needed for bug fixes not currently on CRAN
+devtools::install_github("hadley/secure") # 保护公共包中的私有 R 数据
 devtools::install_github("tidyverse/glue")
 remotes::install_github("asteves/tayloRswift") # 泰勒专辑配色
 devtools::install_github("sjmgarnier/viridis") # 配色
@@ -807,6 +814,37 @@ pacman::p_load_gh("trinker/qdapDictionaries", "trinker/qdapRegex", "trinker/qdap
 install.packages("glmnet") # LASSO回归
 devtools::install_github("ltorgo/DMwR2", ref = "develop") # 使用局部异常因子法(LOF法)检测异常值,LOF算法只对数值型数据有效,
 devtools::install_github(repo = "amices/mice") # 多重插补法
+install.packages("renv") # R项目创建可重现环境
+remotes::install_github("wviechtb/metafor") # Meta分析
+```
+
+## 数据
+```{r}
+install.packages("OCNet") # 自然河网
+install.packages("salem") # 女巫
+install.packages("archeofrag") # 考古学
+devtools::install_github("david6marsh/himach") # 超音速飞机最佳航线
+install.packages("DIGSS") # 考古学
+install.packages("crimedata") # 犯罪数据
+install.packages("nasapower") # 能源预测,全球气象
+install.packages("wikisourcer") # 公共领域作品
+devtools::install_github("hadley/babynames") # 包含美国社会保障管理局提供的三个数据集
+install.packages("neiss") # 2009-2014年期间提供给美国急诊室的所有事故报告样本数据
+devtools::install_github("hadley/yrbss") # 美国疾病控制中心2009-2013年期间青年危险行为监测系统数据
+devtools::install_github("hadley/hflights") # 2011 年从休斯敦出发的航班
+devtools::install_github("AndySouth/rworldmap", build_vignettes = TRUE) # 国家边界数据
+install.packages("usdanutrients") # 美国农业部营养数据库
+devtools::install_github("hadley/fueleconomy") # 美国环保署1984-2015年期间的燃油经济数据
+install.packages("nasaweather") # 包含了一个覆盖中美洲的非常粗糙的24*24格地理位置和大气测量数据
+install.packages("mexico-mortality") # 墨西哥死亡人数数据
+install.packages("data-movies") # 互联网电影数据库http://imdb.com的数据
+install.packages("pop-flows") # 2008年全美人口流动数据
+install.packages("data-housing-crisis") # 经过清洗后的2008美国房地产危机数据
+install.packages("gun-sales") # 纽约时报提供的有关枪支购买的每月背景调查统计分析数据
+remotes::install_github("rich-iannone/stationaRy") # 从成千上万个全球站点收集到的每小时气象数据
+devtools::install_github("jennybc/gapminder") # 摘自Gapminder的数据
+devtools::install_github("juliasilge/janeaustenr") # 简·奥斯丁小说全集数据
+remotes::install_github("wjakethompson/taylor") # Taylor Swift 歌曲的精选数据集的轻松访问，包括歌词和音频特征
 ```
 
 ## 机器学习
@@ -1012,15 +1050,11 @@ install.packages("ggrepel") #
 install.packages("maps") # 地图
 install.packages("bioacoustics") # 分析声音
 install.packages("radtools") # 操作医学图像数据
-install.packages("crimedata") # 犯罪数据
-install.packages("nasapower") # 能源预测,全球气象
-install.packages("wikisourcer") # 公共领域作品
 install.packages("ggasym") # 非对称矩阵绘图
 install.packages("predict3d") # 二维三维绘图
 install.packages("pins") # 提高速度远程操作
 install.packages("sankywheel") #
 install.packages("rayrender") #
-install.packages("OCNet") # 自然河网
 install.packages("covid19us") #
 install.packages("COVID19") #
 install.packages("covid19.analytics") #
@@ -1031,15 +1065,11 @@ install.packages("SITH") # 癌症生长随机模型
 install.packages("glow") #
 install.packages("DataEditR") # 交互编辑器
 install.packages("raveio") # 脑电图
-install.packages("salem") # 女巫
-install.packages("archeofrag") # 考古学
 install.packages("gm") # 音乐
-devtools::install_github("david6marsh/himach") # 超音速飞机最佳航线
 install.packages("nCov2019") #
 install.packages("afdx") # 无黄金标准估计诊断性能
 install.packages("spiralize") # 阿基米德
 remotes::install_github("wjakethompson/taylor") #
-install.packages("DIGSS") # 考古学
 install.packages("igraph") #
 install.packages("nloptr") #
 install.packages("sp") #
