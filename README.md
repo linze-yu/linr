@@ -7,7 +7,8 @@ col1, cols, fills, t_theme, Yuri_theme, stdca, dca, Up, cclean
 `library("tidyfst")` # dplyr类似,底层使用datatable  
 `library("data.table")` # 处理大数据  
 `library("tidyverse")` # tidy-R  
-`library("furrr")` # purrr
+`library("future")` # 多核计算  
+`library("furrr")` # purrr  
 `library("survminer")` # 生存曲线  
 `library("survival")` # 生存曲线  
 `library("ggpmisc")` # 拟合模型相关的注释和绘图  
