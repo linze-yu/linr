@@ -33,7 +33,7 @@ editor_options:
     wrap: 72
 ---
 
-```{r, 代码全局设置, echo = F}
+```{r, 代码全局设置, echo = T}
 knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = F, comment = "", echo = T, eval = F, dpi = 200, collapse = F, fig.align = "left", dev = "png", prompt = F, cache = T)
 # , eval = F 代码显示不运行
 # , include = F 代码运行, 不显示代码和结果
@@ -735,6 +735,7 @@ install.packages("car") # 方差齐性检验
 install.packages("psych") # 相关性检验
 install.packages("jmv") # jamovi
 remotes::install_github("ddsjoberg/gtsummary") # 基线资料表
+install.packages("PMCMRplus") # 非参数检验的全能R包
 ```
 
 ## 主要绘图包
