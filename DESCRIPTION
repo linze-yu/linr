@@ -1,12 +1,12 @@
 Package: YuriR
 Type: Package
 Title: Yuri
-Version: 0.6.0
+Version: 0.7.0
 Author: Linze Yu
 Maintainer: Linze Yu <842359449@qq.com>
-Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, furrr,
-        survminer, survival, ggpmisc, gghalves, ggsignif, ggforce,
-        customLayout, glmnet, circlize, ComplexHeatmap, knitr,
+Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, future,
+        furrr, survminer, survival, ggpmisc, gghalves, ggsignif,
+        ggforce, customLayout, glmnet, circlize, ComplexHeatmap, knitr,
         kableExtra, gtsummary, shiny, scales, pacman, Cairo, ggbreak,
         jiebaR, readtext, skimr, tokenizers, hunspell, udpipe,
         textreadr, tidytext, mice, DMwR2, styler, rvcheck, ggwordcloud,
@@ -17,4 +17,4 @@ Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-04-23 14:58:04 UTC; LinzeYu
+Packaged: 2022-04-23 15:15:34 UTC; LinzeYu

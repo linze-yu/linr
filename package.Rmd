@@ -53,6 +53,7 @@ library("rio") # 导入数据
 library("tidyfst") # dplyr类似,底层使用datatable
 library("data.table") # 处理大数据
 library("tidyverse") # tidy-R
+library("future") # 多核计算
 library("furrr") # purrr
 library("survminer") # 生存曲线
 library("survival") # 生存曲线
