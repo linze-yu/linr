@@ -1,7 +1,7 @@
 Package: YuriR
 Type: Package
 Title: Yuri
-Version: 0.7.0
+Version: 0.8.0
 Author: Linze Yu
 Maintainer: Linze Yu <842359449@qq.com>
 Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, future,
@@ -17,4 +17,4 @@ Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-04-25 02:42:48 UTC; LinzeYu
+Packaged: 2022-04-25 08:31:08 UTC; LinzeYu
