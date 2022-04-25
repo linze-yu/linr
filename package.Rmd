@@ -88,6 +88,7 @@ library("styler") # 整理代码
 library("rvcheck") # 更新包
 library("ggwordcloud") # 词云
 library("showtext") # 中文PDF
+library("DiagrammeR") # 流程图
 ```
 
 # 内容
@@ -716,6 +717,7 @@ devtools::install_github("GuangchuangYu/rvcheck") # 更新大部分平台的R包
 devtools::install_github("trinker/pacman") # 参考文献
 remotes::install_github("r-lib/styler") # 整理代码
 devtools::install_github("gadenbuie/rsthemes") # Rstudio主题
+install.packages("DiagrammeR") # 流程图
 remotes::install_github("DavisVaughan/furrr") # 并行purrr
 ```
 
