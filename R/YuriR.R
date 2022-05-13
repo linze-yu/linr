@@ -89,7 +89,7 @@ Yuri_theme <- theme(#Source Han Sans CN-Regular
   legend.text = element_text(margin = margin(0, 0, 0, 0)), # 图例文字
   strip.text.x = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0)), # 水平分面标签文本
   strip.text.y = element_text(vjust = 0.5, margin = margin(0, 0, 0, 1)), # 竖直分面标签文本
-  axis.text.y = element_text(vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 1, 0, 0)), # Y轴数字标
+  axis.text.y = element_text(vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 2, 0, 0)), # Y轴数字标
   axis.title.y = element_text(vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)), # Y轴标题
   axis.text.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)), # X轴数字标
   axis.title.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)), # X轴标题
