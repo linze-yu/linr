@@ -75,12 +75,12 @@ library("pacman") # 参考文献
 library("Cairo") # 渲染
 library("ggbreak") # 坐标轴截断
 library("jiebaR") # 分词
-library("readtext") # 读取文本pdf、docx、xml、json
+library("readtext") # 读取文本pdf,docx,xml,json
 library("skimr") # 用最少的代码来获知数据框的方方面面
 library("tokenizers") # 文本切分
 library("hunspell") # 拼写检查
 library("udpipe") # 词形还原
-library("textreadr") # rtf、html、docx
+library("textreadr") # rtf,html,docx
 library("tidytext") #
 library("mice") # 多重插补
 library("DMwR2") # 使用局部异常因子法(LOF法)检测异常值
@@ -94,11 +94,11 @@ library("DiagrammeR") # 流程图
 # 内容
 ## 离散颜色
 ```{r,24cols}
-cols <- c("#696AAD","#FC766A","#00997B","#EBBF57","#975A58","#34558B","#BD3645","#92B558","#F3E04E","#6B5B95","#95AAD3","#E34F33","#4DB6AD","#DECEBB","#B067A1","#6364A5","#9D363F","#5BB3B0","#E2654D","#D85A7B","#98B2D1","#F8CDCD","#7FC9CB","#C34E7C")
+cols <- c("#696AAD", "#FC766A", "#00997B", "#EBBF57", "#C34E7C", "#34558B", "#BD3645", "#92B558", "#F3E04E", "#6B5B95", "#95AAD3", "#E34F33", "#4DB6AD", "#DECEBB", "#975A58", "#6364A5", "#9D363F", "#5BB3B0", "#E2654D", "#D85A7B", "#98B2D1", "#F8CDCD", "#7FC9CB", "#B067A1")
 ```
 
 ```{r,24fills}
-fills <- c("#696AAD","#FC766A","#00997B","#EBBF57","#975A58","#34558B","#BD3645","#92B558","#F3E04E","#6B5B95","#95AAD3","#E34F33","#4DB6AD","#DECEBB","#B067A1","#6364A5","#9D363F","#5BB3B0","#E2654D","#D85A7B","#98B2D1","#F8CDCD","#7FC9CB","#C34E7C")
+fills <- c("#696AAD", "#FC766A", "#00997B", "#EBBF57", "#C34E7C", "#34558B", "#BD3645", "#92B558", "#F3E04E", "#6B5B95", "#95AAD3", "#E34F33", "#4DB6AD", "#DECEBB", "#975A58", "#6364A5", "#9D363F", "#5BB3B0", "#E2654D", "#D85A7B", "#98B2D1", "#F8CDCD", "#7FC9CB", "#B067A1")
 ```
 
 ## 主题
@@ -106,7 +106,7 @@ fills <- c("#696AAD","#FC766A","#00997B","#EBBF57","#975A58","#34558B","#BD3645"
 ```{r,t_theme}
 # windowsFonts(A = windowsFont("Source Han Sans CN")) # 字体设置
 t_theme <- theme(
-  text = element_text(family = "sans", color = 1), # 全字体
+  text = element_text(family = "Source Han Sans CN", color = 1), # 全字体
   plot.title = element_text(size = 23, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
   plot.subtitle = element_text(size = 17, angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)), # 副标题
   plot.caption = element_text(size = 14, angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)), # 说明文字
@@ -713,6 +713,11 @@ remotes::install_github("r-lib/styler") # 整理代码
 devtools::install_github("gadenbuie/rsthemes") # Rstudio主题
 install.packages("DiagrammeR") # 流程图
 remotes::install_github("DavisVaughan/furrr") # 并行purrr
+remotes::install_github("davidgohel/officedown") # officeverse
+devtools::install_github("davidgohel/officer") # officeverse
+devtools::install_github("ardata-fr/mschart") # officeverse
+devtools::install_github("davidgohel/flextable") # officeverse
+devtools::install_github("davidgohel/rvg") # officeverse
 ```
 
 ## 数据部分
@@ -735,6 +740,7 @@ install.packages("psych") # 相关性检验
 install.packages("jmv") # jamovi
 remotes::install_github("ddsjoberg/gtsummary") # 基线资料表
 install.packages("PMCMRplus") # 非参数检验的全能R包
+install.packages("lavaan") # 结构方程模型分析
 ```
 
 ## 主要绘图包
@@ -758,6 +764,7 @@ devtools::install_github("badbye/baidumap") # 百度地图
 devtools::install_github("EmilHvitfeldt/paletteer") # 配色
 devtools::install_github("calligross/ggthemeassist") # 主题调整
 remotes::install_github("JohnCoene/echarts4r") # 绘图系统
+install.packages("ggrepel") # 文本防重合
 ```
 
 ## 文本挖掘
@@ -767,7 +774,7 @@ install.packages("textreadr") # rtf,html,docx
 install.packages("magick") # 高级图像处理
 install.packages("imager") # 基于CImg的R图像处理库,可以快速处理多达4个维度的图像信息(两个空间维度,一个时间或深度维度,一个颜色维度)
 install.packages("av") # 对音频和视频进行分析的工具
-install.packages("seewave") # 分析,操作,显示,编辑和合成时间波的功能（特别是音频文件）
+install.packages("seewave") # 分析,操作,显示,编辑和合成时间波的功能(特别是音频文件)
 remotes::install_github("HenrikBengtsson/future.apply", ref = "develop") # 多个文件的并行读取
 install.packages("skimr") # 用最少的代码来获知数据框的方方面面
 devtools::install_github("quanteda/quanteda")
@@ -797,7 +804,6 @@ install.packages("patternplot") # 黑白填充
 install.packages("Cairo") # PDF字体
 install.packages("shiny") # 不用网页开发也可以写自己的网站
 install.packages("sudoku") # 可以设计数独,解数独
-devtools::install_github("tidyverse/magrittr") # 管道符号
 install.packages("tm") # 文本挖掘包
 devtools::install_github("mjockers/syuzhet") # 文本中提取情绪和基于情绪的情节弧线
 remotes::install_github("juliasilge/tidytext") # 文本挖掘
@@ -828,7 +834,7 @@ install.packages("wikisourcer") # 公共领域作品
 devtools::install_github("hadley/babynames") # 包含美国社会保障管理局提供的三个数据集
 install.packages("neiss") # 2009-2014年期间提供给美国急诊室的所有事故报告样本数据
 devtools::install_github("hadley/yrbss") # 美国疾病控制中心2009-2013年期间青年危险行为监测系统数据
-devtools::install_github("hadley/hflights") # 2011 年从休斯敦出发的航班
+devtools::install_github("hadley/hflights") # 2011年从休斯敦出发的航班
 devtools::install_github("AndySouth/rworldmap", build_vignettes = TRUE) # 国家边界数据
 install.packages("usdanutrients") # 美国农业部营养数据库
 devtools::install_github("hadley/fueleconomy") # 美国环保署1984-2015年期间的燃油经济数据
@@ -852,9 +858,9 @@ devtools::install_github("mlr-org/mlr3cluster") # mlr3的聚类分析
 remotes::install_github("mlr-org/mlr3filters") # mlr3的变量选择过滤器
 remotes::install_github("mlr-org/mlr3fselect") # mlr3的包装器功能选择
 remotes::install_github("mlr-org/mlr3learners", dependencies = TRUE) # 推荐的学习器mlr3
-remotes::install_github("mlr-org/mlr3proba") # 监督概率学习的扩展（包括生存分析）
-remotes::install_github("mlr-org/mlr3tuning") # 通过随机搜索、网格搜索等进行超参数调优
-remotes::install_github("mlr-org/mlr3viz") # mlr3 的可视化效果
+remotes::install_github("mlr-org/mlr3proba") # 监督概率学习的扩展(包括生存分析)
+remotes::install_github("mlr-org/mlr3tuning") # 通过随机搜索,网格搜索等进行超参数调优
+remotes::install_github("mlr-org/mlr3viz") # mlr3的可视化效果
 remotes::install_github("mlr-org/paradox") #
 remotes::install_github("mlr-org/mlr3extralearners") #
 remotes::install_github("mlr-org/bbotk") # 黑盒优化工具包
@@ -862,7 +868,7 @@ remotes::install_github("mlr-org/mlr3benchmark") # mlr3中用于基准测试的�
 devtools::install_github("mlr-org/mlr3db") # 使用数据后端扩展mlr3包
 remotes::install_github("mlr-org/mlr3hyperband") # mlr3的超频调谐
 # mlr3measures#连接器到OpenML
-# mlr3oml#用于预处理和构建复杂工作流的管道和 DAG
+# mlr3oml#用于预处理和构建复杂工作流的管道和DAG
 remotes::install_github("mlr-org/mlr3spatiotempcv") # 用于对时空任务进行重新采样的扩展
 remotes::install_github("mlr-org/mlr3keras")
 devtools::install_github("tidymodels/tidymodels") # Tidy-R"(1+13)
@@ -1083,8 +1089,7 @@ install.packages("ggeconodist") # 可以画另类的箱线图
 install.packages("lemon") # 可以很方便的操作ggplot2的图例和坐标轴参考https://cran.r-project.org/web/packages/lemon/vignettes/legends.htmlcomplex-layout-with-grid_arrange_shared_legend
 remotes::install_github("ShixiangWang/ezcox") # 很方便的做Cox回归分析模型和森林图
 install.packages("ggstream") # 河流图绘制
-devtools::install_github("GuangchuangYu/rvcheck") #
-remotes::install_git("appliedepi/epirhandbook") # 该包集合了流行病学中诸多描述性分析的函数,其中epi.tests函数专门用于计算诊断试验的灵敏度,特异度及预测值等指标,详细介绍可以看链接 https://rpubs.com/maomaoworm/690424
+remotes::install_git("appliedepi/epirhandbook") # 该包集合了流行病学中诸多描述性分析的函数,其中epi.tests函数专门用于计算诊断试验的灵敏度,特异度及预测值等指标,详细介绍可以看链接https://rpubs.com/maomaoworm/690424
 devtools::install_github("DillonHammill/DataEditR")
 devtools::install_github("DillonHammill/rhandsontable") # 类似于excel的功能,对R语言已经读入的数据进行修改
 install.packages("job") # 如果命令运行时间过长,是不能运行下一步命令的,这个包里可以将时间比较长的命令放到后台
@@ -1093,8 +1098,6 @@ install.packages("hexView") #
 install.packages("readODS") #
 install.packages("rmatio") #
 remotes::install_github("igraph/rigraph@master")
-install.packages("fBasics") # 正态检验
-devtools::install_github("kassambara/ggpubr") #
 install.package("rticles")
 devtools::install_github("joshkatz/needs", ref = "development")
 ```

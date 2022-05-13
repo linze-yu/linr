@@ -23,10 +23,10 @@
 #' @examples
 
 #' @export cols
-cols <- c("#696AAD","#FC766A","#00997B","#EBBF57","#975A58","#34558B","#BD3645","#92B558","#F3E04E","#6B5B95","#95AAD3","#E34F33","#4DB6AD","#DECEBB","#B067A1","#6364A5","#9D363F","#5BB3B0","#E2654D","#D85A7B","#98B2D1","#F8CDCD","#7FC9CB","#C34E7C")
+cols <- c("#696AAD","#FC766A","#00997B","#EBBF57","#C34E7C","#34558B","#BD3645","#92B558","#F3E04E","#6B5B95","#95AAD3","#E34F33","#4DB6AD","#DECEBB","#975A58","#6364A5","#9D363F","#5BB3B0","#E2654D","#D85A7B","#98B2D1","#F8CDCD","#7FC9CB","#B067A1")
 
 #' @export fills
-fills <- c("#696AAD","#FC766A","#00997B","#EBBF57","#975A58","#34558B","#BD3645","#92B558","#F3E04E","#6B5B95","#95AAD3","#E34F33","#4DB6AD","#DECEBB","#B067A1","#6364A5","#9D363F","#5BB3B0","#E2654D","#D85A7B","#98B2D1","#F8CDCD","#7FC9CB","#C34E7C")
+fills <- c("#696AAD","#FC766A","#00997B","#EBBF57","#C34E7C","#34558B","#BD3645","#92B558","#F3E04E","#6B5B95","#95AAD3","#E34F33","#4DB6AD","#DECEBB","#975A58","#6364A5","#9D363F","#5BB3B0","#E2654D","#D85A7B","#98B2D1","#F8CDCD","#7FC9CB","#B067A1")
 
 #' @export t_theme
 t_theme <- theme(
@@ -79,7 +79,7 @@ t_theme <- theme(
 )
 
 #' @export Yuri_theme
-Yuri_theme <- theme(
+Yuri_theme <- theme(#Source Han Sans CN-Regular
   text = element_text(family = "Source Han Sans CN-Regular", color = 1), # 全字体
   plot.title = element_text(size = 12, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
   plot.subtitle = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)), # 副标题
