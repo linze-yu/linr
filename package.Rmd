@@ -89,6 +89,7 @@ library("rvcheck") # 更新包
 library("ggwordcloud") # 词云
 library("showtext") # 中文PDF
 library("DiagrammeR") # 流程图
+library("ggrepel") # 文本防重叠
 ```
 
 # 内容
@@ -740,7 +741,10 @@ install.packages("psych") # 相关性检验
 install.packages("jmv") # jamovi
 remotes::install_github("ddsjoberg/gtsummary") # 基线资料表
 install.packages("PMCMRplus") # 非参数检验的全能R包
-install.packages("lavaan") # 结构方程模型分析
+install.packages("lavaan") # 结构方程模型分析频率学派
+install.packages("piecewiseSEM") # 结构方程模型分析
+install.packages("brms") # 结构方程模型分析贝叶斯学派
+install.packages("copent") # Copula熵/传递熵比pearson高级
 ```
 
 ## 主要绘图包
@@ -1049,7 +1053,6 @@ install.packages("colorspace") #
 install.packages("easyPubMed") #
 install.packages("eulerr") #
 install.packages("chorddiag") #
-install.packages("ggrepel") #
 install.packages("maps") # 地图
 install.packages("bioacoustics") # 分析声音
 install.packages("radtools") # 操作医学图像数据
