@@ -43,7 +43,7 @@ cols, fills, t_theme, Yuri_theme, stdca, dca, Up, cclean
 `library("ggwordcloud")` # 词云  
 `library("showtext")` # 中文PDF  
 `library("DiagrammeR")` # 流程图  
-
+`library("ggrepel")` # 文本防重叠  
 
 
 
