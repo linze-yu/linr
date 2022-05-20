@@ -1,5 +1,5 @@
 ---
-title: "tidybook"
+title: "linrbook"
 author: "Linze Yu"
 date: "`r Sys.Date()`"
 output:
@@ -47,8 +47,8 @@ knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = F, comment =
 # , cache = T
 ```
 
-# YuriR加载的相关包
-```{r,YuriR加载的相关包}
+# linr加载的相关包
+```{r,linr加载的相关包}
 library("rio") # 导入数据
 library("tidyfst") # dplyr类似,底层使用datatable
 library("data.table") # 处理大数据
@@ -156,9 +156,9 @@ t_theme <- theme(
 )
 ```
 
-### Yuri_theme
-```{r,Yuri_theme}
-Yuri_theme <- theme(
+### lin_theme
+```{r,lin_theme}
+lin_theme <- theme(
   text = element_text(family = "sans", color = 1), # 全字体
   plot.title = element_text(size = 12, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
   plot.subtitle = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)), # 副标题
@@ -886,8 +886,6 @@ install.packages("rpart") # CART决策树算法
 install.packages("e1071") # SVM和Naive Bayes
 install.packages("nnet") # 神经网络算法
 install.packages("neuralnet") # 神经网络算法
-install.packages("mxnet") # 深度学习框架
-install.packages("tensorflow") # 深度学习框架
 install.packages("lubridate") # 时间处理最好的包,没有之一
 install.packages("broom") # 将各种统计学模型结果数据框化
 install.packages("zoo") # 时间序列
@@ -897,11 +895,36 @@ install.packages("network3D") # 结合D3.js
 install.packages("DBI") # 和SQL的交互
 ```
 
+## [Tensorflow](https://tensorflow.google.cn/)
+### [下载Anaconda安装](https://www.anaconda.com/)
+### 运行CMD.exe Prompt
+### `conda --version` 查看conda
+### 连接清华镜像
+- `conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
+- `conda config --set show_channel_urls yes`
+
+### 更新pip
+- `pip install --upgrade pip`
+
+### 设置tensorflow虚拟
+- `conda create -n tensorflow python=3.9`
+- `y`
+
+### Rstudio选择Tensorflow的python
+### R安装Tensorflow
+- `install.packages("tensorflow")`
+- `library("tensorflow")`
+- `install_tensorflow()`
+
+### END
+
 ## 深度学习
 ```{r}
 remotes::install_github("mlr-org/mlr3keras") #
 remotes::install_github("mlverse/torch") #
 devtools::install_github("rstudio/keras") #
+install.packages("mxnet") # 深度学习框架
+install.packages("tensorflow") # 深度学习框架
 ```
 
 ## Python

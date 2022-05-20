@@ -1,7 +1,7 @@
-Package: YuriR
+Package: linr
 Type: Package
-Title: Yuri
-Version: 1.0.200
+Title: linze
+Version: 1.0.204
 Author: Linze Yu
 Maintainer: Linze Yu <linze.yu@outlook.com>
 Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, future,
@@ -11,10 +11,10 @@ Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, future,
         jiebaR, readtext, skimr, tokenizers, hunspell, udpipe,
         textreadr, tidytext, mice, DMwR2, styler, rvcheck, ggwordcloud,
         showtext, DiagrammeR, ggrepel
-Description: cols, fills, t_theme, Yuri_theme, stdca, dca, Up, cclean
+Description: cols, fills, Yuri_theme, stdca, dca, Up, cclean
 License:
 Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-05-16 09:59:16 UTC; LinzeYu
+Packaged: 2022-05-20 12:25:08 UTC; LinzeYu
