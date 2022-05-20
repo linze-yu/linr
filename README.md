@@ -3,7 +3,7 @@ cols, fills, t_theme, lin_theme, stdca, dca, Up, cclean
 # 安装linr包
 `devtools::install_github("Yurisuriyel/linr")  `
 # stdca&dca
-[代码来源](https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis)
+[代码来源](https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis)  
 [1]	VICKERS A J, ELKIN E B. Decision curve analysis: a novel method for evaluating prediction models [J]. Med Decis Making, 2006, 26(6): 565-74.
 # 加载的相关包
 `library("rio")` # 导入数据  
