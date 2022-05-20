@@ -2,6 +2,8 @@
 cols, fills, t_theme, lin_theme, stdca, dca, Up, cclean
 # 安装linr包
 `devtools::install_github("Yurisuriyel/linr")  `
+# stdca&dca
+[代码来源](https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis)
 # 加载的相关包
 `library("rio")` # 导入数据  
 `library("tidyfst")` # dplyr类似,底层使用datatable  
