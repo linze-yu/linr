@@ -1,5 +1,5 @@
 # linr
-cols, fills, t_theme, lin_theme, stdca, dca, Up, cclean
+cols, fills, lin_theme, stdca, dca, Up, cclean
 # 安装linr包
 `devtools::install_github("Yurisuriyel/linr")  `
 # stdca&dca
