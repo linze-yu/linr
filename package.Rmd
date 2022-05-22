@@ -47,6 +47,57 @@ knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = F, comment =
 # , cache = T
 ```
 
+# 安装加载的包
+```{r}
+install.packages("rio") # 导入数据
+install.packages("tidyfst") # dplyr类似,底层使用datatable
+install.packages("data.table") # 处理大数据
+install.packages("tidyverse") # tidy-R
+install.packages("future") # 多核计算
+install.packages("furrr") # purrr
+install.packages("survminer") # 生存曲线
+install.packages("survival") # 生存曲线
+install.packages("ggpmisc") # 拟合模型相关的注释和绘图
+install.packages("gghalves") # 裁剪图形
+install.packages("ggsignif") # 添加P值
+install.packages("ggforce") # 形状曲线
+devtools::install_github("zzawadz/customLayout") # 图片排版
+install.packages("glmnet") # LASSO回归
+install.packages("circlize") # 圈图
+devtools::install_github("jokergoo/ComplexHeatmap") # 热图*
+install.packages("ggwordcloud") # 词云
+install.packages("knitr") # 表格+渲染
+install.packages("kableExtra") # 表格+
+install.packages("gtsummary") # 基线资料表
+install.packages("shiny") # 交互网页
+install.packages("scales") # 缩放刻度
+install.packages("pacman") # 参考文献
+install.packages("Cairo") # 渲染
+install.packages("ggbreak") # 坐标轴截断
+install.packages("jiebaR") # 分词
+install.packages("readtext") # 读取文本pdf,docx,xml,json
+install.packages("skimr") # 用最少的代码来获知数据框的方方面面
+install.packages("tokenizers") # 文本切分
+install.packages("hunspell") # 拼写检查
+install.packages("udpipe") # 词形还原
+install.packages("textreadr") # rtf,html,docx
+install.packages("tidytext") #
+install.packages("mice") # 多重插补
+install.packages("DMwR2") # 使用局部异常因子法(LOF法)检测异常值
+install.packages("styler") # 整理代码
+install.packages("rvcheck") # 更新包
+install.packages("ggwordcloud") # 词云
+install.packages("showtext") # 中文PDF
+install.packages("DiagrammeR") # 流程图
+install.packages("ggrepel") # 文本防重叠
+```
+
+# 安装本地包customLayout&ComplexHeatmap
+```{r}
+setwd("D:/desktop")
+devtools::install_local(".zip")
+```
+
 # linr加载的相关包
 ```{r,linr加载的相关包}
 library("rio") # 导入数据
