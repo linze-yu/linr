@@ -116,7 +116,6 @@ library("customLayout") # 图片排版
 library("glmnet") # LASSO回归
 library("circlize") # 圈图
 library("ComplexHeatmap") # 热图*
-library("ggwordcloud") # 词云
 library("knitr") # 表格+渲染
 library("kableExtra") # 表格+
 library("gtsummary") # 基线资料表
