@@ -26,7 +26,7 @@ cols, fills, lin_theme, stdca, dca, Up, cclean
 `library("gtsummary")` # 基线资料表  
 `library("shiny")` # 交互网页  
 `library("scales")` # 缩放刻度  
-`library("pacman")` # 参考文献  
+`library("namedropR")` # 参考文献  
 `library("Cairo")` # 渲染  
 `library("ggbreak")` # 坐标轴截断  
 `library("jiebaR")` # 分词  
