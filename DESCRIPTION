@@ -1,7 +1,7 @@
 Package: linr
 Type: Package
 Title: linze
-Version: 1.0.213
+Version: 1.0.220
 Author: Linze Yu
 Maintainer: Linze Yu <linz.yu@outlook.com>
 Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, future,
@@ -17,4 +17,4 @@ Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-05-29 14:45:25 UTC; LinzeYu
+Packaged: 2022-06-05 07:15:21 UTC; LinzeYu
