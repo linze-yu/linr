@@ -11,10 +11,10 @@ Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, future,
         ggbreak, jiebaR, readtext, skimr, tokenizers, hunspell, udpipe,
         textreadr, tidytext, mice, DMwR2, styler, rvcheck, ggwordcloud,
         showtext, DiagrammeR, ggrepel
-Description: cols, fills, Yuri_theme, stdca, dca, Up, cclean
+Description: cols, fills, lin_theme, stdca, dca, Up
 License:
 Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-06-23 13:36:22 UTC; LinzeYu
+Packaged: 2022-06-23 13:54:52 UTC; LinzeYu

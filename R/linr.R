@@ -1,6 +1,6 @@
 #' @title linr
 #'
-#' @description cols, fills, lin_theme, stdca, dca, Up, cclean
+#' @description cols, fills, lin_theme, stdca, dca, Up
 #'
 #' @param cols
 #'
@@ -13,8 +13,6 @@
 #' @param dca
 #'
 #' @param Up
-#'
-#' @param cclean
 #'
 #' @return NULL
 #'
@@ -80,7 +78,6 @@ lin_theme <- theme(
 stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
                   ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
                   interventionper = 100, smooth = FALSE, loess.span = 0.10, cmprsk = FALSE) {
-
   # LOADING REQUIRED LIBRARIES
   require(survival)
   require(stats)
@@ -322,7 +319,6 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
 dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
                 ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
                 interventionper = 100, smooth = FALSE, loess.span = 0.10) {
-
   # LOADING REQUIRED LIBRARIES
   require(stats)
 
@@ -529,6 +525,3 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
 
 #' @export Up
 Up <- print("rvcheck::update_all()")
-
-#' @export cclean
-clean <- print("styler:::style_active_file()")
