@@ -265,7 +265,6 @@ lin_theme <- theme(
 stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
                   ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
                   interventionper = 100, smooth = FALSE, loess.span = 0.10, cmprsk = FALSE) {
-
   # LOADING REQUIRED LIBRARIES
   require(survival)
   require(stats)
@@ -509,7 +508,6 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
 dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
                 ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
                 interventionper = 100, smooth = FALSE, loess.span = 0.10) {
-
   # LOADING REQUIRED LIBRARIES
   require(stats)
 
@@ -716,6 +714,20 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
 ```
 
 ## 其他
+### github API
+- [github](https://github.com/)
+- 注册
+- 右上角设置
+- 开发者设置(Developer settings)
+- 个人访问令牌(Personal access tokens)
+- 生成新令牌(Generate new token)
+- Note+Expiration+Select scopes+(Generate token)
+- 复制令牌
+- `usethis::edit_r_environ()`
+- `GITHUB_TOKEN="令牌"`
+- save
+- 重启
+
 ### 升级R包
 ```{r,升级R包}
 Up <- print("rvcheck::update_all()")
@@ -727,21 +739,15 @@ cclean <- print("styler:::style_active_file()")
 ```
 
 # 可选安装的包
+```{r}
+devtools::install_github("linze-yu/linr") #
+```
+
 ## 基础包
 ```{r}
 install.packages("devtools") # 从GitHub上下载R包
 devtools::install_github("r-lib/devtools")
 install.packages("remotes") # 从GitHub上下载R包
-devtools::install_github("tidyverse/tidyverse") # Tidy-R(1+7)
-devtools::install_github("tidyverse/ggplot2") # 1
-devtools::install_github("tidyverse/dplyr") # 2
-devtools::install_github("tidyverse/tidyr") # 3
-devtools::install_github("tidyverse/readr") # 4
-devtools::install_github("tidyverse/purrr") # 5
-devtools::install_github("tidyverse/tibble") # 6
-devtools::install_github("tidyverse/stringr") # 7
-devtools::install_github("tidyverse/forcats") # 8时间序列
-devtools::install_github("Yurisuriyel/YuriR") #
 remotes::install_github("rstudio/rmarkdown") # 写书
 remotes::install_github("juba/rmdformats") # Rmarkdown主题
 remotes::install_github("rstudio/bookdown") # 写书
@@ -751,6 +757,7 @@ install.packages("knitr") # 文档编辑必要
 devtools::install_github("haozhu233/kableExtra") # knitr
 remotes::install_github("yihui/xaringan") # 幻灯片
 remotes::install_github("gadenbuie/xaringanthemer") # 幻灯片主题
+remotes::install_github("brentthorne/posterdown") # 海报
 install.packages("tinytex") # PDF输出
 tinytex::tlmgr_repo("http://mirrors.tuna.tsinghua.edu.cn/CTAN/") # PDF输出
 tinytex::install_tinytex() # PDF输出
@@ -769,6 +776,19 @@ devtools::install_github("davidgohel/officer") # officeverse
 devtools::install_github("ardata-fr/mschart") # officeverse
 devtools::install_github("davidgohel/flextable") # officeverse
 devtools::install_github("davidgohel/rvg") # officeverse
+```
+
+## tidyverse
+```{r}
+devtools::install_github("tidyverse/tidyverse") # Tidy-R(1+7)
+devtools::install_github("tidyverse/ggplot2") # 1
+devtools::install_github("tidyverse/dplyr") # 2
+devtools::install_github("tidyverse/tidyr") # 3
+devtools::install_github("tidyverse/readr") # 4
+devtools::install_github("tidyverse/purrr") # 5
+devtools::install_github("tidyverse/tibble") # 6
+devtools::install_github("tidyverse/stringr") # 7
+devtools::install_github("tidyverse/forcats") # 8
 ```
 
 ## 数据部分
@@ -907,6 +927,40 @@ remotes::install_github("wjakethompson/taylor") # Taylor Swift 歌曲的精选�
 ## 机器学习
 ```{r}
 install.packages("h2o") #
+install.packages("caret") # 类似于python的sciki-learn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大
+install.packages("randomForest") # 最忠实于原文献的随机森林算法包
+install.packages("xgboost") # 大名鼎鼎的xgboost,kaggle高位利器
+install.packages("arules") # 关联算法
+install.packages("C50") # C50决策树算法包
+install.packages("rpart") # CART决策树算法
+install.packages("e1071") # SVM和Naive Bayes
+install.packages("nnet") # 神经网络算法
+install.packages("neuralnet") # 神经网络算法
+install.packages("lubridate") # 时间处理最好的包,没有之一
+install.packages("broom") # 将各种统计学模型结果数据框化
+install.packages("zoo") # 时间序列
+devtools::install_github("xrobin/pROC") # 绘制ROC曲线
+install.packages("igraph") # 网络图以及pagerank算法
+install.packages("network3D") # 结合D3.js
+install.packages("DBI") # 和SQL的交互
+```
+
+### tidymodels
+```{r}
+devtools::install_github("tidymodels/tidymodels") # Tidy-R"(1+12)
+devtools::install_github("tidymodels/broom") # 1
+devtools::install_github("tidymodels/dials") # 2
+remotes::install_github("tidymodels/infer") # 5
+devtools::install_github("tidymodels/parsnip") # 6
+devtools::install_github("tidymodels/recipes") # 8
+devtools::install_dev("rsample") # 9
+devtools::install_github("tidymodels/tune") # 11
+devtools::install_github("tidymodels/workflows") # 12
+devtools::install_github("tidymodels/yardstick") # 13
+```
+
+### mlr
+```{r}
 remotes::install_github("mlr-org/mlr3verse") #
 devtools::install_github("mlr-org/mlr3cluster") # mlr3的聚类分析
 remotes::install_github("mlr-org/mlr3filters") # mlr3的变量选择过滤器
@@ -925,24 +979,7 @@ remotes::install_github("mlr-org/mlr3hyperband") # mlr3的超频调谐
 # mlr3oml#用于预处理和构建复杂工作流的管道和DAG
 remotes::install_github("mlr-org/mlr3spatiotempcv") # 用于对时空任务进行重新采样的扩展
 remotes::install_github("mlr-org/mlr3keras")
-devtools::install_github("tidymodels/tidymodels") # Tidy-R"(1+13)
 devtools::install_github("r-lib/R6", build_vignettes = FALSE) # R6
-install.packages("caret") # 类似于python的sciki-learn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大
-install.packages("randomForest") # 最忠实于原文献的随机森林算法包
-install.packages("xgboost") # 大名鼎鼎的xgboost,kaggle高位利器
-install.packages("arules") # 关联算法
-install.packages("C50") # C50决策树算法包
-install.packages("rpart") # CART决策树算法
-install.packages("e1071") # SVM和Naive Bayes
-install.packages("nnet") # 神经网络算法
-install.packages("neuralnet") # 神经网络算法
-install.packages("lubridate") # 时间处理最好的包,没有之一
-install.packages("broom") # 将各种统计学模型结果数据框化
-install.packages("zoo") # 时间序列
-devtools::install_github("xrobin/pROC") # 绘制ROC曲线
-install.packages("igraph") # 网络图以及pagerank算法
-install.packages("network3D") # 结合D3.js
-install.packages("DBI") # 和SQL的交互
 ```
 
 ## [Tensorflow](https://tensorflow.google.cn/)
