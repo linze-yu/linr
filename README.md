@@ -31,7 +31,7 @@ cols, fills, lin_theme, stdca, dca, Up, cclean
 `library("ggwordcloud")` # 词云  
 `library("showtext")` # 中文PDF  
 `library("ggrepel")` # 文本防重叠  
-- 1.1
+- 1.1  
 `library("ggpmisc")` # 拟合模型相关的注释和绘图  
 `library("ggforce")` # 形状曲线  
 `library("shiny")` # 交互网页  
