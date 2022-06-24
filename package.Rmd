@@ -49,50 +49,53 @@ knitr::opts_chunk$set(warning = F, error = F, message = F, prompt = F, comment =
 
 # 安装加载的包
 ```{r}
-install.packages("rio") # 导入数据
+remotes::install_github("leeper/rio") # 导入数据
 install.packages("tidyfst") # dplyr类似,底层使用datatable
-install.packages("data.table") # 处理大数据
-install.packages("tidyverse") # tidy-R
-install.packages("future") # 多核计算
-install.packages("furrr") # purrr
-install.packages("survminer") # 生存曲线
+install.packages("data.table") # 高性能数据处理
+data.table::update.dev.pkg() # datatable最新版
+devtools::install_github("tidyverse/tidyverse") # Tidy-R(1+7)
+devtools::install_github("tidymodels/tidymodels") # Tidy-R"(1+12)
+remotes::install_github("HenrikBengtsson/future", ref = "develop") # 多核计算
+remotes::install_github("DavisVaughan/furrr") # 并行purrr
+devtools::install_github("kassambara/survminer", build_vignettes = FALSE) # ggplot2绘制生存曲线
 install.packages("survival") # 生存曲线
-install.packages("ggpmisc") # 拟合模型相关的注释和绘图
-install.packages("gghalves") # 裁剪图形
-install.packages("ggsignif") # 添加P值
-install.packages("ggforce") # 形状曲线
+devtools::install_github("erocoar/gghalves") # 裁剪图形
+remotes::install_github("const-ae/ggsignif") # 添加P值
 devtools::install_github("zzawadz/customLayout") # 图片排版
 install.packages("glmnet") # LASSO回归
-install.packages("circlize") # 圈图
+devtools::install_github("jokergoo/circlize") # 弦图
 devtools::install_github("jokergoo/ComplexHeatmap") # 热图*
-install.packages("ggwordcloud") # 词云
-install.packages("knitr") # 表格+渲染
-install.packages("kableExtra") # 表格+
-install.packages("gtsummary") # 基线资料表
-install.packages("shiny") # 交互网页
-install.packages("scales") # 缩放刻度
-install.packages("pacman") # 参考文献
-install.packages("Cairo") # 渲染
-install.packages("ggbreak") # 坐标轴截断
-install.packages("jiebaR") # 分词
-install.packages("readtext") # 读取文本pdf,docx,xml,json
-install.packages("skimr") # 用最少的代码来获知数据框的方方面面
-install.packages("tokenizers") # 文本切分
+install.packages("knitr") # 文档编辑必要/表格+渲染
+devtools::install_github("haozhu233/kableExtra") # knitr+
+remotes::install_github("ddsjoberg/gtsummary") # 基线资料表
+devtools::install_github("r-lib/scales") # 缩放刻度
+remotes::install_github("nucleic-acid/namedropR") # 参考文献
+install.packages("Cairo") # PDF字体
+remotes::install_github("YuLab-SMU/ggbreak") # 坐标轴截断
+devtools::install_github(repo = "amices/mice") # 多重插补法
+devtools::install_github("GuangchuangYu/rvcheck") # 更新包
+devtools::install_github("lepennec/ggwordcloud") # 词云
+install.packages("showtext") # 中文PDF
+devtools::install_github("slowkow/ggrepel") # 文本防重叠
+```
+
+```{r}
+devtools::install_github("aphalo/ggpmisc") # 带标模型方程,ANOVA 表,摘要表的注释图;发现和标记山峰和山谷;注释支持分组和方面
+devtools::install_github("thomasp85/ggforce") # 形状曲线
+install.packages("shiny") # 不用网页开发也可以写自己的网站
+devtools::install_github("qinwf/jiebaR") # 中文分词
+devtools::install_github("qinwf/jiabaRD") # 中文分词
+devtools::install_github("quanteda/readtext") # 读取文本pdf,docx,xml,json
+devtools::install_github("ropensci/skimr") # 用最少的代码来获知数据框的方方面面
+devtools::install_github("ropensci/tokenizers") # 文本切分
 install.packages("hunspell") # 拼写检查
 install.packages("udpipe") # 词形还原
 install.packages("textreadr") # rtf,html,docx
-install.packages("tidytext") #
-install.packages("mice") # 多重插补
-install.packages("DMwR2") # 使用局部异常因子法(LOF法)检测异常值
-install.packages("styler") # 整理代码
-install.packages("rvcheck") # 更新包
-install.packages("ggwordcloud") # 词云
-install.packages("showtext") # 中文PDF
-install.packages("DiagrammeR") # 流程图
-install.packages("ggrepel") # 文本防重叠
+remotes::install_github("juliasilge/tidytext") # 文本挖掘
+devtools::install_github("ltorgo/DMwR2", ref = "develop") # 使用局部异常因子法(LOF法)检测异常值,LOF算法只对数值型数据有效
 ```
 
-# 安装本地包customLayout&ComplexHeatmap
+# 安装本地包
 ```{r}
 setwd("D:/desktop")
 devtools::install_local(".zip")
@@ -104,14 +107,13 @@ library("rio") # 导入数据
 library("tidyfst") # dplyr类似,底层使用datatable
 library("data.table") # 处理大数据
 library("tidyverse") # tidy-R
+library("tidymodels")
 library("future") # 多核计算
 library("furrr") # purrr
 library("survminer") # 生存曲线
 library("survival") # 生存曲线
-library("ggpmisc") # 拟合模型相关的注释和绘图
 library("gghalves") # 裁剪图形
 library("ggsignif") # 添加P值
-library("ggforce") # 形状曲线
 library("customLayout") # 图片排版
 library("glmnet") # LASSO回归
 library("circlize") # 圈图
@@ -119,11 +121,21 @@ library("ComplexHeatmap") # 热图*
 library("knitr") # 表格+渲染
 library("kableExtra") # 表格+
 library("gtsummary") # 基线资料表
-library("shiny") # 交互网页
 library("scales") # 缩放刻度
 library("namedropR") # 参考文献
 library("Cairo") # 渲染
 library("ggbreak") # 坐标轴截断
+library("mice") # 多重插补
+library("rvcheck") # 更新包
+library("ggwordcloud") # 词云
+library("showtext") # 中文PDF
+library("ggrepel") # 文本防重叠
+```
+
+```{r}
+library("ggpmisc") # 拟合模型相关的注释和绘图
+library("ggforce") # 形状曲线
+library("shiny") # 交互网页
 library("jiebaR") # 分词
 library("readtext") # 读取文本pdf,docx,xml,json
 library("skimr") # 用最少的代码来获知数据框的方方面面
@@ -132,14 +144,7 @@ library("hunspell") # 拼写检查
 library("udpipe") # 词形还原
 library("textreadr") # rtf,html,docx
 library("tidytext") #
-library("mice") # 多重插补
 library("DMwR2") # 使用局部异常因子法(LOF法)检测异常值
-library("styler") # 整理代码
-library("rvcheck") # 更新包
-library("ggwordcloud") # 词云
-library("showtext") # 中文PDF
-library("DiagrammeR") # 流程图
-library("ggrepel") # 文本防重叠
 ```
 
 # 内容
@@ -733,11 +738,6 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
 Up <- print("rvcheck::update_all()")
 ```
 
-### 整理代码
-```{r,整理代码}
-cclean <- print("styler:::style_active_file()")
-```
-
 # 可选安装的包
 ```{r}
 devtools::install_github("linze-yu/linr") #
@@ -753,8 +753,6 @@ remotes::install_github("juba/rmdformats") # Rmarkdown主题
 remotes::install_github("rstudio/bookdown") # 写书
 devtools::install_github("pzhaonet/bookdownplus") # 写书+
 remotes::install_github("rstudio/blogdown") # 写网站
-install.packages("knitr") # 文档编辑必要
-devtools::install_github("haozhu233/kableExtra") # knitr
 remotes::install_github("yihui/xaringan") # 幻灯片
 remotes::install_github("gadenbuie/xaringanthemer") # 幻灯片主题
 remotes::install_github("brentthorne/posterdown") # 海报
@@ -763,14 +761,11 @@ tinytex::tlmgr_repo("http://mirrors.tuna.tsinghua.edu.cn/CTAN/") # PDF输出
 tinytex::install_tinytex() # PDF输出
 remotes::install_github("plotly/plotly") # 交互网页
 devtools::install_github("r-lib/roxygen2") # R包
-devtools::install_github("joshuaulrich/quantmod")
+devtools::install_github("joshuaulrich/quantmod") # 定量金融建模和交易框架
 devtools::install_github("joshuaulrich/xts")
-devtools::install_github("GuangchuangYu/rvcheck") # 更新大部分平台的R包
 devtools::install_github("trinker/pacman") # 参考文献
 remotes::install_github("r-lib/styler") # 整理代码
 devtools::install_github("gadenbuie/rsthemes") # Rstudio主题
-install.packages("DiagrammeR") # 流程图
-remotes::install_github("DavisVaughan/furrr") # 并行purrr
 remotes::install_github("davidgohel/officedown") # officeverse
 devtools::install_github("davidgohel/officer") # officeverse
 devtools::install_github("ardata-fr/mschart") # officeverse
@@ -780,7 +775,6 @@ devtools::install_github("davidgohel/rvg") # officeverse
 
 ## tidyverse
 ```{r}
-devtools::install_github("tidyverse/tidyverse") # Tidy-R(1+7)
 devtools::install_github("tidyverse/ggplot2") # 1
 devtools::install_github("tidyverse/dplyr") # 2
 devtools::install_github("tidyverse/tidyr") # 3
@@ -793,23 +787,18 @@ devtools::install_github("tidyverse/forcats") # 8
 
 ## 数据部分
 ```{r}
-remotes::install_github("leeper/rio") # 导入数据
 install.packages("haven")
 remotes::install_github("ycphs/openxlsx")
 install.packages("feather") # R&Python高效数据
 devtools::install_github("fstpackage/fst", ref = "develop")
 devtools::install_github("r-lib/xml2")
 devtools::install_github("Yue-Jiang/pzfx")
-install.packages("tidyfst") # dplyr类似,底层使用datatable
-install.packages("data.table") # 高性能数据处理
-data.table::update.dev.pkg() # datatable最新版
 install.packages("fBasics") # 正态性检验1
 install.packages("timeDate") # 正态性检验2
 install.packages("timeSeries") # 正态性检验3
 install.packages("car") # 方差齐性检验
 install.packages("psych") # 相关性检验
 install.packages("jmv") # jamovi
-remotes::install_github("ddsjoberg/gtsummary") # 基线资料表
 install.packages("PMCMRplus") # 非参数检验的全能R包
 install.packages("lavaan") # 结构方程模型分析频率学派
 install.packages("piecewiseSEM") # 结构方程模型分析
@@ -824,12 +813,8 @@ install.packages("mgcv") # 曲线拟合
 install.packages("hexbin") # 六边形封箱热图
 devtools::install_github("ChrisLou-bioinfo/gg.gap") # 截断坐标轴
 devtools::install_github("kassambara/rstatix") # 计算+统计
-install.packages("survival") # 生存曲线
 devtools::install_github("raivokolde/pheatmap") # 热图
-devtools::install_github("jokergoo/ComplexHeatmap") # 热图*
 install.packages("magick") # 热图栅格化
-devtools::install_github("r-lib/scales") # 缩放刻度
-devtools::install_github("zzawadz/customLayout") # 图片排版
 remotes::install_github("csdaw/ggprism") # 用ggplot2输出GraphPad prism的图
 devtools::install_github("cardiomoon/webr") # 饼图+甜甜圈图+旭日图
 remotes::install_github("r-tmap/tmaptools") # 专题地图
@@ -838,24 +823,17 @@ devtools::install_github("badbye/baidumap") # 百度地图
 devtools::install_github("EmilHvitfeldt/paletteer") # 配色
 devtools::install_github("calligross/ggthemeassist") # 主题调整
 remotes::install_github("JohnCoene/echarts4r") # 绘图系统
-install.packages("ggrepel") # 文本防重合
 ```
 
 ## 文本挖掘
 ```{r}
-devtools::install_github("quanteda/readtext") # 读取文本pdf,docx,xml,json
-install.packages("textreadr") # rtf,html,docx
 install.packages("magick") # 高级图像处理
 install.packages("imager") # 基于CImg的R图像处理库,可以快速处理多达4个维度的图像信息(两个空间维度,一个时间或深度维度,一个颜色维度)
 install.packages("av") # 对音频和视频进行分析的工具
 install.packages("seewave") # 分析,操作,显示,编辑和合成时间波的功能(特别是音频文件)
 remotes::install_github("HenrikBengtsson/future.apply", ref = "develop") # 多个文件的并行读取
-install.packages("skimr") # 用最少的代码来获知数据框的方方面面
 devtools::install_github("quanteda/quanteda")
-install.packages("hunspell") # 拼写检查
-devtools::install_github("ropensci/tokenizers") # 文本切分
 devtools::install_github("mkearney/textfeatures")
-install.packages("udpipe")
 install.packages("stringdist") # 距离计算
 install.packages("RSentiment")
 install.packages("sentimentr")
@@ -875,22 +853,16 @@ devtools::install_github("tidyverse/glue")
 remotes::install_github("asteves/tayloRswift") # 泰勒专辑配色
 devtools::install_github("sjmgarnier/viridis") # 配色
 install.packages("patternplot") # 黑白填充
-install.packages("Cairo") # PDF字体
-install.packages("shiny") # 不用网页开发也可以写自己的网站
 install.packages("sudoku") # 可以设计数独,解数独
 install.packages("tm") # 文本挖掘包
 devtools::install_github("mjockers/syuzhet") # 文本中提取情绪和基于情绪的情节弧线
-remotes::install_github("juliasilge/tidytext") # 文本挖掘
 remotes::install_github("igraph/rigraph@master") # igraph 网络分析库
 devtools::install_github("thomasp85/ggraph") # 网络,图形和树
 devtools::install_github("mjockers/syuzhet") # 文本挖掘
-remotes::install_github("juliasilge/tidytext") # 文本挖掘
 remotes::install_github("EmilHvitfeldt/textdata") # 文本挖掘
 install.packages("reshape2") # 文本挖掘
 pacman::p_load_gh("trinker/qdapDictionaries", "trinker/qdapRegex", "trinker/qdapTools", "trinker/qdap") # 6800个带标签的单词,经过严格审查的学术研究
 install.packages("glmnet") # LASSO回归
-devtools::install_github("ltorgo/DMwR2", ref = "develop") # 使用局部异常因子法(LOF法)检测异常值,LOF算法只对数值型数据有效,
-devtools::install_github(repo = "amices/mice") # 多重插补法
 install.packages("renv") # R项目创建可重现环境
 remotes::install_github("wviechtb/metafor") # Meta分析
 ```
@@ -927,7 +899,7 @@ remotes::install_github("wjakethompson/taylor") # Taylor Swift 歌曲的精选�
 ## 机器学习
 ```{r}
 install.packages("h2o") #
-install.packages("caret") # 类似于python的sciki-learn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大
+install.packages("caret") # 类似于python的scikitlearn包,提供多种算法的api,同时也有交叉验证,数据预处理等函数,相当强大
 install.packages("randomForest") # 最忠实于原文献的随机森林算法包
 install.packages("xgboost") # 大名鼎鼎的xgboost,kaggle高位利器
 install.packages("arules") # 关联算法
@@ -937,7 +909,6 @@ install.packages("e1071") # SVM和Naive Bayes
 install.packages("nnet") # 神经网络算法
 install.packages("neuralnet") # 神经网络算法
 install.packages("lubridate") # 时间处理最好的包,没有之一
-install.packages("broom") # 将各种统计学模型结果数据框化
 install.packages("zoo") # 时间序列
 devtools::install_github("xrobin/pROC") # 绘制ROC曲线
 install.packages("igraph") # 网络图以及pagerank算法
@@ -947,7 +918,6 @@ install.packages("DBI") # 和SQL的交互
 
 ### tidymodels
 ```{r}
-devtools::install_github("tidymodels/tidymodels") # Tidy-R"(1+12)
 devtools::install_github("tidymodels/broom") # 1
 devtools::install_github("tidymodels/dials") # 2
 remotes::install_github("tidymodels/infer") # 5
@@ -1021,7 +991,6 @@ install.packages("reticulate")
 
 ## ggplot2包扩展
 ```{r}
-devtools::install_github("jokergoo/circlize") # 弦图
 remotes::install_github("IndrajeetPatil/ggstatsplot") # GitHub
 devtools::install_github("terrytangyuan/autoplotly") # 为热门统计结果自动生成交互式可视化CRAN
 devtools::install_github("R-CoderDotCom/calendR") # 准备打印月度和年历CRAN
@@ -1040,7 +1009,6 @@ devtools::install_github("jespermaag/gganatogram") # gganatogram 使不同生物
 devtools::install_github("thomasp85/gganimate") # 动画图形的语法,CRAN
 devtools::install_github("jhrcook/ggasym") # 具有多个刻度图的不对称矩阵绘图,CRAN
 devtools::install_github("eclarke/ggbeeswarm") # 创建蜜蜂温暖图,从而避免数据点重叠,CRAN
-remotes::install_github("GuangchuangYu/ggbreak") # 为"ggplot2"设置轴断裂CRAN
 devtools::install_github("davidsjoberg/ggbump") # 凹凸图和西格诺曲线,CRAN
 remotes::install_github("thomas-neitmann/ggcharts") # 缩短从数据可视化构想到实际绘图的距离CRAN
 devtools::install_github("Selbosh/ggChernoff") # 使用人脸可视化多变种数据GitHub
@@ -1053,7 +1021,6 @@ remotes::install_github("jonocarroll/ggeasy") # 轻松访问"ggplot2"命令CRAN
 remotes::install_github("yonicd/ggedit") # ggedit 旨在以交互方式编辑 ggplot 层,刻度和主题美学CRAN
 devtools::install_github("daattali/ggExtra") # ggExtra 允许您将边际密度图或直方图添加到 ggplot2 散射图中,CRAN
 devtools::install_github("wilkox/ggfittext") # ggplot2地理位置, 以适应文本在一个盒子里CRAN
-devtools::install_github("thomasp85/ggforce") # 旨在通过 ggplot2 v2.0.0 引入的扩展系统为 ggplot2 提供缺失的功能CRAN
 devtools::install_github("ProjectMOSAIC/ggformulaExtra") # ggplot2通过配方和管道CRAN
 remotes::install_github("sinhrks/ggfortify") # 统一界面到 ggplot2 许多流行的统计帕克奇结果,CRAN
 devtools::install_github("thomasp85/ggfx") # 用于"ggplot2"和"网格"的像素过滤器CRAN
@@ -1065,7 +1032,6 @@ BiocManager::install("ggtree")
 devtools::install_github("thackl/thacklr")
 devtools::install_github("thackl/gggenomes") # 比较基因组学图形语法GitHub
 devtools::install_github("teunbrand/ggh4x") # 定制面,多个色度和杂项选项CRAN
-devtools::install_github("erocoar/gghalves") # 格哈夫斯增加了半地球仪,ggplot2 CRAN
 devtools::install_github("XiaoLuo-boy/ggheatmap") # ggplot2 版本的热图CRAN
 devtools::install_github("rivasiker/ggHoriPlot") # 地平线图ggplot2CRAN
 remotes::install_github("statsmaths/ggimg") # 图形层,用于绘制带有 ggplot2 的图像数据,CRAN
@@ -1083,8 +1049,7 @@ devtools::install_github("martin-borkovec/ggparty", dependencies = TRUE) # ggplo
 remotes::install_github("coolbutuseless/ggpattern") # ggplot2 地理位置的模式填充,GitHub
 devtools::install_github("eliocamp/ggperiodic") # 自动增强周期性数据ggplot2 GitHub
 devtools::install_github("mikabr/ggpirate") # 海盗阴谋ggplot2GitHub
-devtools::install_github("aphalo/ggpmisc") # 带标模型方程,ANOVA 表,摘要表的注释图;发现和标记山峰和山谷;注释支持分组和方面,CRAN
-devtools::install_github("LKremer/ggpointdensity") # 介绍 ： 散射图和二元密度图之间的交叉,geom_pointdensity()CRAN
+devtools::install_github("LKremer/ggpointdensity") # 介绍 : 散射图和二元密度图之间的交叉,geom_pointdensity()CRAN
 devtools::install_github("erocoar/ggpol") # ggpol 将议会图表和其他几个地理图添加到 ggplot2 中,CRAN
 devtools::install_github("aphalo/ggpp") # 将绘图,表格和凹槽添加为绘图插图集;将标签从焦点或线路上移开;按局部密度过滤观测结果,CRAN
 devtools::install_github("kassambara/ggpubr") # 基于"ggplot2"的出版物准备绘图CRAN
@@ -1094,7 +1059,6 @@ remotes::install_github("mitchelloharawild/ggquiver") # "ggplot2"的奎弗/速�
 devtools::install_github("ricardo-bion/ggradar", dependencies = TRUE) # ggplot2构建雷达图表,CRAN
 devtools::install_github("thomasp85/ggraph") # ggraph 是针对绘图般的数据结构(图形,网络,树木,层次结构...)量身定做的,CRAN
 devtools::install_github("VPetukhov/ggrastr", build_vignettes = TRUE) # 只对情节的特定层进行光击CRAN
-devtools::install_github("slowkow/ggrepel") # 将重叠的文本标签相互排斥,CRAN
 remotes::install_github("wilkelab/ggridges") # 里奇林情节地理为 "ggplot2"CRAN
 remotes::install_github("nanxstats/ggsci") # 受科学期刊和科幻电视节目启发的"ggplot2"调色板系列,CRAN
 devtools::install_github("ellisp/ggseas/pkg") # ggplot2 的飞行扩展的季节性调整,CRAN
@@ -1102,7 +1066,6 @@ remotes::install_github("ggseg/ggseg") # 绘制大脑地图集分割的多边形
 devtools::install_github("omarwagih/ggseqlogo") # 使用 ggplot2 的出版物就绪序列徽标,GitHub
 devtools::install_github("marcmenem/ggshadow") # 在线条下画一个阴影,使繁忙的情节更美观GitHub
 devtools::install_github("jtlandis/ggside") # 侧语法图形CRAN
-remotes::install_github("const-ae/ggsignif") # 添加P值,CRAN
 devtools::install_github("oldlipe/ggsom") # 此包的目的是提供基于自组织地图的图形的更多变异性,CRAN
 install.packages("ggspectra") # "ggspectra"扩展了"ggplot2",并带有用于绘制光谱的统计数据,地理位置和注释,CRAN
 devtools::install_github("lionel-/ggstance") # ggstance 实现普通 ggplot2 地理群系的水平版本,CRAN
@@ -1115,7 +1078,6 @@ devtools::install_github("Ather-Energy/ggTimeSeries") # 此 R 包提供新颖的
 devtools::install_github("rnabioco/ggtrace") # Outline groups of data points using ggplot2
 install.packages("ggtree") # gtree 专为可视化噬菌体树和不同类型的相关注释数据而设计,GitHub
 devtools::install_github("const-ae/ggupset") # 组合矩阵轴,用于"ggplot2"创建"上置"图CRAN
-devtools::install_github("lepennec/ggwordcloud") # 云文本地理图为"ggplot2"的单词,CRAN
 devtools::install_github("brandmaier/ggx") # "ggplot2"的自然语言界面,CRAN
 remotes::install_github("hrbrmstr/hrbrthemes") # 额外的 [ggplot2] 主题,刻度和实用程序的汇编,包括绘图标签字段的拼写检查功能和对排版的整体强调,CRAN
 devtools::install_github("benskov/humapr") # 可视化地形人类数据GitHub
@@ -1127,7 +1089,6 @@ devtools::install_github("aloy/qqplotr") # "ggplot2" 的量子量和概率图扩
 install.packages("see") # 可视化工具箱,用于"易数据"和"ggplot2"的额外地理,主题和调色板CRAN
 devtools::install_github("statisticsNZ/simplevis") # 简单的"ggplot2"可视化,脑力和打字更少CRAN
 remotes::install_github("earowang/sugrrants") # 支持图表分析时间数据ggplot2CRAN
-devtools::install_github("kassambara/survminer", build_vignettes = FALSE) # 使用"ggplot2"绘制生存曲线CRAN
 devtools::install_github("wilkox/treemapify") # 绘制树图ggplot2CRAN
 devtools::install_github("Ryo-N7/tvthemes") # ggplot2热门电视节目的主题和调色板！CRAN
 devtools::install_github("zanidean/xmrr") # 从时间系列数据生成 XMR 控制图表数据,CRAN
@@ -1135,7 +1096,6 @@ devtools::install_github("zanidean/xmrr") # 从时间系列数据生成 XMR 控�
 
 ## 其他类型R包
 ```{r}
-install.packages("showtext") # pdf中文
 install.packages("Sysfonts") #
 remotes::install_github("igraph/rigraph@master") #
 install.packages("extrafont") #
@@ -1150,7 +1110,6 @@ install.packages("ggridges") #
 install.packages("ggalluvial") #
 install.packages("alluvial") #
 install.packages("lubridate") #
-install.packages("broom") #
 install.packages("statnet") #
 install.packages("cartogram") #
 install.packages("fmsb") #

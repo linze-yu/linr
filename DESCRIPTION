@@ -1,20 +1,18 @@
 Package: linr
 Type: Package
 Title: linze
-Version: 1.0-238
+Version: 1.1-239
 Author: Linze Yu
 Maintainer: Linze Yu <linz.yu@outlook.com>
-Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, future,
-        furrr, survminer, survival, ggpmisc, gghalves, ggsignif,
-        ggforce, customLayout, glmnet, circlize, ComplexHeatmap, knitr,
-        kableExtra, gtsummary, shiny, scales, namedropR, Cairo,
-        ggbreak, jiebaR, readtext, skimr, tokenizers, hunspell, udpipe,
-        textreadr, tidytext, mice, DMwR2, styler, rvcheck, ggwordcloud,
-        showtext, DiagrammeR, ggrepel
+Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, tidymodels,
+        future, furrr, survminer, survival, gghalves, ggsignif,
+        customLayout, glmnet, circlize, ComplexHeatmap, knitr,
+        kableExtra, gtsummary, scales, namedropR, Cairo, ggbreak, mice,
+        rvcheck, ggwordcloud, showtext, ggrepel
 Description: cols, fills, lin_theme, stdca, dca, Up
 License:
 Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-06-23 13:54:52 UTC; LinzeYu
+Packaged: 2022-06-24 04:36:39 UTC; LinzeYu
