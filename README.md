@@ -9,6 +9,7 @@ cols, fills, lin_theme, stdca, dca, Up, cclean
 `library("tidyfst")` # dplyr类似,底层使用datatable  
 `library("data.table")` # 处理大数据  
 `library("tidyverse")` # tidy-R  
+`library("tidymodels")`  
 `library("future")` # 多核计算  
 `library("furrr")` # purrr  
 `library("survminer")` # 生存曲线  
