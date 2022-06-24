@@ -827,6 +827,7 @@ remotes::install_github("JohnCoene/echarts4r") # 绘图系统
 
 ## 文本挖掘
 ```{r}
+install.packages("tonkenizers")
 install.packages("magick") # 高级图像处理
 install.packages("imager") # 基于CImg的R图像处理库,可以快速处理多达4个维度的图像信息(两个空间维度,一个时间或深度维度,一个颜色维度)
 install.packages("av") # 对音频和视频进行分析的工具
@@ -834,6 +835,7 @@ install.packages("seewave") # 分析,操作,显示,编辑和合成时间波的�
 remotes::install_github("HenrikBengtsson/future.apply", ref = "develop") # 多个文件的并行读取
 devtools::install_github("quanteda/quanteda")
 devtools::install_github("mkearney/textfeatures")
+install.packages("text2vec")
 install.packages("stringdist") # 距离计算
 install.packages("RSentiment")
 install.packages("sentimentr")

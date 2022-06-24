@@ -4,15 +4,12 @@ Title: linze
 Version: 1.1-239
 Author: Linze Yu
 Maintainer: Linze Yu <linz.yu@outlook.com>
-Depends: R (>= 3.5.0), rio, data.table, tidyfst, tidyverse, tidymodels,
-        future, furrr, survminer, survival, gghalves, ggsignif,
-        customLayout, glmnet, circlize, ComplexHeatmap, knitr,
-        kableExtra, gtsummary, scales, namedropR, Cairo, ggbreak, mice,
-        rvcheck, ggwordcloud, showtext, ggrepel
+Depends:
+        rio,data.table,tidyfst,tidyverse,tidymodels,future,furrr,survminer,survival,gghalves,ggsignif,customLayout,glmnet,circlize,ComplexHeatmap,knitr,kableExtra,gtsummary,scales,namedropR,Cairo,ggbreak,mice,rvcheck,ggwordcloud,showtext,ggrepel
 Description: cols, fills, lin_theme, stdca, dca, Up
 License:
 Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-06-24 04:36:39 UTC; LinzeYu
+Packaged: 2022-06-24 06:13:39 UTC; LinzeYu
