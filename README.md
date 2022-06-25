@@ -10,25 +10,19 @@ cols, fills, lin_theme, stdca, dca, Up, cclean
 `library("data.table")` # 处理大数据  
 `library("tidyverse")` # tidy-R  
 `library("tidymodels")`  
-`library("future")` # 多核计算  
 `library("furrr")` # purrr  
 `library("survminer")` # 生存曲线  
 `library("survival")` # 生存曲线  
-`library("gghalves")` # 裁剪图形  
-`library("ggsignif")` # 添加P值  
 `library("customLayout")` # 图片排版  
 `library("glmnet")` # LASSO回归  
 `library("circlize")` # 圈图  
 `library("ComplexHeatmap")` # 热图*  
 `library("knitr")` # 表格+渲染  
-`library("kableExtra")` # 表格+  
 `library("gtsummary")` # 基线资料表  
 `library("scales")` # 缩放刻度  
 `library("namedropR")` # 参考文献  
 `library("Cairo")` # 渲染  
-`library("ggbreak")` # 坐标轴截断  
 `library("mice")` # 多重插补  
-`library("rvcheck")` # 更新包  
 `library("ggwordcloud")` # 词云  
 `library("showtext")` # 中文PDF  
 `library("ggrepel")` # 文本防重叠  
@@ -45,6 +39,12 @@ cols, fills, lin_theme, stdca, dca, Up, cclean
 `library("textreadr")` # rtf、html、docx  
 `library("tidytext")` #  
 `library("DMwR2")` # 使用局部异常因子法(LOF法)检测异常值  
+`library("future")` # 多核计算  
+`library("gghalves")` # 裁剪图形  
+`library("ggsignif")` # 添加P值  
+`library("kableExtra")` # 表格+  
+`library("ggbreak")` # 坐标轴截断  
+`library("rvcheck")` # 更新包  
 
 
 
