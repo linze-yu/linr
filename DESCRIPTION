@@ -1,7 +1,7 @@
 Package: linr
 Type: Package
 Title: linze
-Version: 1.1-240
+Version: 1.2-242
 Author: Linze Yu
 Maintainer: Linze Yu <linz.yu@outlook.com>
 Depends:
@@ -12,4 +12,4 @@ Encoding: UTF-8
 Date: `2022/3/1`
 RoxygenNote: 7.1.2.9000
 NeedsCompilation: no
-Packaged: 2022-06-25 14:24:03 UTC; LinzeYu
+Packaged: 2022-06-27 00:19:05 UTC; LinzeYu

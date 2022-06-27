@@ -214,7 +214,7 @@ t_theme <- theme(
 ### lin_theme
 ```{r,lin_theme}
 lin_theme <- theme(
-  text = element_text(family = "sans", color = 1), # 全字体
+  text = element_text(color = 1), # 全字体
   plot.title = element_text(size = 12, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
   plot.subtitle = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)), # 副标题
   plot.caption = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)), # 说明文字
@@ -223,7 +223,7 @@ lin_theme <- theme(
   legend.text = element_text(margin = margin(0, 0, 0, 0)), # 图例文字
   strip.text.x = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0)), # 水平分面标签文本
   strip.text.y = element_text(vjust = 0.5, margin = margin(0, 0, 0, 1)), # 竖直分面标签文本
-  axis.text.y = element_text(vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 1, 0, 0)), # Y轴数字标
+  axis.text.y = element_text(vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 2, 0, 0)), # Y轴数字标
   axis.title.y = element_text(vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)), # Y轴标题
   axis.text.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)), # X轴数字标
   axis.title.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)), # X轴标题
@@ -234,13 +234,13 @@ lin_theme <- theme(
   legend.key = element_rect(fill = NA, color = NA), # 图例符号背景
   strip.background = element_rect(fill = NA), # 分面标签背景
   axis.line = element_line(color = "#96999C", size = 1, lineend = "square"), # 坐标轴
-  axis.ticks.x = element_line(color = "#96999C", size = 0.5, lineend = "square"), # X轴刻度线
-  axis.ticks.y = element_line(color = "#96999C", size = 0.5, lineend = "square"), # Y轴刻度线
+  axis.ticks.x = element_line(color = "#96999C", size = 1, lineend = "square"), # X轴刻度线
+  axis.ticks.y = element_line(color = "#96999C", size = 1, lineend = "square"), # Y轴刻度线
   axis.ticks.length = unit(.15, "cm"), # 刻度线长度
-  panel.grid.major.x = element_line(color = "#96999C", size = 0.5, linetype = 3, lineend = "round"), # 主竖线
-  panel.grid.major.y = element_line(color = "#96999C", size = 0.5, linetype = 3, lineend = "round"), # 主横线
-  panel.grid.minor.x = element_line(color = "#96999C", size = 0.25, linetype = 3, lineend = "round"), # 次竖线
-  panel.grid.minor.y = element_line(color = "#96999C", size = 0.25, linetype = 3, lineend = "round"), # 次横线
+  panel.grid.major.x = element_line(color = NA, size = 0.5, linetype = 3, lineend = "square"), # 主竖线"#96999C"
+  panel.grid.major.y = element_line(color = NA, size = 0.5, linetype = 3, lineend = "square"), # 主横线"#96999C"
+  panel.grid.minor.x = element_line(color = NA, size = 0.25, linetype = 3, lineend = "square"), # 次竖线"#96999C"
+  panel.grid.minor.y = element_line(color = NA, size = 0.25, linetype = 3, lineend = "square"), # 次横线"#96999C"
   plot.margin = margin(t = 0.5, r = 0.5, b = 0.1, l = 0.5, unit = "cm"), # 图边界(距离可以为0或者为负值)
   panel.spacing.x = unit(.15, "cm"), # 竖直分面绘图区之间的间距
   panel.spacing.y = unit(.15, "cm"), # 水平分面绘图区之间的间距

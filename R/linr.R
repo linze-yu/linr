@@ -26,7 +26,7 @@ fills <- c("#00997B", "#FC766A", "#696AAD", "#EBBF57", "#C34E7C", "#92B558", "#B
 
 #' @export lin_theme
 lin_theme <- theme(
-  text = element_text(family = "Source Han Sans CN-Regular", color = 1), # 全字体
+  text = element_text(color = 1), # 全字体
   plot.title = element_text(size = 12, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
   plot.subtitle = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)), # 副标题
   plot.caption = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)), # 说明文字
