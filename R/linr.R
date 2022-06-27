@@ -6,6 +6,10 @@
 #'
 #' @param fills
 #'
+#' @param cscale
+#'
+#' @param sscale
+#'
 #' @param lin_theme
 #'
 #' @param stdca
@@ -73,6 +77,18 @@ lin_theme <- theme(
   # aspect.ratio = 7/5,
   # legend.key = element_rect(fill = "group", color = "group"),#图例符号
 )
+
+#' @export cscale
+cscale <- function(x) {
+  x %>%
+    scale(center = T, scale = F)
+}
+
+#' @export sscale
+sscale <- function(x) {
+  x %>%
+    scale(center = F, scale = T)
+}
 
 #' @export stdca
 stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,

@@ -157,6 +157,18 @@ cols <- c("#00997B", "#FC766A", "#696AAD", "#EBBF57", "#C34E7C", "#92B558", "#BD
 fills <- c("#00997B", "#FC766A", "#696AAD", "#EBBF57", "#C34E7C", "#92B558", "#BD3645", "#34558B", "#F3E04E", "#6B5B95", "#4DB6AD", "#E34F33", "#95AAD3", "#DECEBB", "#975A58", "#5BB3B0", "#9D363F", "#6364A5", "#E2654D", "#F8CDCD", "#7FC9CB", "#D85A7B", "#98B2D1", "#B067A1")
 ```
 
+## 中心化/标准化
+```{r}
+cscale <- function(x) {
+  x %>%
+    scale(center = T, scale = F)
+}
+sscale <- function(x) {
+  x %>%
+    scale(center = F, scale = T)
+}
+```
+
 ## 主题
 ### t_theme
 ```{r,t_theme}
