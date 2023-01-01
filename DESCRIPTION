@@ -1,0 +1,14 @@
+Package: linr
+Type: Package
+Title: Help me use R quickly
+Version: 1.5-400
+Author: Linze Yu
+Maintainer: Linze Yu <linz.yu@outlook.com>
+Depends: rio,data.table,tidyfst,tidyverse,knitr,showtext,doParallel
+Description: lrp, cols, fills, cscale, sscale, lin_theme, stdca, dca, Up
+Encoding: UTF-8
+License: NA
+Date: `2022/3/1`
+RoxygenNote: 7.2.3
+Packaged: 2023-01-01 02:29:29 UTC; Yulinze
+NeedsCompilation: no
