@@ -2,8 +2,32 @@
 #' @name lin_theme
 #' @description lin_theme, cols, fills
 #' @param lin_theme
+#' @param col1
+#' @param col2
+#' @param col3
+#' @param col4
+#' @param col5
+#' @param col6
 #' @param cols
 #' @param fills
+
+#' @export col1
+col1 <- c("#90c9e7", "#219ebc", "#136783", "#02304a", "#feb705", "#ff9e02", "#fa8600")
+
+#' @export col2
+col2 <- c("#db3124", "#fc8c5a", "#ffdf92", "#e6f1f3", "#90bee0", "#4b74b2")
+
+#' @export col3
+col3 <- c("#264653", "#287271", "#2a9d8c", "#8ab07d", "#e9c46b", "#f3a261", "#e66f51")
+
+#' @export col4
+col4 <- c("#a40545", "#f46f44", "#fdd985", "#e9f5a1", "#7fcba4", "#4b65af")
+
+#' @export col5
+col5 <- c("#023047", "#0e5b76", "#1a86a3", "#46acca", "#9bcfe8", "#f3f9fc", "#ffca5f", "#fea809", "#fd9802", "#fb8402")
+
+#' @export col6
+col6 <- c("#001219", "#006073", "#099396", "#91d3c0", "#ebd7a5", "#ee9b00", "#cc6602", "#bc3e03", "#ae2012", "#9b2227")
 
 #' @export cols
 cols <- c("#3266B3", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#95AAD3", "#E34F33", "#385F32")
