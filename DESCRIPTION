@@ -1,7 +1,7 @@
 Package: linr
 Type: Package
 Title: Help me use R quickly
-Version: 1.51-432
+Version: 1.51-474
 Author: Linze Yu
 Maintainer: Linze Yu <linz.yu@outlook.com>
 Depends: rio,data.table,tidyfst,tidyverse,knitr,showtext,doParallel
@@ -10,5 +10,5 @@ Encoding: UTF-8
 License: NA
 Date: `2022/3/1`
 RoxygenNote: 7.2.3
-Packaged: 2023-01-03 04:01:18 UTC; Yulinze
+Packaged: 2023-02-12 11:14:49 UTC; Yulinze
 NeedsCompilation: no
