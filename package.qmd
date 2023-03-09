@@ -748,7 +748,7 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
 - 个人访问令牌(Personal access tokens)
 - 生成新令牌(Generate new token)
 - Note+Expiration+Select scopes+(Generate token)
-- 复制令牌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
+- 复制令牌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
 - `usethis::edit_r_environ()`
 - `GITHUB_TOKEN="令牌"`
 - save
@@ -757,6 +757,11 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
 ### 升级R包
 ```{r,升级R包}
 Up <- print("rvcheck::update_all()")
+```
+
+### [ChatGPT](https://github.com/jcrodriguez1989/chatgpt)
+```{r}
+devtools::install_github("jcrodriguez1989/chatgpt")
 ```
 
 # 可选安装的包
@@ -823,6 +828,8 @@ devtools::install_github("tidymodels/plsmod") #
 devtools::install_github("tidymodels/rules") #
 devtools::install_github("tidymodels/agua") #
 devtools::install_github("tidymodels/probably") # 校准曲线
+devtools::install_github("tidymodels/shinymodels") # shiny
+devtools::install_github("tidymodels/tidyclust")
 ```
 
 ## 机器学习
