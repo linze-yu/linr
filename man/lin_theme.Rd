@@ -3,13 +3,13 @@
 \docType{data}
 \name{lin_theme}
 \alias{lin_theme}
-\alias{col1}
+\alias{cols}
 \title{lin_theme}
 \format{
-An object of class \code{character} of length 7.
+An object of class \code{character} of length 12.
 }
 \usage{
-col1
+cols
 }
 \description{
 lin_theme, cols, fills

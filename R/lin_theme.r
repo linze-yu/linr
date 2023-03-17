@@ -2,43 +2,19 @@
 #' @name lin_theme
 #' @description lin_theme, cols, fills
 #' @param lin_theme
-#' @param col1
-#' @param col2
-#' @param col3
-#' @param col4
-#' @param col5
-#' @param col6
 #' @param cols
 #' @param fills
 
-#' @export col1
-col1 <- c("#90c9e7", "#219ebc", "#136783", "#02304a", "#feb705", "#ff9e02", "#fa8600")
-
-#' @export col2
-col2 <- c("#db3124", "#fc8c5a", "#ffdf92", "#e6f1f3", "#90bee0", "#4b74b2")
-
-#' @export col3
-col3 <- c("#264653", "#287271", "#2a9d8c", "#8ab07d", "#e9c46b", "#f3a261", "#e66f51")
-
-#' @export col4
-col4 <- c("#a40545", "#f46f44", "#fdd985", "#e9f5a1", "#7fcba4", "#4b65af")
-
-#' @export col5
-col5 <- c("#023047", "#0e5b76", "#1a86a3", "#46acca", "#9bcfe8", "#f3f9fc", "#ffca5f", "#fea809", "#fd9802", "#fb8402")
-
-#' @export col6
-col6 <- c("#001219", "#006073", "#099396", "#91d3c0", "#ebd7a5", "#ee9b00", "#cc6602", "#bc3e03", "#ae2012", "#9b2227")
-
 #' @export cols
-cols <- c("#3266B3", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#95AAD3", "#E34F33", "#385F32")
+cols <- c("#0057E4", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#95AAD3", "#E34F33", "#385F32")
 
 #' @export fills
-fills <- c("#3266B3", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#95AAD3", "#E34F33", "#385F32")
+fills <- c("#0057E4", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#95AAD3", "#E34F33", "#385F32")
 
 #' @export lin_theme
 lin_theme <- theme(
   # 全字体
-  text = element_text(color = "#000000", family = "Arial"),
+  text = element_text(color = "#000000", family = "sans"),
   # 标题
   plot.title = element_text(size = 14, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)),
   # 副标题
@@ -66,7 +42,7 @@ lin_theme <- theme(
   # 绘图区域背景
   panel.background = element_rect(fill = NA),
   # 绘图区边框
-  panel.border = element_rect(color = NA, fill = NA, linewidth = 0),
+  panel.border = element_rect(color = "#000000", fill = NA, linewidth = 1),
   # 文字区域+图像背景
   plot.background = element_rect(fill = NA, color = NA),
   # 图例背景
@@ -77,11 +53,11 @@ lin_theme <- theme(
   strip.background = element_rect(fill = NA),
 
   # 坐标轴
-  axis.line = element_line(color = 1, linewidth = 1, lineend = "square"),
+  axis.line = element_line(color = NA, linewidth = 0.5, lineend = "square"),
   # X轴刻度线
-  axis.ticks.x = element_line(color = 1, linewidth = 1),
+  axis.ticks.x = element_line(color = 1, linewidth = 0.5),
   # Y轴刻度线
-  axis.ticks.y = element_line(color = 1, linewidth = 1),
+  axis.ticks.y = element_line(color = 1, linewidth = 0.5),
   # 刻度线长度
   axis.ticks.length = unit(-0.2, "cm"),
   # 主竖线
