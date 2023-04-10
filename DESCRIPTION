@@ -4,11 +4,12 @@ Title: Help me use R quickly
 Version: 1.6.1-500
 Author: Linze Yu
 Maintainer: Linze Yu <linz.yu@outlook.com>
-Depends: rio,data.table,tidyfst,tidyverse,knitr,showtext,doParallel
+Depends:
+        rio,data.table,tidyfst,tidyverse,knitr,showtext,furrr,doParallel
 Description: lrp, col1, col2, col3, col4, col5, col6, cols, fills, cscale, sscale, lin_theme, stdca, dca, Up
 Encoding: UTF-8
 License: NA
 Date: `2022/3/1`
-RoxygenNote: 7.2.3
-Packaged: 2023-03-17 12:59:35 UTC; lin
+RoxygenNote: 7.2.3.9000
+Packaged: 2023-04-10 14:10:07 UTC; lin
 NeedsCompilation: no

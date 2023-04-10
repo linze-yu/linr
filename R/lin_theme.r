@@ -14,7 +14,7 @@ fills <- c("#0057E4", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#6
 #' @export lin_theme
 lin_theme <- theme(
   # 全字体
-  text = element_text(color = "#000000", family = "sans"),
+  text = element_text(color = "#000000", family = "HOS"),
   # 标题
   plot.title = element_text(size = 14, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)),
   # 副标题
@@ -96,7 +96,7 @@ lin_theme <- theme(
   # 多图例的排列方式	"horizontal"
   legend.box = "vertical",
   # 多图例居中方式
-  legend.box.just = (0.5),
+  legend.box.just = ("bottom"),
   plot.caption.position = "panel",
   plot.tag.position = "topleft",
   plot.title.position = "plot",
