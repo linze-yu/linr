@@ -1,5 +1,5 @@
 # linr
-cols, fills, cscale, sscale, lin_theme, stdca, dca, Up, cclean
+cols, fills, cscale, sscale, lin_theme, stdca, dca, Up, cclean, Start_creating
 # 安装linr包
 `devtools::install_github("linze-yu/linr")  `
 # [stdca&dca代码来源](https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis)  
