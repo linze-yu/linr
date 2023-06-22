@@ -42,7 +42,7 @@ lin_theme <- theme(
   # 绘图区域背景
   panel.background = element_rect(fill = NA),
   # 绘图区边框
-  panel.border = element_rect(color = "#000000", fill = NA, linewidth = 1),
+  panel.border = element_rect(color = "#000000", fill = NA, linewidth = 1.5),
   # 文字区域+图像背景
   plot.background = element_rect(fill = NA, color = NA),
   # 图例背景
