@@ -70,7 +70,7 @@ lin_theme <- theme(
   panel.grid.minor.y = element_line(color = NA, linewidth = 0.25, linetype = 3),
 
   # 图边界(距离可以为0或者为负值)
-  plot.margin = margin(t = 0.5, r = 0.5, b = 0.5, l = 0.5, unit = "cm"),
+  plot.margin = margin(t = 0.5, r = 1, b = 0.5, l = 0.5, unit = "cm"),
   # 竖直分面绘图区之间的间距
   panel.spacing.x = unit(.15, "cm"),
   # 水平分面绘图区之间的间距
