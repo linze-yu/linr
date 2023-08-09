@@ -12,6 +12,7 @@ Start_creating <- function(x) {
   if (x == "mlr3verse") {
     library("tidymodels")
     library("mlr3verse")
+    library("GenSA")
     library("mlr3extralearners")
     future::plan(list("multisession", "sequential"), workers = 50)
   }
