@@ -12,6 +12,6 @@ An object of class \code{character} of length 37.
 lrp
 }
 \description{
-lrp, Up
+lrp, Up, time
 }
 \keyword{datasets}

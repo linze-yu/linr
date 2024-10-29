@@ -8,16 +8,16 @@ dca(
   data,
   outcome,
   predictors,
-  xstart = 0.01,
-  xstop = 0.99,
-  xby = 0.01,
+  xstart = 0.001,
+  xstop = 0.999,
+  xby = 0.001,
   ymin = -0.05,
   probability = NULL,
   harm = NULL,
-  graph = TRUE,
-  intervention = FALSE,
+  graph = F,
+  intervention = F,
   interventionper = 100,
-  smooth = FALSE,
+  smooth = T,
   loess.span = 0.1
 )
 }

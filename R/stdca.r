@@ -4,16 +4,21 @@
 #' @param stdca
 
 #' @export stdca
-stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
-                  ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
-                  interventionper = 100, smooth = FALSE, loess.span = 0.10, cmprsk = FALSE) {
-
+stdca <- function(data, outcome, ttoutcome, timepoint, predictors,
+                  xstart = 0.001, xstop = 0.999, xby = 0.001,
+                  ymin = -0.05, probability = NULL, harm = NULL,
+                  graph = F, intervention = F,
+                  interventionper = 100, smooth = T,
+                  loess.span = 0.10, cmprsk = F) {
   # LOADING REQUIRED LIBRARIES
   require(survival)
   require(stats)
 
   # ONLY KEEPING COMPLETE CASES
-  data <- data[complete.cases(data[c(outcome, ttoutcome, predictors)]), c(outcome, ttoutcome, predictors)]
+  data <- data[
+    complete.cases(data[c(outcome, ttoutcome, predictors)]),
+    c(outcome, ttoutcome, predictors)
+  ]
 
   # outcome MUST BE CODED AS 0 AND 1
   if ((length(data[!(data[outcome] == 0 | data[outcome] == 1), outcome]) > 0) & cmprsk == FALSE) {
@@ -53,7 +58,6 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
     stop("Number of probabilities specified must be the same as the number of predictors being checked.")
   }
 
-
   # IF harm SPECIFIED ENSURING THAT EACH PREDICTOR HAS A SPECIFIED HARM
   if (length(harm) > 0 & pred.n != length(harm)) {
     stop("Number of harms specified must be the same as the number of predictors being checked.")
@@ -85,9 +89,12 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
     if (probability[m] == FALSE) {
       model <- NULL
       pred <- NULL
-      model <- coxph(Surv(data.matrix(data[ttoutcome]), data.matrix(data[outcome])) ~ data.matrix(data[predictors[m]]))
+      model <- coxph(Surv(data.matrix(data[ttoutcome]), data.matrix(data[outcome])) ~
+        data.matrix(data[predictors[m]]))
       surv.data <- data.frame(0)
-      pred <- data.frame(1 - c(summary(survfit(model, newdata = surv.data), time = timepoint)$surv))
+      pred <- data.frame(1 - c(summary(survfit(model, newdata = surv.data),
+        time = timepoint, extend = T
+      )$surv))
       names(pred) <- predictors[m]
       data <- cbind(data[names(data) != predictors[m]], pred)
       print(paste(predictors[m], "converted to a probability with Cox regression. Due to linearity and proportional hazards assumption, miscalibration may occur.", sep = " "))
@@ -101,7 +108,7 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
   # this is used for the net benefit associated with treating all patients
   if (cmprsk == FALSE) {
     km.cuminc <- survfit(Surv(data.matrix(data[ttoutcome]), data.matrix(data[outcome])) ~ 1)
-    pd <- 1 - summary(km.cuminc, times = timepoint)$surv
+    pd <- 1 - summary(km.cuminc, times = timepoint, extend = T)$surv
   } else {
     require(cmprsk)
     cr.cuminc <- cuminc(data[[ttoutcome]], data[[outcome]])
@@ -127,15 +134,15 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
       px <- sum(data[predictors[m]] > nb$threshold[t]) / N
 
       if (px == 0) {
-        error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "%", sep = ""))
+        error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "%", sep = " "))
         break
       } else {
         # calculate risk using Kaplan Meier
         if (cmprsk == FALSE) {
           km.cuminc <- survfit(Surv(data.matrix(data[data[predictors[m]] > nb$threshold[t], ttoutcome]), data.matrix(data[data[predictors[m]] > nb$threshold[t], outcome])) ~ 1)
-          pdgivenx <- (1 - summary(km.cuminc, times = timepoint)$surv)
+          pdgivenx <- (1 - summary(km.cuminc, times = timepoint, extend = T)$surv)
           if (length(pdgivenx) == 0) {
-            error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "% that have followup through the timepoint selected", sep = ""))
+            error <- rbind(error, paste0(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "% that have followup through the timepoint selected", sep = " "))
             break
           }
           # calculate risk using competing risk
@@ -143,7 +150,7 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
           cr.cuminc <- cuminc(data[[ttoutcome]][data[[predictors[m]]] > nb$threshold[t]], data[[outcome]][data[[predictors[m]]] > nb$threshold[t]])
           pdgivenx <- timepoints(cr.cuminc, times = timepoint)$est[1]
           if (is.na(pdgivenx)) {
-            error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "% that have followup through the timepoint selected", sep = ""))
+            error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "% that have followup through the timepoint selected", sep = " "))
             break
           }
         }
@@ -154,20 +161,19 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
     interv[predictors[m]] <- (nb[predictors[m]] - nb["all"]) * interventionper / (interv$threshold / (1 - interv$threshold))
   }
   if (length(error) > 0) {
-    print(paste(error, ", and therefore net benefit not calculable in this range.", sep = ""))
+    print(paste(error, ", and therefore net benefit not calculable in this range.", sep = " "))
   }
 
   # CYCLING THROUGH EACH PREDICTOR AND SMOOTH NET BENEFIT AND INTERVENTIONS AVOIDED
   for (m in 1:pred.n) {
     if (smooth == TRUE) {
       lws <- loess(data.matrix(nb[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(nb[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
-      nb[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
+      nb[!is.na(nb[[predictors[m]]]), paste0(predictors[m], "_sm")] <- lws$fitted
 
       lws <- loess(data.matrix(interv[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(interv[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
-      interv[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
+      interv[!is.na(nb[[predictors[m]]]), paste0(predictors[m], "_sm")] <- lws$fitted
     }
   }
-
 
   # PLOTTING GRAPH IF REQUESTED
   if (graph == TRUE) {
@@ -185,12 +191,12 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
       ymax <- max(interv[predictors], na.rm = TRUE)
 
       # INITIALIZING EMPTY PLOT WITH LABELS
-      plot(x = nb$threshold, y = nb$all, type = "n", xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = paste("Net reduction in interventions per", interventionper, "patients"))
+      plot(x = nb$threshold, y = nb$all, type = "n", xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = paste("Net reduction in interventions per", interventionper, "patients", sep = " "))
 
       # PLOTTING INTERVENTIONS AVOIDED FOR EACH PREDICTOR
       for (m in 1:pred.n) {
         if (smooth == TRUE) {
-          lines(interv$threshold, data.matrix(interv[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
+          lines(interv$threshold, data.matrix(interv[paste0(predictors[m], "_sm")]), col = m, lty = 2)
         } else {
           lines(interv$threshold, data.matrix(interv[predictors[m]]), col = m, lty = 2)
         }
@@ -219,7 +225,7 @@ stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01
       # PLOTTING net benefit FOR EACH PREDICTOR
       for (m in 1:pred.n) {
         if (smooth == TRUE) {
-          lines(nb$threshold, data.matrix(nb[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
+          lines(nb$threshold, data.matrix(nb[paste0(predictors[m], "_sm")]), col = m, lty = 2)
         } else {
           lines(nb$threshold, data.matrix(nb[predictors[m]]), col = m, lty = 2)
         }

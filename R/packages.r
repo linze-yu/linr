@@ -1,8 +1,9 @@
 #' @title packages
 #' @name packages
-#' @description lrp, Up
+#' @description lrp, Up, time
 #' @param lrp
 #' @param Up
+#' @param time
 
 #' @export lrp
 lrp <- print(c(
@@ -47,3 +48,9 @@ lrp <- print(c(
 
 #' @export Up
 Up <- print("rvcheck::update_all()")
+
+#' @export time
+time <- function(x) {
+  options(timeout = 2000)
+  return(print("timeout is 2000"))
+}

@@ -8,5 +8,5 @@
 cscale(x)
 }
 \description{
-cscale, sscale
+cscale, sscale, outliers_iqr, outliers_q99
 }

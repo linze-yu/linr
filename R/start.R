@@ -14,7 +14,16 @@ Start_creating <- function(x) {
     library("mlr3verse")
     library("GenSA")
     library("mlr3extralearners")
-    future::plan(list("multisession", "sequential"), workers = 50)
+    library("mlr3proba")
+    library("survival")
+    library("survminer")
+    library("distr6")
+    future::plan(list(
+      tweak(multisession, workers = 6), # availableCores() %/% 4
+      tweak(multisession, workers = 3)
+    ))
+    options(mlr3.allow_utf8_names = T)
+    # options("OMP_THREAD_LIMIT" = 1)
   }
   if (x == "tidymodels") {
     library("tidymodels")

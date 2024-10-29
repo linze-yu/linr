@@ -4,10 +4,12 @@
 #' @param dca
 
 #' @export dca
-dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
-                ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
-                interventionper = 100, smooth = FALSE, loess.span = 0.10) {
-
+dca <- function(data, outcome, predictors,
+                xstart = 0.001, xstop = 0.999, xby = 0.001,
+                ymin = -0.05, probability = NULL, harm = NULL,
+                graph = F, intervention = F,
+                interventionper = 100, smooth = T,
+                loess.span = 0.10) {
   # LOADING REQUIRED LIBRARIES
   require(stats)
 
@@ -185,7 +187,7 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
       # PLOTTING net benefit FOR EACH PREDICTOR
       for (m in 1:pred.n) {
         if (smooth == TRUE) {
-          lines(nb$threshold, data.matrix(nb[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
+          lines(nb$threshold, data.matrix(nb[paste0(predictors[m], "_sm")]), col = m, lty = 2)
         } else {
           lines(nb$threshold, data.matrix(nb[predictors[m]]), col = m, lty = 2)
         }

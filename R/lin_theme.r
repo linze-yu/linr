@@ -6,10 +6,10 @@
 #' @param fills
 
 #' @export cols
-cols <- c("#0057E4", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#95AAD3", "#E34F33", "#385F32")
+cols <- c("#0057E4", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#34558B", "#E34F33", "#385F32")
 
 #' @export fills
-fills <- c("#0057E4", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#95AAD3", "#E34F33", "#385F32")
+fills <- c("#0057E4", "#BE3455", "#01847F", "#F09839", "#6395EC", "#87A931", "#696AAD", "#FC766A", "#92B558", "#34558B", "#E34F33", "#385F32")
 
 #' @export lin_theme
 lin_theme <- theme(
@@ -23,10 +23,10 @@ lin_theme <- theme(
   plot.caption = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),
   # 标签
   plot.tag = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)),
-  # 图例标题
-  legend.title = element_text(margin = margin(0, 0, 0, 0)),
-  # 图例文字
-  legend.text = element_text(margin = margin(0, 0, 0, 0)),
+  # 图例标题/(0为左齐, 1为右齐, 0.5居中)
+  legend.title = element_text(margin = margin(0, 0, 0, 0), hjust = 0),
+  # 图例文字/(0为左齐, 1为右齐, 0.5居中)
+  legend.text = element_text(margin = margin(0, 0, 0, 0), hjust = 0),
   # 水平分面标签文本
   strip.text.x = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0)),
   # 竖直分面标签文本
@@ -40,7 +40,7 @@ lin_theme <- theme(
   # X轴标题
   axis.title.x = element_text(size = 20, vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)),
   # 绘图区域背景
-  panel.background = element_rect(fill = NA),
+  panel.background = element_blank(),
   # 绘图区边框
   panel.border = element_rect(color = "#000000", fill = NA, linewidth = 1.5),
   # 文字区域+图像背景
@@ -85,10 +85,6 @@ lin_theme <- theme(
   # legend.key.width = unit(0.5, "cm"),
   # 图例符号大小
   # legend.key.size = unit(0.5, "cm"),
-  # 图例标题对齐方式(0为左齐, 1为右齐, 0.5居中)
-  legend.title.align = (0),
-  # 图例文字标签对齐方式(0为左齐, 1为右齐, 0.5居中)
-  legend.text.align = (0),
   # 图例排列方向"horizontal"(水平一行)
   legend.direction = "vertical",
   # 图例位置	center或两数字向量
@@ -100,7 +96,7 @@ lin_theme <- theme(
   plot.caption.position = "panel",
   plot.tag.position = "topleft",
   plot.title.position = "plot",
-  # aspect.ratio = 7/5,
+  aspect.ratio = 1 / 1
   # 图例符号
   # legend.key = element_rect(fill = "group", color = "group"),
 )
