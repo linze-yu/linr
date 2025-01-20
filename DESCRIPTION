@@ -6,12 +6,12 @@ Author: Linze Yu
 Maintainer: Linze Yu <linz.yu@outlook.com>
 Depends:
         rio,data.table,tidyfst,tidyverse,knitr,showtext,furrr,doParallel
-Description: lrp, Start_creating, cols, fills, cscale, sscale, outliers_iqr, outliers_q99, lin_theme, stdca, dca, time, Up
+Description: lrp, Start_creating, cols, fills, cscale, sscale, minmax, outliers_iqr, outliers_q99, outliers_3sig, lin_theme, stdca, dca, time, Up
 Encoding: UTF-8
 License: NA
 Date: `2022/3/1`
-RoxygenNote: 7.3.2
-Packaged: 2024-10-29 12:42:47 UTC; HUAWEI
+RoxygenNote: 7.3.2.9000
+Packaged: 2025-01-20 04:31:47 UTC; HUAWEI
 Suggests: testthat (>= 3.0.0)
 Config/testthat/edition: 3
 NeedsCompilation: no

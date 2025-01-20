@@ -16,7 +16,6 @@ stdca(
   ymin = -0.05,
   probability = NULL,
   harm = NULL,
-  graph = F,
   intervention = F,
   interventionper = 100,
   smooth = T,

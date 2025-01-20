@@ -12,21 +12,23 @@ Start_creating <- function(x) {
   if (x == "mlr3verse") {
     library("tidymodels")
     library("mlr3verse")
-    library("GenSA")
     library("mlr3extralearners")
-    library("mlr3proba")
     library("survival")
-    library("survminer")
+    library("mlr3proba")
+    library("ggsurvfit")
     library("distr6")
     future::plan(list(
-      tweak(multisession, workers = 6), # availableCores() %/% 4
-      tweak(multisession, workers = 3)
+      tweak(multisession, workers = availableCores() %/% 4), # availableCores() %/% 4
+      tweak(multisession, workers = availableCores() %/% 8)
     ))
     options(mlr3.allow_utf8_names = T)
     # options("OMP_THREAD_LIMIT" = 1)
+    options(scipen = 999)
+    options(digits = 10)
   }
   if (x == "tidymodels") {
     library("tidymodels")
+    library("survival")
     library("vip")
     all_cores <- parallel::detectCores(logical = F)
     registerDoParallel(cores = all_cores)
@@ -38,8 +40,8 @@ Start_creating <- function(x) {
     library("glmnet")
     library("rms")
     library("nomogramFormula")
-    library("survminer")
     library("survival")
+    library("ggsurvfit")
     library("ComplexHeatmap") #
     library("circlize") #
   }
