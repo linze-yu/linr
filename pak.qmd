@@ -1,0 +1,761 @@
+---
+title: "linrbook"
+author: "Linze Yu"
+date: "`r Sys.Date()`"
+format:
+  html:
+    theme: Quartz
+    toc: true
+    fontcolor: "#FFFFFF"
+    number-sections: true
+    code-overflow: wrap
+    self-contained: true
+    fig-cap-location: top
+    title-block-style: default
+    code-copy: true
+    code-block-bg: "#E6EEF1"
+    execute:
+      fig-dpi: 200
+      fig-format: png
+      eval: false
+      echo: true
+      warning: false
+      error: false
+      prompt: false
+      message: false
+      collapse: false
+      comment: ""
+R.options:
+ knitr.graphics.auto_pdf: true
+editor_options:
+  markdown:
+    wrap: sentence
+---
+
+# 安装加载的包
+```{r}
+pak::pkg_install("leeper/rio", upgrade = T, dependencies = T, ask = F) # 导入数据
+pak::pkg_install("tidyfst", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("hope-data-science/tidyfst", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("data.table", upgrade = T, dependencies = T, ask = F) # 高性能数据处理
+pak::pkg_install("Rdatatable/data.table", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("tidyverse/tidyverse", upgrade = T, dependencies = T, ask = F) # Tidy-R(1+7)
+pak::pkg_install("tidymodels/tidymodels", upgrade = T, dependencies = T, ask = F) # Tidy-R"(1+12)
+pak::pkg_install("DavisVaughan/furrr", upgrade = T, dependencies = T, ask = F) # 并行purrr
+pak::pkg_install("survminer", upgrade = T, dependencies = T, ask = F) # ggplot2绘制生存曲线
+pak::pkg_install("kassambara/survminer", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("survival", upgrade = T, dependencies = T, ask = F) # 生存曲线
+pak::pkg_install("zzawadz/customLayout", upgrade = T, dependencies = T, ask = F) # 图片排版
+pak::pkg_install("glmnet", upgrade = T, dependencies = T, ask = F) # LASSO回归
+pak::pkg_install("IRanges", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("jokergoo/circlize", upgrade = T, dependencies = T, ask = F) # 弦图
+pak::pkg_install("jokergoo/ComplexHeatmap", upgrade = T, dependencies = T, ask = F) # 热图*
+pak::pkg_install("knitr", upgrade = T, dependencies = T, ask = F) # 文档编辑必要/表格+渲染
+pak::pkg_install("ddsjoberg/gtsummary", upgrade = T, dependencies = T, ask = F) # 基线资料表
+pak::pkg_install("r-lib/scales", upgrade = T, dependencies = T, ask = F) # 缩放刻度
+pak::pkg_install("nucleic-acid/namedropR", upgrade = T, dependencies = T, ask = F) # 参考文献
+pak::pkg_install("Cairo", upgrade = T, dependencies = T, ask = F) # PDF字体
+pak::pkg_install("amices/mice", upgrade = T, dependencies = T, ask = F) # 多重插补法
+pak::pkg_install("lepennec/ggwordcloud", upgrade = T, dependencies = T, ask = F) # 词云
+pak::pkg_install("showtext", upgrade = T, dependencies = T, ask = F) # 中文PDF
+pak::pkg_install("slowkow/ggrepel", upgrade = T, dependencies = T, ask = F) # 文本防重叠
+
+pak::pkg_install("thomasp85/ggforce", upgrade = T, dependencies = T, ask = F) # 形状曲线
+pak::pkg_install("shiny", upgrade = T, dependencies = T, ask = F) # 不用网页开发也可以写自己的网站
+pak::pkg_install("qinwf/jiebaR", upgrade = T, dependencies = T, ask = F) # 中文分词
+pak::pkg_install("pdftools", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("quanteda/readtext", upgrade = T, dependencies = T, ask = F) # 读取文本pdf,docx,xml,json
+pak::pkg_install("ropensci/skimr", upgrade = T, dependencies = T, ask = F) # 用最少的代码来获知数据框的方方面面
+pak::pkg_install("ropensci/tokenizers", upgrade = T, dependencies = T, ask = F) # 文本切分
+pak::pkg_install("hunspell", upgrade = T, dependencies = T, ask = F) # 拼写检查
+pak::pkg_install("udpipe", upgrade = T, dependencies = T, ask = F) # 词形还原
+pak::pkg_install("juliasilge/tidytext", upgrade = T, dependencies = T, ask = F) # 文本挖掘
+pak::pkg_install("ltorgo/DMwR2", upgrade = T, dependencies = T, ask = F) # 使用局部异常因子法(LOF法)检测异常值,LOF算法只对数值型数据有效
+pak::pkg_install("GuangchuangYu/rvcheck", upgrade = T, dependencies = T, ask = F) # 更新包
+pak::pkg_install("HenrikBengtsson/future", upgrade = T, dependencies = T, ask = F) # 多核计算
+pak::pkg_install("erocoar/gghalves", upgrade = T, dependencies = T, ask = F) # 裁剪图形
+pak::pkg_install("const-ae/ggsignif", upgrade = T, dependencies = T, ask = F) # 添加P值
+pak::pkg_install("haozhu233/kableExtra", upgrade = T, dependencies = T, ask = F) # knitr+
+pak::pkg_install("YuLab-SMU/ggbreak", upgrade = T, dependencies = T, ask = F) # 坐标轴截断
+pak::pkg_install("tylermorganwall/rayrender", upgrade = T, dependencies = T) # 光线追踪
+pak::pkg_install("koalaverse/vip", upgrade = T, dependencies = T, ask = F) # 变量重要程度
+pak::pkg_install("dami82/easyPubMed", upgrade = T, dependencies = T, ask = F) # PubMed
+pak::pak("rstudio/rticles", upgrade = T, dependencies = T, ask = F) # 文献格式
+pak::pkg_install("RcppCore/Rcpp", upgrade = T, dependencies = T, ask = F)
+```
+
+# 安装本地包
+```{r}
+setwd("D:/desktop")
+devtools::install_local(".zip")
+```
+
+# linr加载的相关包
+```{r,linr加载的相关包}
+library("rio") # 导入数据
+library("data.table") # 处理大数据
+library("tidyfst") # dplyr类似,底层使用datatable
+library("tidyverse") # tidy-R
+library("knitr") # 表格+渲染
+library("showtext") # 中文PDF
+```
+
+## other
+```{r}
+library("Cairo") # 渲染
+library("furrr") # purrr
+library("customLayout") # 图片排版
+library("gtsummary") # 基线资料表
+library("scales") # 缩放刻度
+library("namedropR") # 参考文献
+```
+
+## 绘图
+```{r}
+library("circlize") # 圈图
+library("ComplexHeatmap") # 热图*
+library("ggwordcloud") # 词云
+library("ggrepel") # 文本防重叠
+library("ggforce") # 形状曲线
+library("gghalves") # 裁剪图形
+library("ggbreak") # 坐标轴截断
+library("ggsignif") # 添加P值
+```
+
+## 机器学习
+```{r}
+library("glmnet") # LASSO回归
+library("tidymodels")
+```
+
+## 数据
+```{r}
+library("mice") # 多重插补
+library("skimr") # 用最少的代码来获知数据框的方方面面
+library("DMwR2") # 使用局部异常因子法(LOF法)检测异常值
+library("future") # 多核计算
+library("kableExtra") # 表格+
+```
+
+## 文本
+```{r}
+library("jiebaR") # 分词
+library("tokenizers") # 文本切分
+library("hunspell") # 拼写检查
+library("udpipe") # 词形还原
+library("textreadr") # rtf,html,docx
+library("tidytext") #
+```
+
+```{r}
+library("shiny") # 交互网页
+library("rvcheck") # 更新包
+```
+
+# 内容
+## 中心化/标准化
+```{r}
+cscale <- function(x) {
+  x %>%
+    scale(center = T, scale = F)
+}
+sscale <- function(x) {
+  x %>%
+    scale(center = F, scale = T)
+}
+```
+
+
+## 计算
+### [决策曲线](https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis)
+
+## 其他
+### github API
+- [github](https://github.com/)
+- 注册
+- 右上角设置
+- 开发者设置(Developer settings)
+- 个人访问令牌(Personal access tokens)
+- 生成新令牌(Generate new token)
+- Note+Expiration+Select scopes+(Generate token)
+- 复制令牌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
+- `usethis::edit_r_environ()`
+- `GITHUB_TOKEN="令牌"`
+- save
+- 重启
+
+### 升级R包
+```{r,升级R包}
+Up <- print("options(timeout = 2000)
+            rvcheck::update_all()", upgrade = T, dependencies = T, ask = F)
+
+pak::pak_update(force = F, stream = c("auto", "stable", "rc", "devel"))
+```
+
+### [ChatGPT](https://github.com/jcrodriguez1989/chatgpt)
+```{r}
+pak::pkg_install("jcrodriguez1989/chatgpt", upgrade = T, dependencies = T, ask = F)
+```
+
+# 可选安装的包
+```{r}
+pak::pkg_install("linze-yu/linr", upgrade = T, dependencies = T, ask = F) #
+```
+
+## 基础包
+```{r}
+pak::pkg_install("devtools", upgrade = T, dependencies = T, ask = F) # 从GitHub上下载R包
+pak::pkg_install("r-lib/devtools", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("remotes", upgrade = T, dependencies = T, ask = F) # 从GitHub上下载R包
+pak::pkg_install("rstudio/rmarkdown", upgrade = T, dependencies = T, ask = F) # 写书
+pak::pkg_install("juba/rmdformats", upgrade = T, dependencies = T, ask = F) # Rmarkdown主题
+pak::pkg_install("rstudio/bookdown", upgrade = T, dependencies = T, ask = F) # 写书
+pak::pkg_install("pzhaonet/bookdownplus", upgrade = T, dependencies = T, ask = F) # 写书+
+pak::pkg_install("rstudio/blogdown", upgrade = T, dependencies = T, ask = F) # 写网站
+pak::pkg_install("yihui/xaringan", upgrade = T, dependencies = T, ask = F) # 幻灯片
+pak::pkg_install("gadenbuie/xaringanthemer", upgrade = T, dependencies = T, ask = F) # 幻灯片主题
+pak::pkg_install("brentthorne/posterdown", upgrade = T, dependencies = T, ask = F) # 海报
+pak::pkg_install("tinytex", upgrade = T, dependencies = T, ask = F) # PDF输出
+# tinytex::tlmgr_repo("http://mirrors.tuna.tsinghua.edu.cn/CTAN/") # PDF输出
+# tinytex::install_tinytex() # PDF输出
+pak::pkg_install("plotly/plotly", upgrade = T, dependencies = T, ask = F) # 交互网页
+pak::pkg_install("r-lib/roxygen2", upgrade = T, dependencies = T, ask = F) # R包
+pak::pkg_install("joshuaulrich/xts", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("trinker/pacman", upgrade = T, dependencies = T, ask = F) # 参考文献
+pak::pkg_install("r-lib/styler", upgrade = T, dependencies = T, ask = F) # 整理代码
+pak::pkg_install("gadenbuie/rsthemes", upgrade = T, dependencies = T, ask = F) # Rstudio主题
+pak::pkg_install("juicr", upgrade = T, dependencies = T, ask = F) # 提取图片数据
+pak::pkg_install("quarto", upgrade = T, dependencies = T, ask = F)
+```
+
+## tidyverse
+```{r}
+pak::pkg_install("tidyverse/ggplot2", upgrade = T, dependencies = T, ask = F) # 1
+pak::pkg_install("tidyverse/dplyr", upgrade = T, dependencies = T, ask = F) # 2
+pak::pkg_install("tidyverse/tidyr", upgrade = T, dependencies = T, ask = F) # 3
+pak::pkg_install("tidyverse/readr", upgrade = T, dependencies = T, ask = F) # 4
+pak::pkg_install("tidyverse/purrr", upgrade = T, dependencies = T, ask = F) # 5
+pak::pkg_install("tidyverse/tibble", upgrade = T, dependencies = T, ask = F) # 6
+pak::pkg_install("tidyverse/stringr", upgrade = T, dependencies = T, ask = F) # 7
+pak::pkg_install("tidyverse/forcats", upgrade = T, dependencies = T, ask = F) # 8
+pak::pkg_install("tidyverse/lubridate", upgrade = T, dependencies = T, ask = F) # 9
+pak::pkg_install("tidyverse/glue", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("tidyverse/tidyverse", upgrade = T, dependencies = T, ask = F)
+```
+
+## 统计
+```{r}
+pak::pkg_install("joshuaulrich/quantmod", upgrade = T, dependencies = T, ask = F) # 定量金融建模和交易框架
+pak::pkg_install("fBasics", upgrade = T, dependencies = T, ask = F) # 正态性检验1
+pak::pkg_install("timeDate", upgrade = T, dependencies = T, ask = F) # 正态性检验2
+pak::pkg_install("timeSeries", upgrade = T, dependencies = T, ask = F) # 正态性检验3
+pak::pkg_install("car", upgrade = T, dependencies = T, ask = F) # 方差齐性检验
+pak::pkg_install("psych", upgrade = T, dependencies = T, ask = F) # 相关性检验
+pak::pkg_install("jamovi/jmv", upgrade = T, dependencies = T, ask = F) # jamovi
+pak::pkg_install("PMCMRplus", upgrade = T, dependencies = T, ask = F) # 非参数检验的全能R包
+pak::pkg_install("yrosseel/lavaan", upgrade = T, dependencies = T, ask = F) # 结构方程模型分析频率学派
+pak::pkg_install("nalimilan/R2HTML", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("cjvanlissa/tidySEM", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("SachaEpskamp/semPlot", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("alishinski/lavaanPlot", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("piecewiseSEM", upgrade = T, dependencies = T, ask = F) # 结构方程模型分析
+pak::pkg_install("brms", upgrade = T, dependencies = T, ask = F) # 结构方程模型分析贝叶斯学派
+pak::pkg_install("MASS", upgrade = T, dependencies = T, ask = F) # 曲线拟合
+pak::pkg_install("mgcv", upgrade = T, dependencies = T, ask = F) # 曲线拟合
+pak::pkg_install("kassambara/rstatix", upgrade = T, dependencies = T, ask = F) # 计算+统计
+pak::pkg_install("majianthu/copent", upgrade = T, dependencies = T, ask = F) # Copula熵/传递熵比pearson高级
+pak::pkg_install("aphalo/ggpmisc", upgrade = T, dependencies = T, ask = F) # 带标模型方程,ANOVA 表,摘要表的注释图;发现和标记山峰和山谷;注释支持分组和方面
+pak::pkg_install("BayesFactor", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("ngreifer/MatchIt", upgrade = T, dependencies = T, ask = F) # 倾向性评分
+```
+
+## 回归
+```{r}
+pak::pkg_install("moderndive/moderndive", upgrade = T, dependencies = T, ask = F) # 最强回归
+pak::pkg_install("rms", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("gitcreds", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("nomogramFormula", upgrade = T, dependencies = T, ask = F)
+```
+
+### tidymodels
+```{r}
+pak::pkg_install("tidymodels/broom", upgrade = T, dependencies = T, ask = F) # 1
+pak::pkg_install("tidymodels/dials", upgrade = T, dependencies = T, ask = F) # 2
+pak::pkg_install("tidymodels/infer", upgrade = T, dependencies = T, ask = F) # 5
+pak::pkg_install("tidymodels/parsnip", upgrade = T, dependencies = T, ask = F) # 6
+pak::pkg_install("tidymodels/recipes", upgrade = T, dependencies = T, ask = F) # 8
+pak::pkg_install("tidymodels/rsample", upgrade = T, dependencies = T, ask = F) # 9
+pak::pkg_install("tidymodels/tune", upgrade = T, dependencies = T, ask = F) # 11
+pak::pkg_install("tidymodels/workflows", upgrade = T, dependencies = T, ask = F) # 12
+pak::pkg_install("tidymodels/yardstick", upgrade = T, dependencies = T, ask = F) # 13
+pak::pkg_install("tidymodels/discrim", upgrade = T, dependencies = T, ask = F) # 各种判别分析模型,朴素贝叶斯
+pak::pkg_install("tidymodels/baguette", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("tidymodels/censored", upgrade = T, dependencies = T, ask = F) # 生存数据
+pak::pkg_install("tidymodels/plsmod", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("tidymodels/rules", upgrade = T, dependencies = T, ask = F) #
+# pak::pkg_install("tidymodels/agua", upgrade = T, dependencies = T, ask = F) # h2o
+pak::pkg_install("tidymodels/probably", upgrade = T, dependencies = T, ask = F) # 校准曲线
+pak::pkg_install("tidymodels/shinymodels", upgrade = T, dependencies = T, ask = F) # shiny
+pak::pkg_install("tidymodels/tidyclust", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("tidymodels/tidymodels", upgrade = T, dependencies = T, ask = F)
+```
+
+## mlr3
+
+|Name|Title||
+|-|-|-|
+|[mlr3verse](https://github.com/mlr-org/mlr3verse)|
+|[mlr3](https://mlr3.mlr-org.com)|
+|[mlr3cluster](https://mlr3cluster.mlr-org.com)|无监督群集|
+|[mlr3data](https://mlr3data.mlr-org.com)|其他数据集和任务|
+|[mlr3filters](https://mlr3filters.mlr-org.com)|基于过滤器的特征选择|
+|[mlr3fselect](https://mlr3fselect.mlr-org.com)|基于包装器的特征选择|
+|[mlr3learners](https://mlr3learners.mlr-org.com)|推荐学习者|
+|[mlr3pipelines](https://mlr3pipelines.mlr-org.com)|预处理运算符和管道|
+|[mlr3proba](https://mlr3proba.mlr-org.com)|概率回归与生存分析|
+|[mlr3tuning](https://mlr3tuning.mlr-org.com)|超参数优化|
+|[mlr3viz](https://mlr3viz.mlr-org.com)|可视化|
+|[paradox](https://paradox.mlr-org.com)|参数空间|
+|Tuning|
+|[mlr3hyperband](https://github.com/mlr-org/mlr3hyperband)|mlr3的超频调谐|
+|[mlr3mbo](https://github.com/mlr-org/mlr3mbo)|R中的灵活贝叶斯优化|
+|[miesmuschel](https://github.com/mlr-org/miesmuschel)|灵活的混合整数进化策略|
+|Data|
+|[mlr3db](https://github.com/mlr-org/mlr3db)|让mlr3透明地与(远程)数据库一起工作的数据后端|
+|[mlr3oml](https://github.com/mlr-org/mlr3oml)|用OpenML连接mlr3|
+|Learners|
+|[mlr3torch](https://github.com/mlr-org/mlr3torch)|将torch连接到mlr3|
+|[mlr3keras](https://github.com/mlr-org/mlr3keras)|mlr3的深度学习|
+|[mlr3extralearners](https://github.com/mlr-org/mlr3extralearners)|mlr3中使用的额外learner|
+|Utilities|
+|[mlr3misc](https://github.com/mlr-org/mlr3misc)|mlr3的其他辅助函数|
+|[mlr3measures](https://github.com/mlr-org/mlr3measures)|mlr3中使用的绩效指标|
+|[mlr3batchmark](https://github.com/mlr-org/mlr3batchmark)|mlr3和批处理工具之间的连接器|
+|[bbotk](https://github.com/mlr-org/bbotk)|mlr3的黑盒优化工具包|
+|[mlr3benchmark](https://github.com/mlr-org/mlr3benchmark)|mlr3及以后的基准分析和工具|
+|[mlr3fairness](https://github.com/mlr-org/mlr3fairness)|机器学习中用于公平性的mlr3扩展|
+|[mlr3tuningspaces](https://github.com/mlr-org/mlr3tuningspaces)|为mlr3学习者调整空间|
+|Special Tasks & Targets|
+|[mlr3spatiotempcv](https://github.com/mlr-org/mlr3spatiotempcv)|mlr3的时空重采样方法|
+|[mlr3multioutput](https://github.com/mlr-org/mlr3multioutput)|mlr3的多个目标|
+|[mlr3temporal](https://github.com/mlr-org/mlr3temporal)|mlr3的预测|
+|[mlr3spatial](https://github.com/mlr-org/mlr3spatial)||
+|[mlr3ordinal](https://github.com/mlr-org/mlr3ordinal)|mlr3的有序回归|
+|[mlr3fda](https://github.com/mlr-org/mlr3fda)|mlr3的功能数据分析|
+
+```{r}
+pak::pkg_install("mlr-org/mlr3", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("mlr-org/mlr3cluster", upgrade = T, dependencies = T, ask = F) # mlr3的聚类分析
+pak::pkg_install("mlr-org/mlr3filters", upgrade = T, dependencies = T, ask = F) # mlr3的变量选择过滤器
+pak::pkg_install("mlr-org/mlr3fselect", upgrade = T, dependencies = T, ask = F) # mlr3的包装器功能选择
+pak::pkg_install("mlr-org/mlr3learners", upgrade = T, dependencies = T, ask = F) # 推荐的学习器mlr3
+pak::pkg_install("mlr-org/mlr3proba", upgrade = T, dependencies = T, ask = F) # 监督概率学习的扩展(包括生存分析)
+pak::pkg_install("mlr-org/mlr3tuning", upgrade = T, dependencies = T, ask = F) # 通过随机搜索,网格搜索等进行超参数调优
+pak::pkg_install("mlr-org/mlr3viz", upgrade = T, dependencies = T, ask = F) # mlr3的可视化效果
+pak::pkg_install("mlr-org/paradox", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("mlr-org/mlr3mbo", upgrade = T, dependencies = T, ask = F) # 贝叶斯优化
+pak::pkg_install("mlr-org/mlr3extralearners", upgrade = T, dependencies = T, ask = F) # 更多学习器
+pak::pkg_install("mlr-org/bbotk", upgrade = T, dependencies = T, ask = F) # 黑盒优化工具包
+pak::pkg_install("mlr-org/mlr3benchmark", upgrade = T, dependencies = T, ask = F) # mlr3中用于基准测试的分析和工具
+pak::pkg_install("mlr-org/mlr3db", upgrade = T, dependencies = T, ask = F) # 使用数据后端扩展mlr3包
+pak::pkg_install("mlr-org/mlr3hyperband", upgrade = T, dependencies = T, ask = F) # 调参
+# mlr3measures#连接器到OpenML
+# mlr3oml#用于预处理和构建复杂工作流的管道和DAG
+pak::pkg_install("mlr-org/mlr3spatiotempcv", upgrade = T, dependencies = T, ask = F) # 用于对时空任务进行重新采样的扩展
+# pak::pkg_install("mlr-org/mlr3keras", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("r-lib/R6", upgrade = T, dependencies = T, ask = F) # R6
+pak::pkg_install("evalclass/precrec", upgrade = T, dependencies = T, ask = F)
+# pak::pkg_install("mlr3spatiotemporal", upgrade = T, dependencies = T, ask = F) # 特殊类型的重抽样方法
+pak::pkg_install("alan-turing-institute/distr6", upgrade = T, dependencies = T, ask = F)
+# pak::pkg_install("binderh/CoxBoost", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("GenSA", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("mlr-org/mlr3verse", upgrade = T, dependencies = T, ask = F) #
+```
+
+## 机器学习
+```{r}
+pak::pkg_install("timeROC", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("pec", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("riskRegression", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("Boruta", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("imbs-hl/ranger", upgrade = T, dependencies = T, ask = F) # 随机森林
+pak::pkg_install("KlausVigo/kknn", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("xrf", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("mixOmicsTeam/mixOmics", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("topepo/Cubist", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("nnet", upgrade = T, dependencies = T, ask = F) # 神经网络算法
+# pak::pkg_install("h2o", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("randomForest", upgrade = T, dependencies = T, ask = F) # 最忠实于原文献的随机森林算法包
+pak::pkg_install("xgboost", upgrade = T, dependencies = T, ask = F) # 大名鼎鼎的xgboost,kaggle高位利器
+pak::pkg_install("lightgbm", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("arules", upgrade = T, dependencies = T, ask = F) # 关联算法
+pak::pkg_install("C50", upgrade = T, dependencies = T, ask = F) # C50决策树算法包
+pak::pkg_install("rpart", upgrade = T, dependencies = T, ask = F) # CART决策树算法
+pak::pkg_install("e1071", upgrade = T, dependencies = T, ask = F) # SVM和Naive Bayes
+pak::pkg_install("neuralnet", upgrade = T, dependencies = T, ask = F) # 神经网络算法
+pak::pkg_install("lubridate", upgrade = T, dependencies = T, ask = F) # 时间处理最好的包,没有之一
+pak::pkg_install("zoo", upgrade = T, dependencies = T, ask = F) # 时间序列
+pak::pkg_install("xrobin/pROC", upgrade = T, dependencies = T, ask = F) # 绘制ROC曲线
+pak::pkg_install("igraph", upgrade = T, dependencies = T, ask = F) # 网络图以及pagerank算法
+# pak::pkg_install("network3D", upgrade = T, dependencies = T, ask = F) # 结合D3.js
+pak::pkg_install("DBI", upgrade = T, dependencies = T, ask = F) # 和SQL的交互
+pak::pkg_install("randomForestSRC", upgrade = T, dependencies = T, ask = F) # 随机生存森林30000+C
+# pak::pkg_install("christophM/iml", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("DALEX", upgrade = T, dependencies = T, ask = F)
+```
+
+## Torch
+```{r}
+pak::pkg_install("mlverse/torch", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("mlverse/luz", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("mlverse/torchvision@main", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("curso-r/torchaudio", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("bips-hb/innsight", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("mlverse/tabnet", upgrade = T, dependencies = T, ask = F)
+```
+
+## 数据部分
+```{r}
+pak::pkg_install("haven", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("ycphs/openxlsx", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("feather", upgrade = T, dependencies = T, ask = F) # R&Python高效数据
+pak::pkg_install("fstpackage/fst", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("r-lib/xml2", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("Yue-Jiang/pzfx", upgrade = T, dependencies = T, ask = F)
+```
+
+## 主要绘图包
+```{r}
+pak::pkg_install("pharmaverse/ggsurvfit", upgrade = T, dependencies = T, ask = F) # 生存曲线
+pak::pkg_install("hexbin", upgrade = T, dependencies = T, ask = F) # 六边形封箱热图
+pak::pkg_install("ChrisLou-bioinfo/gg.gap", upgrade = T, dependencies = T, ask = F) # 截断坐标轴
+pak::pkg_install("raivokolde/pheatmap", upgrade = T, dependencies = T, ask = F) # 热图
+pak::pkg_install("magick", upgrade = T, dependencies = T, ask = F) # 热图栅格化
+pak::pkg_install("csdaw/ggprism", upgrade = T, dependencies = T, ask = F) # 用ggplot2输出GraphPad prism的图
+pak::pkg_install("cardiomoon/webr", upgrade = T, dependencies = T, ask = F) # 饼图+甜甜圈图+旭日图
+pak::pkg_install("r-tmap/tmaptools", upgrade = T, dependencies = T, ask = F) # 专题地图
+pak::pkg_install("r-tmap/tmap", upgrade = T, dependencies = T, ask = F) # 专题地图
+pak::pkg_install("badbye/baidumap", upgrade = T, dependencies = T, ask = F) # 百度地图
+Sys.setenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS" = "true")
+pak::pkg_install("rspatial/terra", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("EmilHvitfeldt/paletteer", upgrade = T, dependencies = T, ask = F) # 配色
+pak::pkg_install("calligross/ggthemeassist", upgrade = T, dependencies = T, ask = F) # 主题调整
+pak::pkg_install("JohnCoene/echarts4r", upgrade = T, dependencies = T, ask = F) # 绘图系统
+pak::pkg_install("gforge/forestplot", upgrade = T, dependencies = T, ask = F) # 森林图
+pak::pkg_install("adayim/forestploter", upgrade = T, dependencies = T, ask = F) # 森林图
+# pak::pkg_install("ropensci/taxize", upgrade = T, dependencies = T, ask = F)
+# pak::pkg_install("svalvaro/drawCell", upgrade = T, dependencies = T, ask = F) # 细胞图
+```
+
+## 文本挖掘
+```{r}
+# pak::pkg_install("tonkenizers", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("magick", upgrade = T, dependencies = T, ask = F) # 高级图像处理
+pak::pkg_install("imager", upgrade = T, dependencies = T, ask = F) # 基于CImg的R图像处理库,可以快速处理多达4个维度的图像信息(两个空间维度,一个时间或深度维度,一个颜色维度)
+pak::pkg_install("av", upgrade = T, dependencies = T, ask = F) # 对音频和视频进行分析的工具
+pak::pkg_install("seewave", upgrade = T, dependencies = T, ask = F) # 分析,操作,显示,编辑和合成时间波的功能(特别是音频文件)
+pak::pkg_install("HenrikBengtsson/future.apply", upgrade = T, dependencies = T, ask = F) # 多个文件的并行读取
+pak::pkg_install("quanteda/quanteda", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("mkearney/textfeatures", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("text2vec", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("stringdist", upgrade = T, dependencies = T, ask = F) # 距离计算
+# pak::pkg_install("RSentiment", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("sentimentr", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("SentimentAnalysis", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("wrathematics/meanr", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("SentometricsResearch/sentometrics", upgrade = T, dependencies = T, ask = F)
+```
+
+## 其他
+```{r}
+pak::pkg_install("xoopR/param6", upgrade = T, dependencies = T, ask = F) # 快速轻便的 R6 参数接口
+# pak::pkg_install("hadley/strict", upgrade = T, dependencies = T, ask = F) # 严格代码
+pak::pkg_install("hadley/emo", upgrade = T, dependencies = T, ask = F) # 添加表情
+pak::pkg_install("s-u/PKI", upgrade = T, dependencies = T, ask = F) # needed for bug fixes not currently on CRAN
+pak::pkg_install("hadley/secure", upgrade = T, dependencies = T, ask = F) # 保护公共包中的私有 R 数据
+# pak::pkg_install("asteves/tayloRswift", upgrade = T, dependencies = T, ask = F) # 泰勒专辑配色
+pak::pkg_install("sjmgarnier/viridis", upgrade = T, dependencies = T, ask = F) # 配色
+pak::pkg_install("patternplot", upgrade = T, dependencies = T, ask = F) # 黑白填充
+pak::pkg_install("sudoku", upgrade = T, dependencies = T, ask = F) # 可以设计数独,解数独
+pak::pkg_install("tm", upgrade = T, dependencies = T, ask = F) # 文本挖掘包
+pak::pkg_install("mjockers/syuzhet", upgrade = T, dependencies = T, ask = F) # 文本中提取情绪和基于情绪的情节弧线
+# pak::pkg_install("igraph/rigraph@master", upgrade = T, dependencies = T, ask = F) # igraph 网络分析库
+pak::pkg_install("thomasp85/ggraph", upgrade = T, dependencies = T, ask = F) # 网络,图形和树
+pak::pkg_install("mjockers/syuzhet", upgrade = T, dependencies = T, ask = F) # 文本挖掘
+pak::pkg_install("EmilHvitfeldt/textdata", upgrade = T, dependencies = T, ask = F) # 文本挖掘
+pak::pkg_install("reshape2", upgrade = T, dependencies = T, ask = F) # 文本挖掘
+# 6800个带标签的单词,经过严格审查的学术研究
+pak::pkg_install("trinker/qdapDictionaries", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("trinker/qdapRegex", upgrade = T, dependencies = T, ask = F)
+# pak::pkg_install("trinker/qdapTools", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("trinker/qdap", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("glmnet", upgrade = T, dependencies = T, ask = F) # LASSO回归
+pak::pkg_install("renv", upgrade = T, dependencies = T, ask = F) # R项目创建可重现环境
+pak::pkg_install("wviechtb/metafor", upgrade = T, dependencies = T, ask = F) # Meta分析
+```
+
+## 数据
+```{r}
+pak::pkg_install("OCNet", upgrade = T, dependencies = T, ask = F) # 自然河网
+# pak::pkg_install("salem", upgrade = T, dependencies = T, ask = F) # 女巫
+pak::pkg_install("archeofrag", upgrade = T, dependencies = T, ask = F) # 考古学
+pak::pkg_install("david6marsh/himach", upgrade = T, dependencies = T, ask = F) # 超音速飞机最佳航线
+pak::pkg_install("DIGSS", upgrade = T, dependencies = T, ask = F) # 考古学
+pak::pkg_install("crimedata", upgrade = T, dependencies = T, ask = F) # 犯罪数据
+pak::pkg_install("nasapower", upgrade = T, dependencies = T, ask = F) # 能源预测,全球气象
+# pak::pkg_install("wikisourcer", upgrade = T, dependencies = T, ask = F) # 公共领域作品
+pak::pkg_install("hadley/babynames", upgrade = T, dependencies = T, ask = F) # 包含美国社会保障管理局提供的三个数据集
+# pak::pkg_install("neiss", upgrade = T, dependencies = T, ask = F) # 2009-2014年期间提供给美国急诊室的所有事故报告样本数据
+pak::pkg_install("hadley/yrbss", upgrade = T, dependencies = T, ask = F) # 美国疾病控制中心2009-2013年期间青年危险行为监测系统数据
+pak::pkg_install("hadley/hflights", upgrade = T, dependencies = T, ask = F) # 2011年从休斯敦出发的航班
+pak::pkg_install("AndySouth/rworldmap", upgrade = T, dependencies = T, ask = F) # 国家边界数据
+# pak::pkg_install("usdanutrients", upgrade = T, dependencies = T, ask = F) # 美国农业部营养数据库
+pak::pkg_install("hadley/fueleconomy", upgrade = T, dependencies = T, ask = F) # 美国环保署1984-2015年期间的燃油经济数据
+# pak::pkg_install("nasaweather", upgrade = T, dependencies = T, ask = F) # 包含了一个覆盖中美洲的非常粗糙的24*24格地理位置和大气测量数据
+# pak::pkg_install("mexico-mortality", upgrade = T, dependencies = T, ask = F) # 墨西哥死亡人数数据
+# pak::pkg_install("data-movies", upgrade = T, dependencies = T, ask = F) # 互联网电影数据库http://imdb.com的数据
+# pak::pkg_install("pop-flows", upgrade = T, dependencies = T, ask = F) # 2008年全美人口流动数据
+# pak::pkg_install("data-housing-crisis", upgrade = T, dependencies = T, ask = F) # 经过清洗后的2008美国房地产危机数据
+# pak::pkg_install("gun-sales", upgrade = T, dependencies = T, ask = F) # 纽约时报提供的有关枪支购买的每月背景调查统计分析数据
+pak::pkg_install("rich-iannone/stationaRy", upgrade = T, dependencies = T, ask = F) # 从成千上万个全球站点收集到的每小时气象数据
+pak::pkg_install("jennybc/gapminder", upgrade = T, dependencies = T, ask = F) # 摘自Gapminder的数据
+pak::pkg_install("juliasilge/janeaustenr", upgrade = T, dependencies = T, ask = F) # 简·奥斯丁小说全集数据
+pak::pkg_install("wjakethompson/taylor", upgrade = T, dependencies = T, ask = F) # Taylor Swift 歌曲的精选数据集的轻松访问，包括歌词和音频特征
+```
+
+## 深度学习
+```{r}
+pak::pkg_install("mlr-org/mlr3keras", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("mlverse/torch", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("rstudio/keras", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("mxnet", upgrade = T, dependencies = T, ask = F) # 深度学习框架
+pak::pkg_install("tensorflow", upgrade = T, dependencies = T, ask = F) # 深度学习框架
+```
+
+## Python
+```{r}
+pak::pkg_install("reticulate", upgrade = T, dependencies = T, ask = F)
+```
+
+## ggplot2包扩展
+```{r}
+pak::pkg_install("IndrajeetPatil/ggstatsplot", upgrade = T, dependencies = T, ask = F) # GitHub
+pak::pkg_install("terrytangyuan/autoplotly", upgrade = T, dependencies = T, ask = F) # 为热门统计结果自动生成交互式可视化CRAN
+pak::pkg_install("R-CoderDotCom/calendR", upgrade = T, dependencies = T, ask = F) # 准备打印月度和年历CRAN
+pak::pkg_install("krassowski/complex-upset", upgrade = T, dependencies = T, ask = F) # 可视化设置的交叉点并添加注释ggplot2CRAN
+pak::pkg_install("wilkelab/cowplot", upgrade = T, dependencies = T, ask = F) # "ggplot2" 的流线型绘图主题和情节注释CRAN
+# pak::pkg_install("tdhock/directlabels", upgrade = T, dependencies = T, ask = F) # 在格子或 ggplot2 绘图中添加直接标签的框架,CRAN
+pak::pkg_install("R-CoderDotCom/econocharts", upgrade = T, dependencies = T, ask = F) # 微观经济学与宏观经济学图表GitHub
+pak::pkg_install("dreamRs/esquisse", upgrade = T, dependencies = T, ask = F) # 与您的数据互动探索和可视化ggplot2 CRAN
+pak::pkg_install("sctyner/geomnet", upgrade = T, dependencies = T, ask = F) # 地理网通过geom_net在 ggplot2 中实现网络可视化,CRAN
+pak::pkg_install("AckerDWM/gg3D", upgrade = T, dependencies = T, ask = F) # ggplot2 的 3D 透视图图GitHub
+pak::pkg_install("corybrunson/ggalluvial", upgrade = T, dependencies = T, ask = F) # 冲积图的"ggplot2"扩展CRAN
+pak::pkg_install("ggobi/ggally", upgrade = T, dependencies = T, ask = F) # 通过添加多个功能来扩展"ggplot2",以降低将几何对象与转换数据相结合的复杂性,CRAN
+pak::pkg_install("hrbrmstr/ggalt", upgrade = T, dependencies = T, ask = F) # "ggplot2" 的 "地理" , "coords" 和 "统计数据" 的简编,CRAN
+pak::pkg_install("jespermaag/gganatogram", upgrade = T, dependencies = T, ask = F) # gganatogram 使不同生物体或细胞室的组织可视化成为可能,GitHub
+pak::pkg_install("thomasp85/gganimate", upgrade = T, dependencies = T, ask = F) # 动画图形的语法,CRAN
+pak::pkg_install("jhrcook/ggasym", upgrade = T, dependencies = T, ask = F) # 具有多个刻度图的不对称矩阵绘图,CRAN
+pak::pkg_install("eclarke/ggbeeswarm", upgrade = T, dependencies = T, ask = F) # 创建蜜蜂温暖图,从而避免数据点重叠,CRAN
+pak::pkg_install("davidsjoberg/ggbump", upgrade = T, dependencies = T, ask = F) # 凹凸图和西格诺曲线,CRAN
+pak::pkg_install("thomas-neitmann/ggcharts", upgrade = T, dependencies = T, ask = F) # 缩短从数据可视化构想到实际绘图的距离CRAN
+pak::pkg_install("Selbosh/ggChernoff", upgrade = T, dependencies = T, ask = F) # 使用人脸可视化多变种数据GitHub
+pak::pkg_install("teunbrand/ggchromatic", upgrade = T, dependencies = T, ask = F) # "ggplot2"的色空间刻度GitHub
+pak::pkg_install("kassambara/ggcorrplot", upgrade = T, dependencies = T, ask = F) # 使用"ggplot2"可视化相关矩阵CRAN
+pak::pkg_install("malcolmbarrett/ggdag", upgrade = T, dependencies = T, ask = F) # 因果指示环形图(DAG)在ggplot2CRAN
+pak::pkg_install("nsgrantham/ggdark", upgrade = T, dependencies = T, ask = F) # 主题的黑暗模式ggplot2CRAN
+pak::pkg_install("mjskay/ggdist", upgrade = T, dependencies = T, ask = F) # "ggdist" 提供统计数据和地理位置,用于可视化分布和不确定性,CRAN
+pak::pkg_install("jonocarroll/ggeasy", upgrade = T, dependencies = T, ask = F) # 轻松访问"ggplot2"命令CRAN
+pak::pkg_install("yonicd/ggedit", upgrade = T, dependencies = T, ask = F) # ggedit 旨在以交互方式编辑 ggplot 层,刻度和主题美学CRAN
+pak::pkg_install("daattali/ggExtra", upgrade = T, dependencies = T, ask = F) # ggExtra 允许您将边际密度图或直方图添加到 ggplot2 散射图中,CRAN
+pak::pkg_install("wilkox/ggfittext", upgrade = T, dependencies = T, ask = F) # ggplot2地理位置, 以适应文本在一个盒子里CRAN
+pak::pkg_install("ProjectMOSAIC/ggformulaExtra", upgrade = T, dependencies = T, ask = F) # ggplot2通过配方和管道CRAN
+pak::pkg_install("sinhrks/ggfortify", upgrade = T, dependencies = T, ask = F) # 统一界面到 ggplot2 许多流行的统计帕克奇结果,CRAN
+pak::pkg_install("thomasp85/ggfx", upgrade = T, dependencies = T, ask = F) # 用于"ggplot2"和"网格"的像素过滤器CRAN
+pak::pkg_install("wilkox/gggenes", upgrade = T, dependencies = T, ask = F) # ggplot2绘制基因箭头图的地理图CRAN
+pak::pkg_install("BiocManager", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("ggtree", upgrade = T, dependencies = T, ask = F)
+# pak::pkg_install("thackl/thacklr", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("thackl/gggenomes", upgrade = T, dependencies = T, ask = F) # 比较基因组学图形语法GitHub
+pak::pkg_install("teunbrand/ggh4x", upgrade = T, dependencies = T, ask = F) # 定制面,多个色度和杂项选项CRAN
+pak::pkg_install("XiaoLuo-boy/ggheatmap", upgrade = T, dependencies = T, ask = F) # ggplot2 版本的热图CRAN
+pak::pkg_install("rivasiker/ggHoriPlot", upgrade = T, dependencies = T, ask = F) # 地平线图ggplot2CRAN
+pak::pkg_install("statsmaths/ggimg", upgrade = T, dependencies = T, ask = F) # 图形层,用于绘制带有 ggplot2 的图像数据,CRAN
+pak::pkg_install("aphalo/gginnards", upgrade = T, dependencies = T, ask = F) # 查找,删除,插入和移动绘图层,从存储在 ggplot 对象中的数据对象中删除未使用的数据,将数据转储到 R 控制台,GitHub
+pak::pkg_install("davidchall/ggip", upgrade = T, dependencies = T, ask = F) # IP 地址和网络的数据可视化CRAN
+pak::pkg_install("davidgohel/ggiraph", upgrade = T, dependencies = T, ask = F) # htmlwidget 使 "ggplot" 图形交互,CRAN
+pak::pkg_install("graysonwhite/gglm", upgrade = T, dependencies = T, ask = F) # 线性模型诊断图的图形语法,CRAN
+pak::pkg_install("jjchern/gglorenz", upgrade = T, dependencies = T, ask = F) # 在 ggplot2 的祝福下绘制洛伦茨曲线,CRAN
+# pak::pkg_install("haleyjeppson/ggmosaic", upgrade = T, dependencies = T, ask = F) # 格格马赛克通过geom_mosaic在 "ggplot2" 中实现马赛克地块,CRAN
+pak::pkg_install("robjohnnoble/ggmuller", upgrade = T, dependencies = T, ask = F) # 创建穆勒绘图,用于可视化进化动态,CRAN
+pak::pkg_install("briatte/ggnetwork", upgrade = T, dependencies = T, ask = F) # gnetwork 包提供了一种用 ggplot2 构建网络绘图的方法,CRAN
+# pak::pkg_install("ggnewsccale", upgrade = T, dependencies = T, ask = F) # 在"ggplot2"中使用多个填充和色度,CRAN
+pak::pkg_install("EmilHvitfeldt/ggpage", upgrade = T, dependencies = T, ask = F) # 创建页面布局可视化,CRAN
+pak::pkg_install("martin-borkovec/ggparty", dependencies = TRUE) # ggplot2包的可视化partykitGitHub
+pak::pkg_install("coolbutuseless/ggpattern", upgrade = T, dependencies = T, ask = F) # ggplot2 地理位置的模式填充,GitHub
+pak::pkg_install("eliocamp/ggperiodic", upgrade = T, dependencies = T, ask = F) # 自动增强周期性数据ggplot2 GitHub
+pak::pkg_install("mikabr/ggpirate", upgrade = T, dependencies = T, ask = F) # 海盗阴谋ggplot2GitHub
+pak::pkg_install("LKremer/ggpointdensity", upgrade = T, dependencies = T, ask = F) # 介绍 : 散射图和二元密度图之间的交叉,geom_pointdensity()CRAN
+pak::pkg_install("erocoar/ggpol", upgrade = T, dependencies = T, ask = F) # ggpol 将议会图表和其他几个地理图添加到 ggplot2 中,CRAN
+pak::pkg_install("aphalo/ggpp", upgrade = T, dependencies = T, ask = F) # 将绘图,表格和凹槽添加为绘图插图集;将标签从焦点或线路上移开;按局部密度过滤观测结果,CRAN
+pak::pkg_install("kassambara/ggpubr", upgrade = T, dependencies = T, ask = F) # 基于"ggplot2"的出版物准备绘图CRAN
+pak::pkg_install("kenithgrey/ggQC", upgrade = T, dependencies = T, ask = F) # 使用 ggQC 绘制单层,分面和多层质量控制图表,CRAN
+pak::pkg_install("ggQQunif", upgrade = T, dependencies = T, ask = F) # 制作大数据的QQ图,期望统一分布,例如p值
+pak::pkg_install("mitchelloharawild/ggquiver", upgrade = T, dependencies = T, ask = F) # "ggplot2"的奎弗/速度图,CRAN
+pak::pkg_install("ricardo-bion/ggradar", upgrade = T, dependencies = T, ask = F) # ggplot2构建雷达图表,CRAN
+pak::pkg_install("thomasp85/ggraph", upgrade = T, dependencies = T, ask = F) # ggraph 是针对绘图般的数据结构(图形,网络,树木,层次结构...)量身定做的,CRAN
+pak::pkg_install("VPetukhov/ggrastr", upgrade = T, dependencies = T, ask = F) # 只对情节的特定层进行光击CRAN
+pak::pkg_install("wilkelab/ggridges", upgrade = T, dependencies = T, ask = F) # 里奇林情节地理为 "ggplot2"CRAN
+pak::pkg_install("nanxstats/ggsci", upgrade = T, dependencies = T, ask = F) # 受科学期刊和科幻电视节目启发的"ggplot2"调色板系列,CRAN
+# pak::pkg_install("ellisp/ggseas", upgrade = T, dependencies = T, ask = F) # ggplot2 的飞行扩展的季节性调整,CRAN
+pak::pkg_install("ggseg/ggseg", upgrade = T, dependencies = T, ask = F) # 绘制大脑地图集分割的多边形GitHub
+pak::pkg_install("omarwagih/ggseqlogo", upgrade = T, dependencies = T, ask = F) # 使用 ggplot2 的出版物就绪序列徽标,GitHub
+pak::pkg_install("marcmenem/ggshadow", upgrade = T, dependencies = T, ask = F) # 在线条下画一个阴影,使繁忙的情节更美观GitHub
+pak::pkg_install("jtlandis/ggside", upgrade = T, dependencies = T, ask = F) # 侧语法图形CRAN
+pak::pkg_install("oldlipe/ggsom", upgrade = T, dependencies = T, ask = F) # 此包的目的是提供基于自组织地图的图形的更多变异性,CRAN
+pak::pkg_install("ggspectra", upgrade = T, dependencies = T, ask = F) # "ggspectra"扩展了"ggplot2",并带有用于绘制光谱的统计数据,地理位置和注释,CRAN
+pak::pkg_install("lionel-/ggstance", upgrade = T, dependencies = T, ask = F) # ggstance 实现普通 ggplot2 地理群系的水平版本,CRAN
+pak::pkg_install("IndrajeetPatil/ggstatsplot", upgrade = T, dependencies = T, ask = F) # "ggstatslot"提供了一系列功能,以增强"ggplot2"图,并提供统计测试的结果,CRAN
+pak::pkg_install("ricardo-bion/ggtech", dependencies = TRUE) # ggplot2 技术主题,比例和地理位置,CRAN
+pak::pkg_install("wilkelab/ggtext", upgrade = T, dependencies = T, ask = F) # 改进的文本渲染支持ggplot2CRAN
+# pak::pkg_install("jrnold/ggthemes", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("Mikata-Project/ggthemr", upgrade = T, dependencies = T, ask = F) # 格格洛特的主题GitHub
+pak::pkg_install("Ather-Energy/ggTimeSeries", upgrade = T, dependencies = T, ask = F) # 此 R 包提供新颖的时间系列可视化,CRAN
+pak::pkg_install("rnabioco/ggtrace", upgrade = T, dependencies = T, ask = F) # Outline groups of data points using ggplot2
+pak::pkg_install("ggtree", upgrade = T, dependencies = T, ask = F) # gtree 专为可视化噬菌体树和不同类型的相关注释数据而设计,GitHub
+pak::pkg_install("const-ae/ggupset", upgrade = T, dependencies = T, ask = F) # 组合矩阵轴,用于"ggplot2"创建"上置"图CRAN
+pak::pkg_install("brandmaier/ggx", upgrade = T, dependencies = T, ask = F) # "ggplot2"的自然语言界面,CRAN
+pak::pkg_install("hrbrmstr/hrbrthemes", upgrade = T, dependencies = T, ask = F) # 额外的 [ggplot2] 主题,刻度和实用程序的汇编,包括绘图标签字段的拼写检查功能和对排版的整体强调,CRAN
+pak::pkg_install("benskov/humapr", upgrade = T, dependencies = T, ask = F) # 可视化地形人类数据GitHub
+pak::pkg_install("stefanedwards/lemon", upgrade = T, dependencies = T, ask = F) # 重新定位图例并将括号添加到轴中以"ggplot2",CRAN
+pak::pkg_install("yeukyul/lindia", upgrade = T, dependencies = T, ask = F) # 创建线性回归的诊断图CRAN
+pak::pkg_install("thomas-neitmann/mdthemes", upgrade = T, dependencies = T, ask = F) # 将文本渲染为标记/HTML 的"ggplot2"主题GitHub
+pak::pkg_install("sachsmc/plotROC", upgrade = T, dependencies = T, ask = F) # plotROC 提供用于 Web 使用的交互式 ROC 曲线图和打印版本的功能,CRAN
+pak::pkg_install("aloy/qqplotr", upgrade = T, dependencies = T, ask = F) # "ggplot2" 的量子量和概率图扩展CRAN
+pak::pkg_install("see", upgrade = T, dependencies = T, ask = F) # 可视化工具箱,用于"易数据"和"ggplot2"的额外地理,主题和调色板CRAN
+# pak::pkg_install("statisticsNZ/simplevis", upgrade = T, dependencies = T, ask = F) # 简单的"ggplot2"可视化,脑力和打字更少CRAN
+pak::pkg_install("earowang/sugrrants", upgrade = T, dependencies = T, ask = F) # 支持图表分析时间数据ggplot2CRAN
+pak::pkg_install("wilkox/treemapify", upgrade = T, dependencies = T, ask = F) # 绘制树图ggplot2CRAN
+pak::pkg_install("Ryo-N7/tvthemes", upgrade = T, dependencies = T, ask = F) # ggplot2热门电视节目的主题和调色板！CRAN
+pak::pkg_install("zanidean/xmrr", upgrade = T, dependencies = T, ask = F) # 从时间系列数据生成 XMR 控制图表数据,CRAN
+```
+
+## 其他类型R包
+```{r}
+# pak::pkg_install("Sysfonts", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("igraph/rigraph", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("extrafont", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("caTools", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("fpp3", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("timetk", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("modeltime", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("plotly", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("leaflet", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("treemapify", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("ggridges", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("ggalluvial", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("alluvial", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("lubridate", upgrade = T, dependencies = T, ask = F) #
+# pak::pkg_install("statnet", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("cartogram", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("fmsb", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("treemap", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("vioplot", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("ggmap", upgrade = T, dependencies = T, ask = F) #
+# pak::pkg_install("linear models", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("colorspace", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("easyPubMed", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("eulerr", upgrade = T, dependencies = T, ask = F) #
+# pak::pkg_install("chorddiag", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("maps", upgrade = T, dependencies = T, ask = F) # 地图
+pak::pkg_install("bioacoustics", upgrade = T, dependencies = T, ask = F) # 分析声音
+# pak::pkg_install("radtools", upgrade = T, dependencies = T, ask = F) # 操作医学图像数据
+pak::pkg_install("ggasym", upgrade = T, dependencies = T, ask = F) # 非对称矩阵绘图
+pak::pkg_install("predict3d", upgrade = T, dependencies = T, ask = F) # 二维三维绘图
+pak::pkg_install("pins", upgrade = T, dependencies = T, ask = F) # 提高速度远程操作
+# pak::pkg_install("sankywheel", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("rayrender", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("covid19us", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("COVID19", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("covid19.analytics", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("regmedint", upgrade = T, dependencies = T, ask = F) # sas部分功能
+pak::pkg_install("covid19dbcand", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("oysteR", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("SITH", upgrade = T, dependencies = T, ask = F) # 癌症生长随机模型
+pak::pkg_install("glow", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("DataEditR", upgrade = T, dependencies = T, ask = F) # 交互编辑器
+pak::pkg_install("raveio", upgrade = T, dependencies = T, ask = F) # 脑电图
+pak::pkg_install("gm", upgrade = T, dependencies = T, ask = F) # 音乐
+# pak::pkg_install("nCov2019", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("afdx", upgrade = T, dependencies = T, ask = F) # 无黄金标准估计诊断性能
+pak::pkg_install("spiralize", upgrade = T, dependencies = T, ask = F) # 阿基米德
+pak::pkg_install("wjakethompson/taylor", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("igraph", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("nloptr", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("sp", upgrade = T, dependencies = T, ask = F) #
+# pak::pkg_install("rgeos", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("zoometh/iconr", upgrade = T, dependencies = T, ask = F) # 研究史前图像学的形式化方法
+```
+
+## 画图包
+```{r}
+pak::pkg_install("jrodu/qqboxplot", upgrade = T, dependencies = T, ask = F) # q-qboxplots作为ggplot2的扩展
+pak::pkg_install("pez", upgrade = T, dependencies = T, ask = F) # 系统全面的系统发育R包
+pak::pkg_install("r3dmol", upgrade = T, dependencies = T, ask = F) # 在R中对分子结构进行3D可视化
+# pak::pkg_install("ggeconodist", upgrade = T, dependencies = T, ask = F) # 可以画另类的箱线图
+pak::pkg_install("lemon", upgrade = T, dependencies = T, ask = F) # 可以很方便的操作ggplot2的图例和坐标轴参考https://cran.r-project.org/web/packages/lemon/vignettes/legends.htmlcomplex-layout-with-grid_arrange_shared_legend
+pak::pkg_install("ShixiangWang/ezcox", upgrade = T, dependencies = T, ask = F) # 很方便的做Cox回归分析模型和森林图
+pak::pkg_install("ggstream", upgrade = T, dependencies = T, ask = F) # 河流图绘制
+# pak::pkg_install("appliedepi/epirhandbook", upgrade = T, dependencies = T, ask = F) # 该包集合了流行病学中诸多描述性分析的函数,其中epi.tests函数专门用于计算诊断试验的灵敏度,特异度及预测值等指标,详细介绍可以看链接https://rpubs.com/maomaoworm/690424
+pak::pkg_install("DillonHammill/DataEditR", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("DillonHammill/rhandsontable", upgrade = T, dependencies = T, ask = F) # 类似于excel的功能,对R语言已经读入的数据进行修改
+pak::pkg_install("job", upgrade = T, dependencies = T, ask = F) # 如果命令运行时间过长,是不能运行下一步命令的,这个包里可以将时间比较长的命令放到后台
+pak::pkg_install("arrow", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("hexView", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("readODS", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("rmatio", upgrade = T, dependencies = T, ask = F) #
+pak::pkg_install("igraph/rigraph", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("rticles", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("joshkatz/needs", upgrade = T, dependencies = T, ask = F)
+```
+
+## 101
+```{r}
+pak::pkg_install("survival", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("randomForestSRC", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("glmnet", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("plsRcox", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("superpc", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("gbm", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("CoxBoost", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("survivalsvm", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("BART", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("limma", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("tidyverse", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("miscTools", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("compareC", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("ggsci", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("tidyr", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("ggbreak", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("openxlsx", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("seqinr", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("plyr", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("survival", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("randomForestSRC", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("glmnet", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("plsRcox", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("superpc", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("gbm", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("mixOmics", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("survcomp", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("CoxBoost", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("survivalsvm", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("BART", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("snowfall", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("ComplexHeatmap", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("RColorBrewer", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("dbarts", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("infotheo", upgrade = T, dependencies = T, ask = F) # 互信息
+pak::pkg_install("r-lib/cli", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("magrittr", upgrade = T, dependencies = T, ask = F)
+pak::pkg_install("WeightIt", upgrade = T, dependencies = T, ask = F)
+```

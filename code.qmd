@@ -1,0 +1,176 @@
+---
+title: "code"
+date-modified: "`r Sys.Date()`"
+---
+
+```{python}
+print("Hello World")
+```
+
+
+## dca
+```{r}
+# PLOTTING GRAPH IF REQUESTED
+# 如果请求，绘制图表
+if (graph == TRUE) {
+  require(graphics)
+
+  # PLOTTING INTERVENTIONS AVOIDED IF REQUESTED
+  # 如果请求，避免绘制干预措施图
+  if (intervention == TRUE) {
+    # initialize the legend label, color, and width using the standard specs of the none and all lines
+    # 使用标准规格初始化图例标签、颜色和宽度，分别对应于“无”和“全部”线条。
+    legendlabel <- NULL
+    legendcolor <- NULL
+    legendwidth <- NULL
+    legendpattern <- NULL
+
+    # getting maximum number of avoided interventions
+    # 获得最大数量的避免干预
+    ymax <- max(interv[predictors], na.rm = TRUE)
+
+    # INITIALIZING EMPTY PLOT WITH LABELS
+    # 初始化带有标签的空白图
+    plot(x = nb$threshold, y = nb$all, type = "n", xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = paste("Net reduction in interventions per", interventionper, "patients"))
+
+    # PLOTTING INTERVENTIONS AVOIDED FOR EACH PREDICTOR
+    # 为每个预测变量绘制避免干预的图
+    for (m in 1:pred.n) {
+      if (smooth == TRUE) {
+        lines(interv$threshold, data.matrix(interv[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
+      } else {
+        lines(interv$threshold, data.matrix(interv[predictors[m]]), col = m, lty = 2)
+      }
+
+      # adding each model to the legend
+      # 将每个模型添加到图例中
+      legendlabel <- c(legendlabel, predictors[m])
+      legendcolor <- c(legendcolor, m)
+      legendwidth <- c(legendwidth, 1)
+      legendpattern <- c(legendpattern, 2)
+    }
+  } else {
+    # PLOTTING NET BENEFIT IF REQUESTED
+    # 如果需要，绘制净效益图
+
+    # initialize the legend label, color, and width using the standard specs of the none and all lines
+    # 使用标准规格初始化图例标签、颜色和宽度，分别对应“无”和“全部”线条
+    legendlabel <- c("None", "All")
+    legendcolor <- c(17, 8)
+    legendwidth <- c(2, 2)
+    legendpattern <- c(1, 1)
+
+    # getting maximum net benefit
+    # 获得最大净收益
+    ymax <- max(nb[names(nb) != "threshold"], na.rm = TRUE)
+
+    # inializing new benfit plot with treat all option
+    # 正在初始化新的效益图表，使用全部处理
+    plot(x = nb$threshold, y = nb$all, type = "l", col = 8, lwd = 2, xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = "Net benefit")
+    # adding treat none option
+    # 添加不处理选项
+    lines(x = nb$threshold, y = nb$none, lwd = 2)
+    # PLOTTING net benefit FOR EACH PREDICTOR
+    # 为每个预测变量绘制净效益图
+    for (m in 1:pred.n) {
+      if (smooth == TRUE) {
+        lines(nb$threshold, data.matrix(nb[paste0(predictors[m], "_sm")]), col = m, lty = 2)
+      } else {
+        lines(nb$threshold, data.matrix(nb[predictors[m]]), col = m, lty = 2)
+      }
+      # adding each model to the legend
+      # 将每个模型添加到图例中
+      legendlabel <- c(legendlabel, predictors[m])
+      legendcolor <- c(legendcolor, m)
+      legendwidth <- c(legendwidth, 1)
+      legendpattern <- c(legendpattern, 2)
+    }
+  }
+  # then add the legend
+  # 然后添加图例
+  legend("topright", legendlabel, cex = 0.8, col = legendcolor, lwd = legendwidth, lty = legendpattern)
+}
+```
+
+## stdca
+```{r}
+# PLOTTING GRAPH IF REQUESTED
+# 如果请求，绘制图表
+if (graph == TRUE) {
+  require(graphics)
+
+  # PLOTTING INTERVENTIONS AVOIDED IF REQUESTED
+  # 如果请求，避免策划干预措施
+  if (intervention == TRUE) {
+    # initialize the legend label, color, and width using the standard specs of the none and all lines
+    # 使用标准规格初始化图例标签、颜色和宽度，分别对应“none”和“all”线条。
+    legendlabel <- NULL
+    legendcolor <- NULL
+    legendwidth <- NULL
+    legendpattern <- NULL
+
+    # getting maximum number of avoided interventions
+    # 获得最大数量的避免干预
+    ymax <- max(interv[predictors], na.rm = TRUE)
+
+    # INITIALIZING EMPTY PLOT WITH LABELS
+    # 初始化带有标签的空图表
+    plot(x = nb$threshold, y = nb$all, type = "n", xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = paste("Net reduction in interventions per", interventionper, "patients", sep = " "))
+
+    # PLOTTING INTERVENTIONS AVOIDED FOR EACH PREDICTOR
+    # 为每个预测变量避免的绘图干预
+    for (m in 1:pred.n) {
+      if (smooth == TRUE) {
+        lines(interv$threshold, data.matrix(interv[paste0(predictors[m], "_sm")]), col = m, lty = 2)
+      } else {
+        lines(interv$threshold, data.matrix(interv[predictors[m]]), col = m, lty = 2)
+      }
+
+      # adding each model to the legend
+      # 将每个模型添加到图例中
+      legendlabel <- c(legendlabel, predictors[m])
+      legendcolor <- c(legendcolor, m)
+      legendwidth <- c(legendwidth, 1)
+      legendpattern <- c(legendpattern, 2)
+    }
+  } else {
+    # PLOTTING NET BENEFIT IF REQUESTED
+    # 如果需要，绘制净获益图
+    # initialize the legend label, color, and width using the standard specs of the none and all lines
+    # 使用标准规格初始化图例标签、颜色和宽度，适用于“none”和“all”线条
+    legendlabel <- c("None", "All")
+    legendcolor <- c(17, 8)
+    legendwidth <- c(2, 2)
+    legendpattern <- c(1, 1)
+
+    # getting maximum net benefit
+    # 获得最大的净收益
+    ymax <- max(nb[names(nb) != "threshold"], na.rm = TRUE)
+
+    # inializing new benfit plot with treat all option
+    # 正在初始化一个新的利益图表，使用“all”的选项
+    plot(x = nb$threshold, y = nb$all, type = "l", col = 8, lwd = 2, xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = "Net benefit")
+    # adding treat none option
+    # 添加none选项
+    lines(x = nb$threshold, y = nb$none, lwd = 2)
+    # PLOTTING net benefit FOR EACH PREDICTOR
+    # 为每个预测变量绘制净效益图
+    for (m in 1:pred.n) {
+      if (smooth == TRUE) {
+        lines(nb$threshold, data.matrix(nb[paste0(predictors[m], "_sm")]), col = m, lty = 2)
+      } else {
+        lines(nb$threshold, data.matrix(nb[predictors[m]]), col = m, lty = 2)
+      }
+      # adding each model to the legend
+      # 将每个模型添加到图例中
+      legendlabel <- c(legendlabel, predictors[m])
+      legendcolor <- c(legendcolor, m)
+      legendwidth <- c(legendwidth, 1)
+      legendpattern <- c(legendpattern, 2)
+    }
+  }
+  # then add the legend
+  # 然后添加图例
+  legend("topright", legendlabel, cex = 0.8, col = legendcolor, lwd = legendwidth, lty = legendpattern)
+}
+```

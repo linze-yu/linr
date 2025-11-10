@@ -1,37 +1,51 @@
 project:
-  title: "linzeyu"
-author: "余林泽"
+  type: book
+  output-dir: _book
 editor: source
+
+author: "[余林泽](https://orcid.org/0000-0002-1975-9530)"
+anchor-sections: true
+date: "2022/11/26"
+smooth-scroll: true
+page-layout: "article"
+
+book:
+  title: "linrbook"
+  page-navigation: true
+  chapters:
+    - code.qmd
+
 format:
   html:
     theme: Cosmo
     toc: true
-    fontcolor: "#34558B"
+    toc-title: "章节目录"
+    fontcolor: "#002FA7"
     number-sections: true
     code-overflow: wrap
-    fig-cap-location: top
-    title-block-style: default
+    code-line-numbers: true
     code-copy: true
     code-block-bg: "#E6EEF1"
+    fig-cap-location: top
+    title-block-style: default
     embed-resources: true
+    mermaid:
+      theme: forest
     execute:
       fig-dpi: 400
       fig-format: png
-      echo: true
+      echo: false
       warning: false
       error: false
       prompt: false
       message: false
       collapse: false
       comment: ""
+    gfm:
+      mermaid-format: png
+
 R.options:
- knitr.graphics.auto_pdf: true
+knitr.graphics.auto_pdf: true
 editor_options:
   markdown:
     wrap: sentence
-
-
-
-
-
-

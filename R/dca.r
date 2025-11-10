@@ -133,6 +133,7 @@ dca <- function(data, outcome, predictors,
   nb %>%
     mutate_dt(all = event.rate - (1 - event.rate) * nb$threshold / (1 - nb$threshold)) %>%
     mutate_dt(none = 0) %>%
+   #mutate_dt() %>%
     data.frame() -> nb
 
   # OLD:Net Benefit = TPrate − FPrate × ( 1 − T )

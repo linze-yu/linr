@@ -1,0 +1,113 @@
+---
+title: "影像相关"
+author: "Linze Yu"
+date: "`r Sys.Date()`"
+format:
+  html:
+    theme: Quartz
+    toc: true
+    fontcolor: "#FFFFFF"
+    number-sections: true
+    code-overflow: wrap
+    self-contained: true
+    fig-cap-location: top
+    title-block-style: default
+    code-copy: true
+    code-block-bg: "#E6EEF1"
+    execute:
+      fig-dpi: 200
+      fig-format: png
+      eval: false
+      echo: true
+      warning: false
+      error: false
+      prompt: false
+      message: false
+      collapse: false
+      comment: ""
+R.options:
+ knitr.graphics.auto_pdf: true
+editor_options:
+  markdown:
+    wrap: sentence
+---
+
+# 数据输入/输出
+## DICOM
+```{r}
+pak::pkg_install("oro.dicom")
+pak::pkg_install("divest")
+pak::pkg_install("tractor.aase")
+pak::pkg_install("fmri")
+pak::pkg_install("dti")
+pak::pkg_install("DICOMread")
+```
+
+## ANALYZE和NIfTI
+```{r}
+pak::pkg_install("RNifti")
+pak::pkg_install("oro.nifti")
+pak::pkg_install("neuroim")
+pak::pkg_install("nifti.io")
+```
+
+# 可视化
+```{r}
+pak::pkg_install("brainR")
+pak::pkg_install("Morpho")
+pak::pkg_install("Rvcg")
+```
+
+# Magnetic Resonance Imaging (MRI)
+```{r}
+pak::pkg_install("tractor.base")
+pak::pkg_install("dti")
+pak::pkg_install("dmri.tracking")
+```
+
+# Functional MRI
+```{r}
+pak::pkg_install("adaptsmoFMRI")
+pak::pkg_install("fmri")
+pak::pkg_install("Neuroimage")
+```
+
+# Structural MRI
+```{r}
+pak::pkg_install("mritc")
+pak::pkg_install("qMRI")
+```
+
+# Simulation
+```{r}
+pak::pkg_install("neuRosim")
+```
+
+# Magnetic Resonance Spectroscopy (MRS)
+```{r}
+pak::pkg_install("spant")
+```
+
+# 一般图像处理
+```{r}
+pak::pkg_install("adimpro")
+pak::pkg_install("bayesImageS")
+pak::pkg_install("EBImage")
+pak::pkg_install("mmand")
+pak::pkg_install("RNiftyReg")
+pak::pkg_install("fslr")
+```
+
+# Positron Emission Tomography (PET)
+```{r}
+pak::pkg_install("occ")
+pak::pkg_install("oro.pet")
+```
+
+# Electroencephalography (EEG)
+```{r}
+pak::pkg_install("edfReader")
+pak::pkg_install("EEG")
+pak::pkg_install("eegkit")
+pak::pkg_install("raveio")
+```

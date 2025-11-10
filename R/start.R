@@ -5,8 +5,10 @@
 
 #' @export Start_creating
 Start_creating <- function(x) {
+  options(timeout = 6000)
   showtext_auto()
-  font_add("HOS", "C:/Windows/Fonts/HarmonyOS Sans SC/HarmonyOS_Sans_SC_Regular.ttf")
+  # font_add("HOS", "C:/Windows/Fonts/HarmonyOS Sans SC/HarmonyOS_Sans_SC_Regular.ttf")
+  font_add("YaHei", "C:/Windows/Fonts/微软雅黑/msyh.ttc")
   showtext_opts(dpi = 400)
   font_families()
   if (x == "mlr3verse") {

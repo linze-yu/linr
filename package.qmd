@@ -31,22 +31,23 @@ editor_options:
   markdown:
     wrap: sentence
 ---
-cache: true
-
 
 # 安装加载的包
 ```{r}
 devtools::install_github("leeper/rio") # 导入数据
+install.packages("tidyfst")
 devtools::install_github("hope-data-science/tidyfst")
 install.packages("data.table") # 高性能数据处理
 # data.table::update.dev.pkg() # datatable最新版
 devtools::install_github("tidyverse/tidyverse") # Tidy-R(1+7)
 devtools::install_github("tidymodels/tidymodels") # Tidy-R"(1+12)
 devtools::install_github("DavisVaughan/furrr") # 并行purrr
-devtools::install_github("kassambara/survminer", build_vignettes = FALSE) # ggplot2绘制生存曲线
-devtools::install_github("therneau/survival") # 生存曲线
+install.packages("survminer") # ggplot2绘制生存曲线
+devtools::install_github("kassambara/survminer", build_vignettes = FALSE)
+install.packages("survival") # 生存曲线
 # devtools::install_github("zzawadz/customLayout") # 图片排版
 install.packages("glmnet") # LASSO回归
+BiocManager::install("IRanges")
 devtools::install_github("jokergoo/circlize") # 弦图
 devtools::install_github("jokergoo/ComplexHeatmap") # 热图*
 install.packages("knitr") # 文档编辑必要/表格+渲染
@@ -61,7 +62,6 @@ devtools::install_github("slowkow/ggrepel") # 文本防重叠
 ```
 
 ```{r}
-devtools::install_github("aphalo/ggpmisc") # 带标模型方程,ANOVA 表,摘要表的注释图;发现和标记山峰和山谷;注释支持分组和方面
 devtools::install_github("thomasp85/ggforce") # 形状曲线
 install.packages("shiny") # 不用网页开发也可以写自己的网站
 devtools::install_github("qinwf/jiebaR") # 中文分词
@@ -75,15 +75,14 @@ devtools::install_github("juliasilge/tidytext") # 文本挖掘
 devtools::install_github("ltorgo/DMwR2", ref = "develop") # 使用局部异常因子法(LOF法)检测异常值,LOF算法只对数值型数据有效
 devtools::install_github("GuangchuangYu/rvcheck") # 更新包
 devtools::install_github("HenrikBengtsson/future", ref = "develop") # 多核计算
-devtools::install_github("erocoar/gghalves") # 裁剪图形
+# devtools::install_github("erocoar/gghalves") # 裁剪图形
 devtools::install_github("const-ae/ggsignif") # 添加P值
 devtools::install_github("haozhu233/kableExtra") # knitr+
-devtools::install_github("YuLab-SMU/ggbreak") # 坐标轴截断
-devtools::install_github("tylermorganwall/rayrender") # 光线追踪
+# devtools::install_github("YuLab-SMU/ggbreak") # 坐标轴截断
+# devtools::install_github("tylermorganwall/rayrender") # 光线追踪
 devtools::install_github("koalaverse/vip") # 变量重要程度
-devtools::install_github("majianthu/copent") # Copula熵
 devtools::install_github("dami82/easyPubMed") # PubMed
-devtools::install_github("imbs-hl/ranger") # 随机森林
+pak::pak("rstudio/rticles") # 文献格式
 ```
 
 # 安装本地包
@@ -159,15 +158,6 @@ library("rvcheck") # 更新包
 ```
 
 # 内容
-## 离散颜色
-```{r,24cols}
-cols <- c("#00997B", "#FC766A", "#696AAD", "#EBBF57", "#C34E7C", "#92B558", "#BD3645", "#34558B", "#F3E04E", "#6B5B95", "#4DB6AD", "#E34F33", "#95AAD3", "#DECEBB", "#975A58", "#5BB3B0", "#9D363F", "#6364A5", "#E2654D", "#F8CDCD", "#7FC9CB", "#D85A7B", "#98B2D1", "#B067A1")
-```
-
-```{r,24fills}
-fills <- c("#00997B", "#FC766A", "#696AAD", "#EBBF57", "#C34E7C", "#92B558", "#BD3645", "#34558B", "#F3E04E", "#6B5B95", "#4DB6AD", "#E34F33", "#95AAD3", "#DECEBB", "#975A58", "#5BB3B0", "#9D363F", "#6364A5", "#E2654D", "#F8CDCD", "#7FC9CB", "#D85A7B", "#98B2D1", "#B067A1")
-```
-
 ## 中心化/标准化
 ```{r}
 cscale <- function(x) {
@@ -180,511 +170,9 @@ sscale <- function(x) {
 }
 ```
 
-## 主题
-### lin_theme
-```{r,lin_theme}
-lin_theme <- theme(
-  text = element_text(color = 1), # 全字体
-  plot.title = element_text(size = 12, hjust = 0.5, angle = 0, lineheight = 1, margin = margin(0, 1, 0, 0)), # 标题
-  plot.subtitle = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 2, 0)), # 副标题
-  plot.caption = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)), # 说明文字
-  plot.tag = element_text(angle = 0, lineheight = 1, margin = margin(0, 0, 0, 0)), # 标签
-  legend.title = element_text(margin = margin(0, 0, 0, 0)), # 图例标题
-  legend.text = element_text(margin = margin(0, 0, 0, 0)), # 图例文字
-  strip.text.x = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0)), # 水平分面标签文本
-  strip.text.y = element_text(vjust = 0.5, margin = margin(0, 0, 0, 1)), # 竖直分面标签文本
-  axis.text.y = element_text(vjust = 0.5, hjust = 1, angle = 0, margin = margin(0, 2, 0, 0)), # Y轴数字标
-  axis.title.y = element_text(vjust = 0.5, hjust = 0.5, angle = 90, margin = margin(0, 3, 0, 0)), # Y轴标题
-  axis.text.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(1, 0, 0, 0)), # X轴数字标
-  axis.title.x = element_text(vjust = 0.5, hjust = 0.5, angle = 0, margin = margin(2, 0, 0, 0)), # X轴标题
-  panel.background = element_rect(fill = NA), # 绘图区域背景
-  panel.border = element_rect(color = NA, fill = NA, size = 1), # 绘图区边框
-  plot.background = element_rect(fill = NA, color = NA), # 文字区域+图像背景
-  legend.background = element_rect(fill = NA, color = NA), # 图例背景
-  legend.key = element_rect(fill = NA, color = NA), # 图例符号背景
-  strip.background = element_rect(fill = NA), # 分面标签背景
-  axis.line = element_line(color = "#96999C", size = 1, lineend = "square"), # 坐标轴
-  axis.ticks.x = element_line(color = "#96999C", size = 1, lineend = "square"), # X轴刻度线
-  axis.ticks.y = element_line(color = "#96999C", size = 1, lineend = "square"), # Y轴刻度线
-  axis.ticks.length = unit(.15, "cm"), # 刻度线长度
-  panel.grid.major.x = element_line(color = NA, size = 0.5, linetype = 3, lineend = "square"), # 主竖线"#96999C"
-  panel.grid.major.y = element_line(color = NA, size = 0.5, linetype = 3, lineend = "square"), # 主横线"#96999C"
-  panel.grid.minor.x = element_line(color = NA, size = 0.25, linetype = 3, lineend = "square"), # 次竖线"#96999C"
-  panel.grid.minor.y = element_line(color = NA, size = 0.25, linetype = 3, lineend = "square"), # 次横线"#96999C"
-  plot.margin = margin(t = 0.5, r = 0.5, b = 0.1, l = 0.5, unit = "cm"), # 图边界(距离可以为0或者为负值)
-  panel.spacing.x = unit(.15, "cm"), # 竖直分面绘图区之间的间距
-  panel.spacing.y = unit(.15, "cm"), # 水平分面绘图区之间的间距
-  legend.margin = margin(t = 0, r = 0, b = 0, l = -9), # 图例边界, unit = "cm"
-  legend.position = ("right"), # 图例位置left, right, bottom, top, c(0.9, 0.9)
-  legend.key.height = unit(0.5, "cm"), # 图例符号高度
-  legend.key.width = unit(0.5, "cm"), # 图例符号宽度
-  legend.key.size = unit(0.5, "cm"), # 图例符号大小
-  legend.title.align = (0), # 图例标题对齐方式(0为左齐, 1为右齐, 0.5居中)
-  legend.text.align = (0), # 图例文字标签对齐方式(0为左齐, 1为右齐, 0.5居中)
-  legend.direction = "vertical", # 图例排列方向"horizontal"(水平一行)
-  legend.justification = c(1, 1), # 图例位置	center或两数字向量
-  legend.box = "vertical", # 多图例的排列方式	"horizontal"
-  legend.box.just = (0.5), # 多图例居中方式
-  plot.caption.position = "panel",
-  plot.tag.position = "topleft",
-  plot.title.position = "plot",
-  # aspect.ratio = 7/5,
-  # legend.key = element_rect(fill = "group", color = "group"),#图例符号
-)
-```
 
 ## 计算
 ### [决策曲线](https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis)
-#### stdca
-```{r,stdca}
-stdca <- function(data, outcome, ttoutcome, timepoint, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01, ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE, interventionper = 100, smooth = FALSE, loess.span = 0.10, cmprsk = FALSE) {
-  # LOADING REQUIRED LIBRARIES
-  require(survival)
-  require(stats)
-
-  # ONLY KEEPING COMPLETE CASES
-  data <- data[complete.cases(data[c(outcome, ttoutcome, predictors)]), c(outcome, ttoutcome, predictors)]
-
-  # outcome MUST BE CODED AS 0 AND 1
-  if ((length(data[!(data[outcome] == 0 | data[outcome] == 1), outcome]) > 0) & cmprsk == FALSE) {
-    stop("outcome must be coded as 0 and 1")
-  }
-
-  # data MUST BE A DATA FRAME
-  if (class(data) != "data.frame") {
-    stop("Input data must be class data.frame")
-  }
-
-  # xstart IS BETWEEN 0 AND 1
-  if (xstart < 0 | xstart > 1) {
-    stop("xstart must lie between 0 and 1")
-  }
-
-  # xstop IS BETWEEN 0 AND 1
-  if (xstop < 0 | xstop > 1) {
-    stop("xstop must lie between 0 and 1")
-  }
-
-  # xby IS BETWEEN 0 AND 1
-  if (xby <= 0 | xby >= 1) {
-    stop("xby must lie between 0 and 1")
-  }
-
-  # xstart IS BEFORE xstop
-  if (xstart >= xstop) {
-    stop("xstop must be larger than xstart")
-  }
-
-  # STORING THE NUMBER OF PREDICTORS SPECIFIED
-  pred.n <- length(predictors)
-
-  # IF probability SPECIFIED ENSURING THAT EACH PREDICTOR IS INDICATED AS A T OR F
-  if (length(probability) > 0 & pred.n != length(probability)) {
-    stop("Number of probabilities specified must be the same as the number of predictors being checked.")
-  }
-
-
-  # IF harm SPECIFIED ENSURING THAT EACH PREDICTOR HAS A SPECIFIED HARM
-  if (length(harm) > 0 & pred.n != length(harm)) {
-    stop("Number of harms specified must be the same as the number of predictors being checked.")
-  }
-
-  # INITIALIZING DEFAULT VALUES FOR PROBABILITES AND HARMS IF NOT SPECIFIED
-  if (length(harm) == 0) {
-    harm <- rep(0, pred.n)
-  }
-  if (length(probability) == 0) {
-    probability <- rep(TRUE, pred.n)
-  }
-
-  # THE PREDICTOR NAMES CANNOT BE EQUAL TO all OR none.
-  if (length(predictors[predictors == "all" | predictors == "none"])) {
-    stop("Prediction names cannot be equal to all or none.")
-  }
-
-  # CHECKING THAT EACH probability ELEMENT IS EQUAL TO T OR F,
-  # AND CHECKING THAT PROBABILITIES ARE BETWEEN 0 and 1
-  # IF NOT A PROB THEN CONVERTING WITH A COX REGRESSION
-  for (m in 1:pred.n) {
-    if (probability[m] != TRUE & probability[m] != FALSE) {
-      stop("Each element of probability vector must be TRUE or FALSE")
-    }
-    if (probability[m] == TRUE & (max(data[predictors[m]]) > 1 | min(data[predictors[m]]) < 0)) {
-      stop(paste(predictors[m], "must be between 0 and 1 OR sepcified as a non-probability in the probability option", sep = " "))
-    }
-    if (probability[m] == FALSE) {
-      model <- NULL
-      pred <- NULL
-      model <- coxph(Surv(data.matrix(data[ttoutcome]), data.matrix(data[outcome])) ~ data.matrix(data[predictors[m]]))
-      surv.data <- data.frame(0)
-      pred <- data.frame(1 - c(summary(survfit(model, newdata = surv.data), time = timepoint)$surv))
-      names(pred) <- predictors[m]
-      data <- cbind(data[names(data) != predictors[m]], pred)
-      print(paste(predictors[m], "converted to a probability with Cox regression. Due to linearity and proportional hazards assumption, miscalibration may occur.", sep = " "))
-    }
-  }
-
-  #########  CALCULATING NET BENEFIT   #########
-  N <- dim(data)[1]
-
-  # getting the probability of the event for all subjects
-  # this is used for the net benefit associated with treating all patients
-  if (cmprsk == FALSE) {
-    km.cuminc <- survfit(Surv(data.matrix(data[ttoutcome]), data.matrix(data[outcome])) ~ 1)
-    pd <- 1 - summary(km.cuminc, times = timepoint)$surv
-  } else {
-    require(cmprsk)
-    cr.cuminc <- cuminc(data[[ttoutcome]], data[[outcome]])
-    pd <- timepoints(cr.cuminc, times = timepoint)$est[1]
-  }
-
-  # creating dataset that is one line per threshold for the treat all and treat none strategies;
-  # CREATING DATAFRAME THAT IS ONE LINE PER THRESHOLD PER all AND none STRATEGY
-  nb <- data.frame(seq(from = xstart, to = xstop, by = xby))
-  names(nb) <- "threshold"
-  interv <- nb
-  error <- NULL
-
-  nb["all"] <- pd - (1 - pd) * nb$threshold / (1 - nb$threshold)
-  nb["none"] <- 0
-
-  # CYCLING THROUGH EACH PREDICTOR AND CALCULATING NET BENEFIT
-  for (m in 1:pred.n) {
-    nb[predictors[m]] <- NA
-
-    for (t in 1:length(nb$threshold)) {
-      # calculating number of true and false postives;
-      px <- sum(data[predictors[m]] > nb$threshold[t]) / N
-
-      if (px == 0) {
-        error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "%", sep = ""))
-        break
-      } else {
-        # calculate risk using Kaplan Meier
-        if (cmprsk == FALSE) {
-          km.cuminc <- survfit(Surv(data.matrix(data[data[predictors[m]] > nb$threshold[t], ttoutcome]), data.matrix(data[data[predictors[m]] > nb$threshold[t], outcome])) ~ 1)
-          pdgivenx <- (1 - summary(km.cuminc, times = timepoint)$surv)
-          if (length(pdgivenx) == 0) {
-            error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "% that have followup through the timepoint selected", sep = ""))
-            break
-          }
-          # calculate risk using competing risk
-        } else {
-          cr.cuminc <- cuminc(data[[ttoutcome]][data[[predictors[m]]] > nb$threshold[t]], data[[outcome]][data[[predictors[m]]] > nb$threshold[t]])
-          pdgivenx <- timepoints(cr.cuminc, times = timepoint)$est[1]
-          if (is.na(pdgivenx)) {
-            error <- rbind(error, paste(predictors[m], ": No observations with risk greater than ", nb$threshold[t] * 100, "% that have followup through the timepoint selected", sep = ""))
-            break
-          }
-        }
-        # calculating NB based on calculated risk
-        nb[t, predictors[m]] <- pdgivenx * px - (1 - pdgivenx) * px * nb$threshold[t] / (1 - nb$threshold[t]) - harm[m]
-      }
-    }
-    interv[predictors[m]] <- (nb[predictors[m]] - nb["all"]) * interventionper / (interv$threshold / (1 - interv$threshold))
-  }
-  if (length(error) > 0) {
-    print(paste(error, ", and therefore net benefit not calculable in this range.", sep = ""))
-  }
-
-  # CYCLING THROUGH EACH PREDICTOR AND SMOOTH NET BENEFIT AND INTERVENTIONS AVOIDED
-  for (m in 1:pred.n) {
-    if (smooth == TRUE) {
-      lws <- loess(data.matrix(nb[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(nb[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
-      nb[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
-
-      lws <- loess(data.matrix(interv[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(interv[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
-      interv[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
-    }
-  }
-
-
-  # PLOTTING GRAPH IF REQUESTED
-  if (graph == TRUE) {
-    require(graphics)
-
-    # PLOTTING INTERVENTIONS AVOIDED IF REQUESTED
-    if (intervention == TRUE) {
-      # initialize the legend label, color, and width using the standard specs of the none and all lines
-      legendlabel <- NULL
-      legendcolor <- NULL
-      legendwidth <- NULL
-      legendpattern <- NULL
-
-      # getting maximum number of avoided interventions
-      ymax <- max(interv[predictors], na.rm = TRUE)
-
-      # INITIALIZING EMPTY PLOT WITH LABELS
-      plot(x = nb$threshold, y = nb$all, type = "n", xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = paste("Net reduction in interventions per", interventionper, "patients"))
-
-      # PLOTTING INTERVENTIONS AVOIDED FOR EACH PREDICTOR
-      for (m in 1:pred.n) {
-        if (smooth == TRUE) {
-          lines(interv$threshold, data.matrix(interv[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
-        } else {
-          lines(interv$threshold, data.matrix(interv[predictors[m]]), col = m, lty = 2)
-        }
-
-        # adding each model to the legend
-        legendlabel <- c(legendlabel, predictors[m])
-        legendcolor <- c(legendcolor, m)
-        legendwidth <- c(legendwidth, 1)
-        legendpattern <- c(legendpattern, 2)
-      }
-    } else {
-      # PLOTTING NET BENEFIT IF REQUESTED
-      # initialize the legend label, color, and width using the standard specs of the none and all lines
-      legendlabel <- c("None", "All")
-      legendcolor <- c(17, 8)
-      legendwidth <- c(2, 2)
-      legendpattern <- c(1, 1)
-
-      # getting maximum net benefit
-      ymax <- max(nb[names(nb) != "threshold"], na.rm = TRUE)
-
-      # inializing new benfit plot with treat all option
-      plot(x = nb$threshold, y = nb$all, type = "l", col = 8, lwd = 2, xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = "Net benefit")
-      # adding treat none option
-      lines(x = nb$threshold, y = nb$none, lwd = 2)
-      # PLOTTING net benefit FOR EACH PREDICTOR
-      for (m in 1:pred.n) {
-        if (smooth == TRUE) {
-          lines(nb$threshold, data.matrix(nb[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
-        } else {
-          lines(nb$threshold, data.matrix(nb[predictors[m]]), col = m, lty = 2)
-        }
-        # adding each model to the legend
-        legendlabel <- c(legendlabel, predictors[m])
-        legendcolor <- c(legendcolor, m)
-        legendwidth <- c(legendwidth, 1)
-        legendpattern <- c(legendpattern, 2)
-      }
-    }
-    # then add the legend
-    legend("topright", legendlabel, cex = 0.8, col = legendcolor, lwd = legendwidth, lty = legendpattern)
-  }
-
-  # RETURNING RESULTS
-  results <- list()
-  results$N <- N
-  results$predictors <- data.frame(cbind(predictors, harm, probability))
-  names(results$predictors) <- c("predictor", "harm.applied", "probability")
-  results$interventions.avoided.per <- interventionper
-  results$net.benefit <- nb
-  results$interventions.avoided <- interv
-  return(results)
-}
-```
-
-#### dca
-```{r,dca}
-dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.01,
-                ymin = -0.05, probability = NULL, harm = NULL, graph = TRUE, intervention = FALSE,
-                interventionper = 100, smooth = FALSE, loess.span = 0.10) {
-  # LOADING REQUIRED LIBRARIES
-  require(stats)
-
-  # data MUST BE A DATA FRAME
-  if (class(data) != "data.frame") {
-    stop("Input data must be class data.frame")
-  }
-
-  # ONLY KEEPING COMPLETE CASES
-  data <- data[complete.cases(data[append(outcome, predictors)]), append(outcome, predictors)]
-
-  # outcome MUST BE CODED AS 0 AND 1
-  if (max(data[[outcome]]) > 1 | min(data[[outcome]]) < 0) {
-    stop("outcome cannot be less than 0 or greater than 1")
-  }
-  # xstart IS BETWEEN 0 AND 1
-  if (xstart < 0 | xstart > 1) {
-    stop("xstart must lie between 0 and 1")
-  }
-
-  # xstop IS BETWEEN 0 AND 1
-  if (xstop < 0 | xstop > 1) {
-    stop("xstop must lie between 0 and 1")
-  }
-
-  # xby IS BETWEEN 0 AND 1
-  if (xby <= 0 | xby >= 1) {
-    stop("xby must lie between 0 and 1")
-  }
-
-  # xstart IS BEFORE xstop
-  if (xstart >= xstop) {
-    stop("xstop must be larger than xstart")
-  }
-
-  # STORING THE NUMBER OF PREDICTORS SPECIFIED
-  pred.n <- length(predictors)
-
-  # IF probability SPECIFIED ENSURING THAT EACH PREDICTOR IS INDICATED AS A YES OR NO
-  if (length(probability) > 0 & pred.n != length(probability)) {
-    stop("Number of probabilities specified must be the same as the number of predictors being checked.")
-  }
-
-  # IF harm SPECIFIED ENSURING THAT EACH PREDICTOR HAS A SPECIFIED HARM
-  if (length(harm) > 0 & pred.n != length(harm)) {
-    stop("Number of harms specified must be the same as the number of predictors being checked.")
-  }
-
-  # INITIALIZING DEFAULT VALUES FOR PROBABILITES AND HARMS IF NOT SPECIFIED
-  if (length(harm) == 0) {
-    harm <- rep(0, pred.n)
-  }
-  if (length(probability) == 0) {
-    probability <- rep(TRUE, pred.n)
-  }
-
-
-  # CHECKING THAT EACH probability ELEMENT IS EQUAL TO YES OR NO,
-  # AND CHECKING THAT PROBABILITIES ARE BETWEEN 0 and 1
-  # IF NOT A PROB THEN CONVERTING WITH A LOGISTIC REGRESSION
-  for (m in 1:pred.n) {
-    if (probability[m] != TRUE & probability[m] != FALSE) {
-      stop("Each element of probability vector must be TRUE or FALSE")
-    }
-    if (probability[m] == TRUE & (max(data[predictors[m]]) > 1 | min(data[predictors[m]]) < 0)) {
-      stop(paste(predictors[m], "must be between 0 and 1 OR sepcified as a non-probability in the probability option", sep = " "))
-    }
-    if (probability[m] == FALSE) {
-      model <- NULL
-      pred <- NULL
-      model <- glm(data.matrix(data[outcome]) ~ data.matrix(data[predictors[m]]), family = binomial("logit"))
-      pred <- data.frame(model$fitted.values)
-      pred <- data.frame(pred)
-      names(pred) <- predictors[m]
-      data <- cbind(data[names(data) != predictors[m]], pred)
-      print(paste(predictors[m], "converted to a probability with logistic regression. Due to linearity assumption, miscalibration may occur.", sep = " "))
-    }
-  }
-
-  # THE PREDICTOR NAMES CANNOT BE EQUAL TO all OR none.
-  if (length(predictors[predictors == "all" | predictors == "none"])) {
-    stop("Prediction names cannot be equal to all or none.")
-  }
-
-  #########  CALCULATING NET BENEFIT   #########
-  N <- dim(data)[1]
-  event.rate <- colMeans(data[outcome])
-
-  # CREATING DATAFRAME THAT IS ONE LINE PER THRESHOLD PER all AND none STRATEGY
-  nb <- data.frame(seq(from = xstart, to = xstop, by = xby))
-  names(nb) <- "threshold"
-  interv <- nb
-
-  nb["all"] <- event.rate - (1 - event.rate) * nb$threshold / (1 - nb$threshold)
-  nb["none"] <- 0
-
-  # CYCLING THROUGH EACH PREDICTOR AND CALCULATING NET BENEFIT
-  for (m in 1:pred.n) {
-    for (t in 1:length(nb$threshold)) {
-      # COUNTING TRUE POSITIVES AT EACH THRESHOLD
-      tp <- mean(data[data[[predictors[m]]] >= nb$threshold[t], outcome]) * sum(data[[predictors[m]]] >= nb$threshold[t])
-      # COUNTING FALSE POSITIVES AT EACH THRESHOLD
-      fp <- (1 - mean(data[data[[predictors[m]]] >= nb$threshold[t], outcome])) * sum(data[[predictors[m]]] >= nb$threshold[t])
-      # setting TP and FP to 0 if no observations meet threshold prob.
-      if (sum(data[[predictors[m]]] >= nb$threshold[t]) == 0) {
-        tp <- 0
-        fp <- 0
-      }
-
-      # CALCULATING NET BENEFIT
-      nb[t, predictors[m]] <- tp / N - fp / N * (nb$threshold[t] / (1 - nb$threshold[t])) - harm[m]
-    }
-    interv[predictors[m]] <- (nb[predictors[m]] - nb["all"]) * interventionper / (interv$threshold / (1 - interv$threshold))
-  }
-
-  # CYCLING THROUGH EACH PREDICTOR AND SMOOTH NET BENEFIT AND INTERVENTIONS AVOIDED
-  for (m in 1:pred.n) {
-    if (smooth == TRUE) {
-      lws <- loess(data.matrix(nb[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(nb[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
-      nb[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
-
-      lws <- loess(data.matrix(interv[!is.na(nb[[predictors[m]]]), predictors[m]]) ~ data.matrix(interv[!is.na(nb[[predictors[m]]]), "threshold"]), span = loess.span)
-      interv[!is.na(nb[[predictors[m]]]), paste(predictors[m], "_sm", sep = "")] <- lws$fitted
-    }
-  }
-
-  # PLOTTING GRAPH IF REQUESTED
-  if (graph == TRUE) {
-    require(graphics)
-
-    # PLOTTING INTERVENTIONS AVOIDED IF REQUESTED
-    if (intervention == TRUE) {
-      # initialize the legend label, color, and width using the standard specs of the none and all lines
-      legendlabel <- NULL
-      legendcolor <- NULL
-      legendwidth <- NULL
-      legendpattern <- NULL
-
-      # getting maximum number of avoided interventions
-      ymax <- max(interv[predictors], na.rm = TRUE)
-
-      # INITIALIZING EMPTY PLOT WITH LABELS
-      plot(x = nb$threshold, y = nb$all, type = "n", xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = paste("Net reduction in interventions per", interventionper, "patients"))
-
-      # PLOTTING INTERVENTIONS AVOIDED FOR EACH PREDICTOR
-      for (m in 1:pred.n) {
-        if (smooth == TRUE) {
-          lines(interv$threshold, data.matrix(interv[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
-        } else {
-          lines(interv$threshold, data.matrix(interv[predictors[m]]), col = m, lty = 2)
-        }
-
-        # adding each model to the legend
-        legendlabel <- c(legendlabel, predictors[m])
-        legendcolor <- c(legendcolor, m)
-        legendwidth <- c(legendwidth, 1)
-        legendpattern <- c(legendpattern, 2)
-      }
-    } else {
-      # PLOTTING NET BENEFIT IF REQUESTED
-
-      # initialize the legend label, color, and width using the standard specs of the none and all lines
-      legendlabel <- c("None", "All")
-      legendcolor <- c(17, 8)
-      legendwidth <- c(2, 2)
-      legendpattern <- c(1, 1)
-
-      # getting maximum net benefit
-      ymax <- max(nb[names(nb) != "threshold"], na.rm = TRUE)
-
-      # inializing new benfit plot with treat all option
-      plot(x = nb$threshold, y = nb$all, type = "l", col = 8, lwd = 2, xlim = c(xstart, xstop), ylim = c(ymin, ymax), xlab = "Threshold probability", ylab = "Net benefit")
-      # adding treat none option
-      lines(x = nb$threshold, y = nb$none, lwd = 2)
-      # PLOTTING net benefit FOR EACH PREDICTOR
-      for (m in 1:pred.n) {
-        if (smooth == TRUE) {
-          lines(nb$threshold, data.matrix(nb[paste(predictors[m], "_sm", sep = "")]), col = m, lty = 2)
-        } else {
-          lines(nb$threshold, data.matrix(nb[predictors[m]]), col = m, lty = 2)
-        }
-        # adding each model to the legend
-        legendlabel <- c(legendlabel, predictors[m])
-        legendcolor <- c(legendcolor, m)
-        legendwidth <- c(legendwidth, 1)
-        legendpattern <- c(legendpattern, 2)
-      }
-    }
-    # then add the legend
-    legend("topright", legendlabel, cex = 0.8, col = legendcolor, lwd = legendwidth, lty = legendpattern)
-  }
-
-  # RETURNING RESULTS
-  results <- list()
-  results$N <- N
-  results$predictors <- data.frame(cbind(predictors, harm, probability))
-  names(results$predictors) <- c("predictor", "harm.applied", "probability")
-  results$interventions.avoided.per <- interventionper
-  results$net.benefit <- nb
-  results$interventions.avoided <- interv
-
-  return(results)
-}
-```
 
 ## 其他
 ### github API
@@ -695,7 +183,7 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
 - 个人访问令牌(Personal access tokens)
 - 生成新令牌(Generate new token)
 - Note+Expiration+Select scopes+(Generate token)
-- 复制令牌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
+- 复制令牌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
 - `usethis::edit_r_environ()`
 - `GITHUB_TOKEN="令牌"`
 - save
@@ -703,7 +191,8 @@ dca <- function(data, outcome, predictors, xstart = 0.01, xstop = 0.99, xby = 0.
 
 ### 升级R包
 ```{r,升级R包}
-Up <- print("rvcheck::update_all()")
+Up <- print("options(timeout = 2000)
+            rvcheck::update_all()")
 ```
 
 ### [ChatGPT](https://github.com/jcrodriguez1989/chatgpt)
@@ -722,24 +211,22 @@ install.packages("devtools") # 从GitHub上下载R包
 devtools::install_github("r-lib/devtools")
 install.packages("remotes") # 从GitHub上下载R包
 devtools::install_github("rstudio/rmarkdown") # 写书
-devtools::install_github("juba/rmdformats") # Rmarkdown主题
+# devtools::install_github("juba/rmdformats") # Rmarkdown主题
 devtools::install_github("rstudio/bookdown") # 写书
-devtools::install_github("pzhaonet/bookdownplus") # 写书+
+# devtools::install_github("pzhaonet/bookdownplus") # 写书+
 devtools::install_github("rstudio/blogdown") # 写网站
-devtools::install_github("yihui/xaringan") # 幻灯片
-devtools::install_github("gadenbuie/xaringanthemer") # 幻灯片主题
-devtools::install_github("brentthorne/posterdown") # 海报
+# devtools::install_github("yihui/xaringan") # 幻灯片
+# devtools::install_github("gadenbuie/xaringanthemer") # 幻灯片主题
+# devtools::install_github("brentthorne/posterdown") # 海报
 install.packages("tinytex") # PDF输出
 tinytex::tlmgr_repo("http://mirrors.tuna.tsinghua.edu.cn/CTAN/") # PDF输出
 tinytex::install_tinytex() # PDF输出
 devtools::install_github("plotly/plotly") # 交互网页
 devtools::install_github("r-lib/roxygen2") # R包
-devtools::install_github("joshuaulrich/quantmod") # 定量金融建模和交易框架
 devtools::install_github("joshuaulrich/xts")
 devtools::install_github("trinker/pacman") # 参考文献
 devtools::install_github("r-lib/styler") # 整理代码
 devtools::install_github("gadenbuie/rsthemes") # Rstudio主题
-devtools::install_github("igraph/rigraph@master")
 install.packages("juicr") # 提取图片数据
 ```
 
@@ -755,6 +242,36 @@ devtools::install_github("tidyverse/tibble") # 6
 devtools::install_github("tidyverse/stringr") # 7
 devtools::install_github("tidyverse/forcats") # 8
 devtools::install_github("tidyverse/lubridate") # 9
+devtools::install_github("tidyverse/glue")
+pak::pak("tidyverse/glue")
+```
+
+## 统计
+```{r}
+devtools::install_github("joshuaulrich/quantmod") # 定量金融建模和交易框架
+install.packages("fBasics") # 正态性检验1
+install.packages("timeDate") # 正态性检验2
+install.packages("timeSeries") # 正态性检验3
+install.packages("car") # 方差齐性检验
+install.packages("psych") # 相关性检验
+install.packages("jmv") # jamovi
+install.packages("PMCMRplus") # 非参数检验的全能R包
+install.packages("lavaan") # 结构方程模型分析频率学派
+install.packages("piecewiseSEM") # 结构方程模型分析
+install.packages("brms") # 结构方程模型分析贝叶斯学派
+install.packages("copent") # Copula熵/传递熵比pearson高级
+install.packages("MASS") # 曲线拟合
+install.packages("mgcv") # 曲线拟合
+devtools::install_github("kassambara/rstatix") # 计算+统计
+devtools::install_github("majianthu/copent") # Copula熵
+devtools::install_github("aphalo/ggpmisc") # 带标模型方程,ANOVA 表,摘要表的注释图;发现和标记山峰和山谷;注释支持分组和方面
+devtools::install_github("richarddmorey/BayesFactor", subdir = "pkg/BayesFactor", dependencies = TRUE)
+devtools::install_github("ngreifer/MatchIt") # 倾向性评分
+```
+
+## 回归
+```{r}
+devtools::install_github("moderndive/moderndive") # 最强回归
 ```
 
 ### tidymodels
@@ -780,8 +297,89 @@ devtools::install_github("tidymodels/shinymodels") # shiny
 devtools::install_github("tidymodels/tidyclust")
 ```
 
+## mlr3
+
+|Name|Title||
+|-|-|-|
+|[mlr3verse](https://github.com/mlr-org/mlr3verse)|
+|[mlr3](https://mlr3.mlr-org.com)|
+|[mlr3cluster](https://mlr3cluster.mlr-org.com)|无监督群集|
+|[mlr3data](https://mlr3data.mlr-org.com)|其他数据集和任务|
+|[mlr3filters](https://mlr3filters.mlr-org.com)|基于过滤器的特征选择|
+|[mlr3fselect](https://mlr3fselect.mlr-org.com)|基于包装器的特征选择|
+|[mlr3learners](https://mlr3learners.mlr-org.com)|推荐学习者|
+|[mlr3pipelines](https://mlr3pipelines.mlr-org.com)|预处理运算符和管道|
+|[mlr3proba](https://mlr3proba.mlr-org.com)|概率回归与生存分析|
+|[mlr3tuning](https://mlr3tuning.mlr-org.com)|超参数优化|
+|[mlr3viz](https://mlr3viz.mlr-org.com)|可视化|
+|[paradox](https://paradox.mlr-org.com)|参数空间|
+|Tuning|
+|[mlr3hyperband](https://github.com/mlr-org/mlr3hyperband)|mlr3的超频调谐|
+|[mlr3mbo](https://github.com/mlr-org/mlr3mbo)|R中的灵活贝叶斯优化|
+|[miesmuschel](https://github.com/mlr-org/miesmuschel)|灵活的混合整数进化策略|
+|Data|
+|[mlr3db](https://github.com/mlr-org/mlr3db)|让mlr3透明地与(远程)数据库一起工作的数据后端|
+|[mlr3oml](https://github.com/mlr-org/mlr3oml)|用OpenML连接mlr3|
+|Learners|
+|[mlr3torch](https://github.com/mlr-org/mlr3torch)|将torch连接到mlr3|
+|[mlr3keras](https://github.com/mlr-org/mlr3keras)|mlr3的深度学习|
+|[mlr3extralearners](https://github.com/mlr-org/mlr3extralearners)|mlr3中使用的额外learner|
+|Utilities|
+|[mlr3misc](https://github.com/mlr-org/mlr3misc)|mlr3的其他辅助函数|
+|[mlr3measures](https://github.com/mlr-org/mlr3measures)|mlr3中使用的绩效指标|
+|[mlr3batchmark](https://github.com/mlr-org/mlr3batchmark)|mlr3和批处理工具之间的连接器|
+|[bbotk](https://github.com/mlr-org/bbotk)|mlr3的黑盒优化工具包|
+|[mlr3benchmark](https://github.com/mlr-org/mlr3benchmark)|mlr3及以后的基准分析和工具|
+|[mlr3fairness](https://github.com/mlr-org/mlr3fairness)|机器学习中用于公平性的mlr3扩展|
+|[mlr3tuningspaces](https://github.com/mlr-org/mlr3tuningspaces)|为mlr3学习者调整空间|
+|Special Tasks & Targets|
+|[mlr3spatiotempcv](https://github.com/mlr-org/mlr3spatiotempcv)|mlr3的时空重采样方法|
+|[mlr3multioutput](https://github.com/mlr-org/mlr3multioutput)|mlr3的多个目标|
+|[mlr3temporal](https://github.com/mlr-org/mlr3temporal)|mlr3的预测|
+|[mlr3spatial](https://github.com/mlr-org/mlr3spatial)||
+|[mlr3ordinal](https://github.com/mlr-org/mlr3ordinal)|mlr3的有序回归|
+|[mlr3fda](https://github.com/mlr-org/mlr3fda)|mlr3的功能数据分析|
+
+```{r}
+devtools::install_github("mlr-org/mlr3verse") #
+devtools::install_github("mlr-org/mlr3") #
+devtools::install_github("mlr-org/mlr3cluster") # mlr3的聚类分析
+devtools::install_github("mlr-org/mlr3filters") # mlr3的变量选择过滤器
+devtools::install_github("mlr-org/mlr3fselect") # mlr3的包装器功能选择
+devtools::install_github("mlr-org/mlr3learners", dependencies = TRUE) # 推荐的学习器mlr3
+devtools::install_github("mlr-org/mlr3proba") # 监督概率学习的扩展(包括生存分析)
+devtools::install_github("mlr-org/mlr3tuning") # 通过随机搜索,网格搜索等进行超参数调优
+devtools::install_github("mlr-org/mlr3viz") # mlr3的可视化效果
+devtools::install_github("mlr-org/paradox") #
+devtools::install_github("mlr-org/mlr3mbo") # 贝叶斯优化
+devtools::install_github("mlr-org/mlr3extralearners") # 更多学习器
+devtools::install_github("mlr-org/bbotk") # 黑盒优化工具包
+devtools::install_github("mlr-org/mlr3benchmark") # mlr3中用于基准测试的分析和工具
+devtools::install_github("mlr-org/mlr3db") # 使用数据后端扩展mlr3包
+devtools::install_github("mlr-org/mlr3hyperband") # 调参
+# mlr3measures#连接器到OpenML
+# mlr3oml#用于预处理和构建复杂工作流的管道和DAG
+# devtools::install_github("mlr-org/mlr3spatiotempcv") # 用于对时空任务进行重新采样的扩展
+# devtools::install_github("mlr-org/mlr3keras")
+devtools::install_github("r-lib/R6", build_vignettes = FALSE) # R6
+devtools::install_github("evalclass/precrec")
+install.packages("mlr3spatiotemporal") # 特殊类型的重抽样方法
+devtools::install_github("alan-turing-institute/distr6")
+devtools::install_github("binderh/CoxBoost")
+```
+
+```{r}
+devtools::install_github("RaphaelS1/survivalmodels")
+survivalmodels::install_pycox(pip = TRUE, install_torch = FALSE)
+survivalmodels::install_keras(pip = TRUE, install_tensorflow = FALSE)
+survivalmodels::install_torch(pip = TRUE)
+```
+
 ## 机器学习
 ```{r}
+devtools::install_github("mhahsler/dbscan") # 
+devtools::install_github("imbs-hl/ranger") # 随机森林
+BiocManager::install("imbs-hl/ranger")
 devtools::install_github("KlausVigo/kknn")
 devtools::install_dev("xrf")
 BiocManager::install("mixOmicsTeam/mixOmics")
@@ -790,6 +388,7 @@ install.packages("nnet") # 神经网络算法
 install.packages("h2o") #
 install.packages("randomForest") # 最忠实于原文献的随机森林算法包
 install.packages("xgboost") # 大名鼎鼎的xgboost,kaggle高位利器
+install.packages("lightgbm") #
 install.packages("arules") # 关联算法
 install.packages("C50") # C50决策树算法包
 install.packages("rpart") # CART决策树算法
@@ -802,6 +401,9 @@ install.packages("igraph") # 网络图以及pagerank算法
 install.packages("network3D") # 结合D3.js
 install.packages("DBI") # 和SQL的交互
 install.packages("randomForestSRC") # 随机生存森林30000+C
+
+devtools::install_github("christophM/iml")
+install.packages("DALEX")
 ```
 
 ## Torch
@@ -822,26 +424,13 @@ install.packages("feather") # R&Python高效数据
 devtools::install_github("fstpackage/fst", ref = "develop")
 devtools::install_github("r-lib/xml2")
 devtools::install_github("Yue-Jiang/pzfx")
-install.packages("fBasics") # 正态性检验1
-install.packages("timeDate") # 正态性检验2
-install.packages("timeSeries") # 正态性检验3
-install.packages("car") # 方差齐性检验
-install.packages("psych") # 相关性检验
-install.packages("jmv") # jamovi
-install.packages("PMCMRplus") # 非参数检验的全能R包
-install.packages("lavaan") # 结构方程模型分析频率学派
-install.packages("piecewiseSEM") # 结构方程模型分析
-install.packages("brms") # 结构方程模型分析贝叶斯学派
-install.packages("copent") # Copula熵/传递熵比pearson高级
 ```
 
 ## 主要绘图包
 ```{r}
-install.packages("MASS") # 曲线拟合
-install.packages("mgcv") # 曲线拟合
+devtools::install_github("pharmaverse/ggsurvfit") # 生存曲线
 install.packages("hexbin") # 六边形封箱热图
 devtools::install_github("ChrisLou-bioinfo/gg.gap") # 截断坐标轴
-devtools::install_github("kassambara/rstatix") # 计算+统计
 devtools::install_github("raivokolde/pheatmap") # 热图
 install.packages("magick") # 热图栅格化
 devtools::install_github("csdaw/ggprism") # 用ggplot2输出GraphPad prism的图
@@ -885,7 +474,6 @@ devtools::install_github("hadley/strict") # 严格代码
 devtools::install_github("hadley/emo") # 添加表情
 devtools::install_github("s-u/PKI") # needed for bug fixes not currently on CRAN
 devtools::install_github("hadley/secure") # 保护公共包中的私有 R 数据
-devtools::install_github("tidyverse/glue")
 devtools::install_github("asteves/tayloRswift") # 泰勒专辑配色
 devtools::install_github("sjmgarnier/viridis") # 配色
 install.packages("patternplot") # 黑白填充
@@ -936,99 +524,6 @@ devtools::install_github("juliasilge/janeaustenr") # 简·奥斯丁小说全集�
 devtools::install_github("wjakethompson/taylor") # Taylor Swift 歌曲的精选数据集的轻松访问，包括歌词和音频特征
 ```
 
-## mlr3
-
-|Name|Title||
-|-|-|-|
-|[mlr3verse](https://github.com/mlr-org/mlr3verse)|
-|[mlr3](https://mlr3.mlr-org.com)|
-|[mlr3cluster](https://mlr3cluster.mlr-org.com)|无监督群集|
-|[mlr3data](https://mlr3data.mlr-org.com)|其他数据集和任务|
-|[mlr3filters](https://mlr3filters.mlr-org.com)|基于过滤器的特征选择|
-|[mlr3fselect](https://mlr3fselect.mlr-org.com)|基于包装器的特征选择|
-|[mlr3learners](https://mlr3learners.mlr-org.com)|推荐学习者|
-|[mlr3pipelines](https://mlr3pipelines.mlr-org.com)|预处理运算符和管道|
-|[mlr3proba](https://mlr3proba.mlr-org.com)|概率回归与生存分析|
-|[mlr3tuning](https://mlr3tuning.mlr-org.com)|超参数优化|
-|[mlr3viz](https://mlr3viz.mlr-org.com)|可视化|
-|[paradox](https://paradox.mlr-org.com)|参数空间|
-|Tuning|
-|[mlr3hyperband](https://github.com/mlr-org/mlr3hyperband)|mlr3的超频调谐|
-|[mlr3mbo](https://github.com/mlr-org/mlr3mbo)|R中的灵活贝叶斯优化|
-|[miesmuschel](https://github.com/mlr-org/miesmuschel)|灵活的混合整数进化策略|
-|Data|
-|[mlr3db](https://github.com/mlr-org/mlr3db)|让mlr3透明地与(远程)数据库一起工作的数据后端|
-|[mlr3oml](https://github.com/mlr-org/mlr3oml)|用OpenML连接mlr3|
-|Learners|
-|[mlr3torch](https://github.com/mlr-org/mlr3torch)|将torch连接到mlr3|
-|[mlr3keras](https://github.com/mlr-org/mlr3keras)|mlr3的深度学习|
-|[mlr3extralearners](https://github.com/mlr-org/mlr3extralearners)|mlr3中使用的额外learner|
-|Utilities|
-|[mlr3misc](https://github.com/mlr-org/mlr3misc)|mlr3的其他辅助函数|
-|[mlr3measures](https://github.com/mlr-org/mlr3measures)|mlr3中使用的绩效指标|
-|[mlr3batchmark](https://github.com/mlr-org/mlr3batchmark)|mlr3和批处理工具之间的连接器|
-|[bbotk](https://github.com/mlr-org/bbotk)|mlr3的黑盒优化工具包|
-|[mlr3benchmark](https://github.com/mlr-org/mlr3benchmark)|mlr3及以后的基准分析和工具|
-|[mlr3fairness](https://github.com/mlr-org/mlr3fairness)|机器学习中用于公平性的mlr3扩展|
-|[mlr3tuningspaces](https://github.com/mlr-org/mlr3tuningspaces)|为mlr3学习者调整空间|
-|Special Tasks & Targets|
-|[mlr3spatiotempcv](https://github.com/mlr-org/mlr3spatiotempcv)|mlr3的时空重采样方法|
-|[mlr3multioutput](https://github.com/mlr-org/mlr3multioutput)|mlr3的多个目标|
-|[mlr3temporal](https://github.com/mlr-org/mlr3temporal)|mlr3的预测|
-|[mlr3spatial](https://github.com/mlr-org/mlr3spatial)||
-|[mlr3ordinal](https://github.com/mlr-org/mlr3ordinal)|mlr3的有序回归|
-|[mlr3fda](https://github.com/mlr-org/mlr3fda)|mlr3的功能数据分析|
-
-```{r}
-devtools::install_github("mlr-org/mlr3verse") #
-devtools::install_github("mlr-org/mlr3cluster") # mlr3的聚类分析
-devtools::install_github("mlr-org/mlr3filters") # mlr3的变量选择过滤器
-devtools::install_github("mlr-org/mlr3fselect") # mlr3的包装器功能选择
-devtools::install_github("mlr-org/mlr3learners", dependencies = TRUE) # 推荐的学习器mlr3
-devtools::install_github("mlr-org/mlr3proba") # 监督概率学习的扩展(包括生存分析)
-devtools::install_github("mlr-org/mlr3tuning") # 通过随机搜索,网格搜索等进行超参数调优
-devtools::install_github("mlr-org/mlr3viz") # mlr3的可视化效果
-devtools::install_github("mlr-org/paradox") #
-devtools::install_github("mlr-org/mlr3extralearners") # 更多学习器
-devtools::install_github("mlr-org/bbotk") # 黑盒优化工具包
-devtools::install_github("mlr-org/mlr3benchmark") # mlr3中用于基准测试的分析和工具
-devtools::install_github("mlr-org/mlr3db") # 使用数据后端扩展mlr3包
-devtools::install_github("mlr-org/mlr3hyperband") # mlr3的超频调谐
-# mlr3measures#连接器到OpenML
-# mlr3oml#用于预处理和构建复杂工作流的管道和DAG
-devtools::install_github("mlr-org/mlr3spatiotempcv") # 用于对时空任务进行重新采样的扩展
-devtools::install_github("mlr-org/mlr3keras")
-devtools::install_github("mlr-org/mlr3proba")
-devtools::install_github("r-lib/R6", build_vignettes = FALSE) # R6
-devtools::install_github("evalclass/precrec")
-```
-
-## [Tensorflow](https://tensorflow.google.cn/)
-### [下载Anaconda安装](https://www.anaconda.com/)
-### 运行CMD.exe Prompt
-### `conda --version` 查看conda
-### 连接清华镜像
-- `conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
-- `conda config --set show_channel_urls yes`
-
-### 更新pip
-- `pip install --upgrade pip`
-
-### 设置tensorflow虚拟
-- `conda create -n tensorflow python=3.9`
-- `y`
-
-### Rstudio选择Tensorflow的python
-### R安装Tensorflow
-- `install.packages("tensorflow")`
-- `library("tensorflow")`
-- `install_tensorflow()`
-
-### END
-
-### 删除库
-- `pip uninstall TensorFlow`
-
 ## 深度学习
 ```{r}
 devtools::install_github("mlr-org/mlr3keras") #
@@ -1052,7 +547,7 @@ devtools::install_github("krassowski/complex-upset") # 可视化设置的交叉�
 devtools::install_github("wilkelab/cowplot") # "ggplot2" 的流线型绘图主题和情节注释CRAN
 devtools::install_github("tdhock/directlabels") # 在格子或 ggplot2 绘图中添加直接标签的框架,CRAN
 devtools::install_github("R-CoderDotCom/econocharts") # 微观经济学与宏观经济学图表GitHub
-devtools::install_github("dreamRs/esquisse") # 与您的数据互动探索和可视化ggplot2CRAN
+devtools::install_github("dreamRs/esquisse") # 与您的数据互动探索和可视化ggplot2 CRAN
 devtools::install_github("sctyner/geomnet") # 地理网通过geom_net在 ggplot2 中实现网络可视化,CRAN
 devtools::install_github("AckerDWM/gg3D") # ggplot2 的 3D 透视图图GitHub
 devtools::install_github("corybrunson/ggalluvial@main", build_vignettes = TRUE)
